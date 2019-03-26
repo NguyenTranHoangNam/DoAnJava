@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-reverse-engineering PUBLIC "-//Hibernate/Hibernate Reverse Engineering DTD 3.0//EN" "http://hibernate.org/dtd/hibernate-reverse-engineering-3.0.dtd" >
+
+<hibernate-reverse-engineering>
+  <table-filter match-catalog="QLSTK" match-name="dangnhap"/>
+  <table-filter match-catalog="QLSTK" match-name="loaitaikhoan"/>
+  <table-filter match-catalog="QLSTK" match-name="loaitietkiem"/>
+  <table-filter match-catalog="QLSTK" match-name="nhanvien"/>
+  <table-filter match-catalog="QLSTK" match-name="phieuguitien"/>
+  <table-filter match-catalog="QLSTK" match-name="phieuruttien"/>
+  <table-filter match-catalog="QLSTK" match-name="sotietkiem"/>
+  <table-filter match-catalog="QLSTK" match-name="taikhoankhachhang"/>
+</hibernate-reverse-engineering>
