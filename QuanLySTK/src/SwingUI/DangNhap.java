@@ -71,7 +71,14 @@ public class DangNhap extends JFrame {
 		btnLogin.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				DangNhap_DAO dnDao = new DangNhap_DAO();
-				Dangnhap dn = dnDao.KiemTraDangNhap("nthnam", "12345");
+				if(tfUsername.getText() != "" && tfPassword.getText() != "") {
+					Dangnhap dn = dnDao.KiemTraDangNhap(tfUsername.getText(), tfPassword.getText());
+					if(dn != null) {
+						Menu mn = new Menu();
+						mn.main();
+					}
+				}
+				
 				
 			}
 		});
