@@ -42,34 +42,34 @@ public class Menu extends JFrame {
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
-		JLabel lblNewLabel = new JLabel("MENU");
-		lblNewLabel.setBackground(new Color(51, 153, 255));
-		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
-		lblNewLabel.setBounds(6, 0, 384, 22);
-		contentPane.add(lblNewLabel);
+		JLabel lblMenu = new JLabel("MENU");
+		lblMenu.setBackground(new Color(51, 153, 255));
+		lblMenu.setHorizontalAlignment(SwingConstants.CENTER);
+		lblMenu.setBounds(6, 0, 384, 22);
+		contentPane.add(lblMenu);
 		
-		JButton btnLap = new JButton("Lập phiếu gửi tiền");
-		btnLap.setBounds(31, 77, 149, 29);
-		contentPane.add(btnLap);
+		JButton btnGuiTien = new JButton("Lập phiếu gửi tiền");
+		btnGuiTien.setBounds(31, 77, 149, 29);
+		contentPane.add(btnGuiTien);
 		
-		JButton button = new JButton("Mở sổ tiết kiệm");
-		button.setBounds(31, 34, 149, 29);
-		contentPane.add(button);
+		JButton btnMoSo = new JButton("Mở sổ tiết kiệm");
+		btnMoSo.setBounds(31, 34, 149, 29);
+		contentPane.add(btnMoSo);
 		
-		JButton btnLpPhiuRt = new JButton("Lập phiếu rút tiền");
-		btnLpPhiuRt.setBounds(31, 118, 149, 29);
-		contentPane.add(btnLpPhiuRt);
+		JButton btnRutTien = new JButton("Lập phiếu rút tiền");
+		btnRutTien.setBounds(31, 118, 149, 29);
+		contentPane.add(btnRutTien);
 		
-		JButton btnTraCuS = new JButton("Tra cứu sổ");
-		btnTraCuS.setBounds(204, 118, 149, 29);
-		contentPane.add(btnTraCuS);
+		JButton btnTraCuuSo = new JButton("Tra cứu sổ");
+		btnTraCuuSo.setBounds(204, 118, 149, 29);
+		contentPane.add(btnTraCuuSo);
 		
-		JButton btnLpBoCo = new JButton("Lập báo cáo tháng");
-		btnLpBoCo.setBounds(204, 34, 149, 29);
-		contentPane.add(btnLpBoCo);
+		JButton btnBaoCao = new JButton("Lập báo cáo tháng");
+		btnBaoCao.setBounds(204, 34, 149, 29);
+		contentPane.add(btnBaoCao);
 		
-		JButton btnThayiQuy = new JButton("Thay đổi quy định");
-		btnThayiQuy.setBounds(204, 77, 149, 29);
-		contentPane.add(btnThayiQuy);
+		JButton btnThayDoiQD = new JButton("Thay đổi quy định");
+		btnThayDoiQD.setBounds(204, 77, 149, 29);
+		contentPane.add(btnThayDoiQD);
 	}
 }

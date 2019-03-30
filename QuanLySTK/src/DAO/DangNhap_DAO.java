@@ -17,11 +17,11 @@ public Dangnhap KiemTraDangNhap(String username,String password) {
 	 ArrayList<Dangnhap> dns = new ArrayList();
      try {
 
-         // bắt đầu 1 transaction (giao dịch)
+         // Bat dau 1 transaction (Giao dich)
 
          session.beginTransaction();
 
-         // thực thi câu query dạng hql
+         // Thuc thi cau querry Dang Nhap
 
          String sql = "from Dangnhap dn where dn.tenDangNhap =:username and dn.matKhau =:password ";
          Query query = session.createQuery(sql);

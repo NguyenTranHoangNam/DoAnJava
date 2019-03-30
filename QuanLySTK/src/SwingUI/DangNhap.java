@@ -1,7 +1,9 @@
 package SwingUI;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.EventQueue;
+import java.awt.Font;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -43,28 +45,34 @@ public class DangNhap extends JFrame {
 	 */
 	public DangNhap() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 450, 300);
+		setBounds(100, 100, 450, 240);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
-		JLabel lblNewLabel = new JLabel("Username");
-		lblNewLabel.setBounds(45, 80, 75, 16);
-		contentPane.add(lblNewLabel);
+		JLabel lblDangNhap = new JLabel("\u0110\u0102NG NH\u1EACP");
+		lblDangNhap.setForeground(Color.BLUE);
+		lblDangNhap.setFont(new Font("Tahoma", Font.BOLD, 16));
+		lblDangNhap.setBounds(170, 28, 107, 20);
+		contentPane.add(lblDangNhap);
+		
+		JLabel lblUsername = new JLabel("Tên đăng nhập:");
+		lblUsername.setBounds(38, 71, 112, 14);
+		contentPane.add(lblUsername);
 		
 		tfUsername = new JTextField();
-		tfUsername.setBounds(124, 75, 130, 26);
+		tfUsername.setBounds(146, 68, 239, 20);
 		contentPane.add(tfUsername);
 		tfUsername.setColumns(10);
 		
 		tfPassword = new JTextField();
 		tfPassword.setColumns(10);
-		tfPassword.setBounds(124, 108, 130, 26);
+		tfPassword.setBounds(146, 99, 239, 20);
 		contentPane.add(tfPassword);
 		
-		JLabel lblPassword = new JLabel("Password");
-		lblPassword.setBounds(45, 113, 75, 16);
+		JLabel lblPassword = new JLabel("Mật khẩu:");
+		lblPassword.setBounds(38, 101, 95, 14);
 		contentPane.add(lblPassword);
 		
 		JButton btnLogin = new JButton("Đăng nhập");
@@ -82,7 +90,7 @@ public class DangNhap extends JFrame {
 				
 			}
 		});
-		btnLogin.setBounds(134, 149, 117, 29);
+		btnLogin.setBounds(146, 149, 117, 29);
 		contentPane.add(btnLogin);
 	}
 }
