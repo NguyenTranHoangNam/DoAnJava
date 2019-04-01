@@ -15,6 +15,8 @@ import javax.swing.JButton;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 import java.awt.event.ActionEvent;
 
 public class TaiKhoanKhachHang extends JFrame {
@@ -97,6 +99,7 @@ public class TaiKhoanKhachHang extends JFrame {
 		JComboBox cbbGioiTinh = new JComboBox();
 		cbbGioiTinh.setBounds(144, 132, 132, 20);
 		contentPane.add(cbbGioiTinh);
+		cbbGioiTinh.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Nam","Nữ" }));
 		
 		JLabel lblCMND = new JLabel("S\u1ED1 CMND:");
 		lblCMND.setBounds(298, 135, 66, 14);
@@ -141,28 +144,30 @@ public class TaiKhoanKhachHang extends JFrame {
 			}
 		});
 		btnUpdate.setFont(new Font("Tahoma", Font.BOLD, 12));
-		btnUpdate.setBounds(179, 307, 109, 29);
+		btnUpdate.setBounds(168, 307, 109, 29);
 		contentPane.add(btnUpdate);
 		
-		JButton btnDelete = new JButton("Xo\u00E1 Kh\u00E1ch");
-		btnDelete.addActionListener(new ActionListener() {
+		JButton btnLapSo = new JButton("Lập Sổ tiết kiệm");
+		btnLapSo.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				LapSoTK lap_so = new LapSoTK();
+				lap_so.add(lap_so);
 			}
 		});
-		btnDelete.setFont(new Font("Tahoma", Font.BOLD, 12));
-		btnDelete.setBounds(298, 306, 119, 30);
-		contentPane.add(btnDelete);
+		btnLapSo.setFont(new Font("Tahoma", Font.BOLD, 12));
+		btnLapSo.setBounds(413, 306, 139, 30);
+		contentPane.add(btnLapSo);
 		
-		JButton btnSearch = new JButton("T\u00ECm ki\u1EBFm");
+		JButton btnSearch = new JButton("Tìm kiếm");
 		btnSearch.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 			}
 		});
 		btnSearch.setFont(new Font("Tahoma", Font.BOLD, 12));
-		btnSearch.setBounds(427, 306, 125, 30);
+		btnSearch.setBounds(287, 306, 116, 30);
 		contentPane.add(btnSearch);
 		
-		JLabel lblLoaiTK = new JLabel("Lo\u1EA1i T\u00E0i kho\u1EA3n:");
+		JLabel lblLoaiTK = new JLabel("Loại Tài khoản:");
 		lblLoaiTK.setBounds(297, 166, 92, 14);
 		contentPane.add(lblLoaiTK);
 		
@@ -171,13 +176,13 @@ public class TaiKhoanKhachHang extends JFrame {
 		contentPane.add(txtLoaiTK);
 		txtLoaiTK.setColumns(10);
 		
-		JButton btnInsert = new JButton("Th\u00EAm Kh\u00E1ch");
+		JButton btnInsert = new JButton("Thêm Khách");
 		btnInsert.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 			}
 		});
 		btnInsert.setFont(new Font("Tahoma", Font.BOLD, 12));
-		btnInsert.setBounds(33, 306, 136, 30);
+		btnInsert.setBounds(33, 306, 125, 30);
 		contentPane.add(btnInsert);
 		
 		table = new JTable();
@@ -189,10 +194,38 @@ public class TaiKhoanKhachHang extends JFrame {
 				{null, null, null, null, null, null, null, null, null, null},
 			},
 			new String[] {
-				"STT", "H\u1ECD v\u00E0 T\u00EAn", "Ng\u00E0y sinh", "Gi\u1EDBi t\u00EDnh", "S\u1ED1 CMND", "M\u00E3 T\u00E0i kho\u1EA3n", "Lo\u1EA1i T\u00E0i kho\u1EA3n", "S\u1ED1 \u0111i\u1EC7n tho\u1EA1i", "\u0110\u1ECBa ch\u1EC9", "Email"
+				"STT", "Họ và Tên", "Ngày sinh", "Giới tính", "Số CMND", "Mã Tài khoản", "Loại Tài khoản", "Số điện thoại", "Địa chỉ", "Email"
 			}
 		));
 		table.setBounds(10, 367, 570, 141);
 		contentPane.add(table);
+		
+		txtNgaySinh.addKeyListener(new KeyAdapter() {
+			public void keyTyped(KeyEvent e) {
+			      char c = e.getKeyChar();
+			      if ( ((c < '0') || (c > '9')) && (c != KeyEvent.VK_BACK_SPACE)) {
+			         e.consume();  
+			      }
+			   }
+			});
+		
+		txtCMND.addKeyListener(new KeyAdapter() {
+			public void keyTyped(KeyEvent e) {
+			      char c = e.getKeyChar();
+			      if ( ((c < '0') || (c > '9')) && (c != KeyEvent.VK_BACK_SPACE)) {
+			         e.consume();  
+			      }
+			   }
+			});
+		
+		txtDienThoai.addKeyListener(new KeyAdapter() {
+			public void keyTyped(KeyEvent e) {
+			      char c = e.getKeyChar();
+			      if ( ((c < '0') || (c > '9')) && (c != KeyEvent.VK_BACK_SPACE)) {
+			         e.consume();  
+			      }
+			   }
+			});
+		
 	}
 }
