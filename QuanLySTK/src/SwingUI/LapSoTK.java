@@ -12,6 +12,9 @@ import javax.swing.JLabel;
 import javax.swing.SwingConstants;
 import javax.swing.JTextField;
 import javax.swing.JComboBox;
+import javax.swing.JButton;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class LapSoTK extends JFrame {
 
@@ -118,6 +121,19 @@ public class LapSoTK extends JFrame {
 		contentPane.add(cbLoaiTk);
 		
 		cbLoaiTk.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Không kỳ hạn ","6 Thang","3 Thang" }));
+		
+		JButton btnXacNhan = new JButton("XÁC NHẬN");
+		btnXacNhan.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+//				if(tfCMND.get)
+			}
+		});
+		btnXacNhan.setBounds(347, 179, 131, 29);
+		contentPane.add(btnXacNhan);
+		
+		JButton btnHuy = new JButton("HUỶ");
+		btnHuy.setBounds(92, 179, 136, 29);
+		contentPane.add(btnHuy);
 		tfSoTienGui.addKeyListener(new KeyAdapter() {
 			   public void keyTyped(KeyEvent e) {
 				      char c = e.getKeyChar();
@@ -135,6 +151,8 @@ public class LapSoTK extends JFrame {
 				      }
 				   }
 				});
+		
+		
 
 	}
 }
