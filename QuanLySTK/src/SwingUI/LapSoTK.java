@@ -53,12 +53,12 @@ public class LapSoTK extends JFrame {
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
-		JLabel lblNewLabel = new JLabel("MỞ SỔ TIẾT KIỆM");
+		JLabel lblNewLabel = new JLabel("Má»ž Sá»” TIáº¾T KIá»†M");
 		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
 		lblNewLabel.setBounds(6, 6, 438, 24);
 		contentPane.add(lblNewLabel);
 		
-		JLabel lblMaSo = new JLabel("MÃ SỐ:");
+		JLabel lblMaSo = new JLabel("MÃƒ Sá»�:");
 		lblMaSo.setBounds(6, 47, 92, 16);
 		contentPane.add(lblMaSo);
 		
@@ -67,7 +67,7 @@ public class LapSoTK extends JFrame {
 		contentPane.add(tfMaSo);
 		tfMaSo.setColumns(10);
 		
-		JLabel lblKhchHng = new JLabel("KHÁCH HÀNG:");
+		JLabel lblKhchHng = new JLabel("KHÃ�CH HÃ€NG:");
 		lblKhchHng.setBounds(6, 80, 92, 16);
 		contentPane.add(lblKhchHng);
 		
@@ -76,7 +76,7 @@ public class LapSoTK extends JFrame {
 		tfKhachHang.setBounds(98, 75, 130, 26);
 		contentPane.add(tfKhachHang);
 		
-		JLabel lblaCh = new JLabel("ĐỊA CHỈ:");
+		JLabel lblaCh = new JLabel("Ä�á»ŠA CHá»ˆ:");
 		lblaCh.setBounds(6, 113, 92, 16);
 		contentPane.add(lblaCh);
 		
@@ -85,7 +85,7 @@ public class LapSoTK extends JFrame {
 		tfDiaChi.setBounds(98, 108, 130, 26);
 		contentPane.add(tfDiaChi);
 		
-		JLabel lblSTinGi = new JLabel("SỐ TIỀN GỬI:");
+		JLabel lblSTinGi = new JLabel("Sá»� TIá»€N Gá»¬I:");
 		lblSTinGi.setBounds(6, 146, 92, 16);
 		contentPane.add(lblSTinGi);
 		
@@ -94,7 +94,7 @@ public class LapSoTK extends JFrame {
 		tfSoTienGui.setBounds(98, 141, 130, 26);
 		contentPane.add(tfSoTienGui);
 		
-		JLabel lblLoiTitKim = new JLabel("LOẠI TIẾT KIỆM:");
+		JLabel lblLoiTitKim = new JLabel("LOáº I TIáº¾T KIá»†M:");
 		lblLoiTitKim.setBounds(244, 47, 108, 16);
 		contentPane.add(lblLoiTitKim);
 		
@@ -107,7 +107,7 @@ public class LapSoTK extends JFrame {
 		tfCMND.setBounds(348, 75, 130, 26);
 		contentPane.add(tfCMND);
 		
-		JLabel lblNgyMS = new JLabel("NGÀY MỞ SỔ:");
+		JLabel lblNgyMS = new JLabel("NGÃ€Y Má»ž Sá»”:");
 		lblNgyMS.setBounds(244, 113, 108, 16);
 		contentPane.add(lblNgyMS);
 		
@@ -120,9 +120,9 @@ public class LapSoTK extends JFrame {
 		cbLoaiTk.setBounds(348, 42, 130, 27);
 		contentPane.add(cbLoaiTk);
 		
-		cbLoaiTk.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Không kỳ hạn ","6 Thang","3 Thang" }));
+		cbLoaiTk.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "KhÃ´ng ká»³ háº¡n ","6 Thang","3 Thang" }));
 		
-		JButton btnXacNhan = new JButton("XÁC NHẬN");
+		JButton btnXacNhan = new JButton("XÃ�C NHáº¬N");
 		btnXacNhan.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 //				if(tfCMND.get)
@@ -131,7 +131,7 @@ public class LapSoTK extends JFrame {
 		btnXacNhan.setBounds(347, 179, 131, 29);
 		contentPane.add(btnXacNhan);
 		
-		JButton btnHuy = new JButton("HUỶ");
+		JButton btnHuy = new JButton("HUá»¶");
 		btnHuy.setBounds(92, 179, 136, 29);
 		contentPane.add(btnHuy);
 		tfSoTienGui.addKeyListener(new KeyAdapter() {

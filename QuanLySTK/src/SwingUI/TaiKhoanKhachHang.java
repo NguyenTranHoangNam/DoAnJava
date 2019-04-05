@@ -151,7 +151,7 @@ public class TaiKhoanKhachHang extends JFrame {
 		btnLapSo.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				LapSoTK lap_so = new LapSoTK();
-				lap_so.add(lap_so);
+				lap_so.main(null);	//??????????
 			}
 		});
 		btnLapSo.setFont(new Font("Tahoma", Font.BOLD, 12));

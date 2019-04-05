@@ -2,6 +2,9 @@ package SwingUI;
 
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
+import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -43,33 +46,38 @@ public class Menu extends JFrame {
 		contentPane.setLayout(null);
 		
 		JLabel lblMenu = new JLabel("MENU");
+		lblMenu.setFont(new Font("Tahoma", Font.BOLD, 16));
 		lblMenu.setBackground(new Color(51, 153, 255));
+		lblMenu.setForeground(Color.BLUE);
 		lblMenu.setHorizontalAlignment(SwingConstants.CENTER);
 		lblMenu.setBounds(6, 0, 384, 22);
 		contentPane.add(lblMenu);
 		
-		JButton btnGuiTien = new JButton("Lập phiếu gửi tiền");
-		btnGuiTien.setBounds(31, 77, 149, 29);
-		contentPane.add(btnGuiTien);
+		JButton btnTaiKhoan = new JButton("Tài khoản Khách hàng");
+		btnTaiKhoan.setBounds(31, 77, 162, 29);
+		contentPane.add(btnTaiKhoan);
+		btnTaiKhoan.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				TaiKhoanKhachHang tk = new TaiKhoanKhachHang();
+				tk.main(null);
+			}
+		});
 		
-		JButton btnMoSo = new JButton("Mở sổ tiết kiệm");
-		btnMoSo.setBounds(31, 34, 149, 29);
-		contentPane.add(btnMoSo);
-		
-		JButton btnRutTien = new JButton("Lập phiếu rút tiền");
-		btnRutTien.setBounds(31, 118, 149, 29);
-		contentPane.add(btnRutTien);
-		
-		JButton btnTraCuuSo = new JButton("Tra cứu sổ");
-		btnTraCuuSo.setBounds(204, 118, 149, 29);
-		contentPane.add(btnTraCuuSo);
+		JButton btnSoTietKiem = new JButton("Sổ tiết kiệm");
+		btnSoTietKiem.setBounds(31, 34, 162, 29);
+		contentPane.add(btnSoTietKiem);
+		/*btnSoTietKiem.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+					
+			}
+		});*/
 		
 		JButton btnBaoCao = new JButton("Lập báo cáo tháng");
-		btnBaoCao.setBounds(204, 34, 149, 29);
+		btnBaoCao.setBounds(204, 34, 162, 29);
 		contentPane.add(btnBaoCao);
 		
 		JButton btnThayDoiQD = new JButton("Thay đổi quy định");
-		btnThayDoiQD.setBounds(204, 77, 149, 29);
+		btnThayDoiQD.setBounds(204, 77, 162, 29);
 		contentPane.add(btnThayDoiQD);
 	}
 }
