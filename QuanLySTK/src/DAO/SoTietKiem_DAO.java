@@ -54,4 +54,35 @@ public class SoTietKiem_DAO {
 	 	return 0;
 	 }
 	 
+	 public ArrayList<Sotietkiem> TraCuuSTK() {
+			Sotietkiem stk = new Sotietkiem();
+			 Session session = sessionFactory.openSession();
+			 ArrayList<Sotietkiem> stks = new ArrayList();
+		     try {
+
+		         // Bat dau 1 transaction (Giao dich)
+
+		         session.beginTransaction();
+
+		         // Thuc thi cau querry
+
+		         String sql = "select * from sotietkiem ";
+		         Query query = session.createQuery(sql);
+		       	stks = (ArrayList<Sotietkiem>) query.list();
+		       	return stks;
+		     } catch (RuntimeException e) {
+
+		         session.getTransaction().rollback();
+
+		         e.printStackTrace();
+
+		     } finally {
+
+		         session.flush();
+
+		         session.close();
+
+		     }
+			return null;
+		}
 }

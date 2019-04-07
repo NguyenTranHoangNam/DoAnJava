@@ -79,5 +79,13 @@ public class Menu extends JFrame {
 		JButton btnThayDoiQD = new JButton("Thay đổi quy định");
 		btnThayDoiQD.setBounds(204, 77, 162, 29);
 		contentPane.add(btnThayDoiQD);
+		
+		JButton btnNewButton = new JButton("Tra cứu");
+		btnNewButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			}
+		});
+		btnNewButton.setBounds(31, 118, 162, 29);
+		contentPane.add(btnNewButton);
 	}
 }
