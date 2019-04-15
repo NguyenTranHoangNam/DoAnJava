@@ -4,12 +4,15 @@ import java.awt.BorderLayout;
 import java.awt.EventQueue;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+import java.util.Date;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
 import DAO.SoTietKiem_DAO;
+import model.Loaitietkiem;
+import model.Taikhoankhachhang;
 
 import javax.swing.JLabel;
 import javax.swing.SwingConstants;
@@ -129,8 +132,11 @@ public class LapSoTK extends JFrame {
 		btnXacNhan.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				SoTietKiem_DAO stk = new SoTietKiem_DAO();
-				int result = stk.MoSoTk("3","TK0001","L01","1","1");
+				Loaitietkiem loaiTK = stk.getLoaiTietKiem("L01");
+				Taikhoankhachhang tkkh = stk.getTaiKhoanKhachHang("TK0001");
+				int result = stk.MoSoTk("STK0009","TK0001",loaiTK,new Date(),"11",tkkh);
 				System.out.println(result);
+//				System.out.println(loaiTK.getLaiSuat());
 			}
 		});
 		btnXacNhan.setBounds(347, 179, 131, 29);

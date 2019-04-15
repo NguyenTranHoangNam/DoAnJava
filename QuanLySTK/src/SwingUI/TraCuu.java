@@ -6,6 +6,7 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+import javax.swing.table.DefaultTableModel;
 
 import DAO.SoTietKiem_DAO;
 
@@ -16,6 +17,7 @@ public class TraCuu extends JFrame {
 
 	private JPanel contentPane;
 	private JTable table;
+	private DefaultTableModel defaultTable_1; 
 
 	/**
 	 * Launch the application.
@@ -48,7 +50,12 @@ public class TraCuu extends JFrame {
 		scrollPane.setBounds(34, 110, 531, 207);
 		contentPane.add(scrollPane);
 		
-		table = new JTable();
+		defaultTable_1 = new DefaultTableModel(new Object[][] {},new String[] {
+			"STT","MA SO","LOAI TIET KIEM","KHACH HANG","SO DU"	
+		});
+		
+		
+		table = new JTable(defaultTable_1);
 		scrollPane.setViewportView(table);
 		
 		SoTietKiem_DAO stkD = new SoTietKiem_DAO();

@@ -10,10 +10,10 @@ import org.hibernate.Query;
 import model.Dangnhap;
 
 public class DangNhap_DAO {
-	 SessionFactory sessionFactory = new Configuration().configure().buildSessionFactory();
+//	 SessionFactory sessionFactory = new Configuration().configure().buildSessionFactory();
 public Dangnhap KiemTraDangNhap(String username,String password) {
 	Dangnhap dn = new Dangnhap();
-	 Session session = sessionFactory.openSession();
+	 Session session = config.sessionFactory.openSession();
 	 ArrayList<Dangnhap> dns = new ArrayList();
      try {
 
