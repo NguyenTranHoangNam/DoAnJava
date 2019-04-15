@@ -2,6 +2,8 @@ package SwingUI;
 
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
+import java.util.ArrayList;
+import java.util.Vector;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -9,6 +11,7 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableModel;
 
 import DAO.SoTietKiem_DAO;
+import model.Sotietkiem;
 
 import javax.swing.JTable;
 import javax.swing.JScrollPane;
@@ -35,6 +38,27 @@ public class TraCuu extends JFrame {
 		});
 	}
 
+
+	
+	public void LoadData(ArrayList<Sotietkiem> stks) {
+		if(stks.size() > 0) {
+			defaultTable_1 = (DefaultTableModel) table.getModel();
+			defaultTable_1.setRowCount(0);
+			for (int i = 0; i < stks.size(); i++) {
+				Vector<String> row = new Vector<>();
+				Sotietkiem stk = stks.get(i);
+				int stt = i + 1;
+				row.add(stt + "");
+				row.add(stk.getMaSo());
+				row.add(stk.getLoaitietkiem().getMaLoaiTietKiem() + "");
+				row.add(stk.getTaikhoankhachhang().getMaTaiKhoan() + "");
+				row.add(stk.getSoDu() + "");
+				defaultTable_1.addRow(row);
+			}
+		}
+	}
+
+	
 	/**
 	 * Create the frame.
 	 */
@@ -59,14 +83,9 @@ public class TraCuu extends JFrame {
 		scrollPane.setViewportView(table);
 		
 		SoTietKiem_DAO stkD = new SoTietKiem_DAO();
-		if(stkD.TraCuuSTK() != null)
-		{
-			System.out.println(stkD.TraCuuSTK().size());
-		}
-		else {
-			System.out.println("null nha ");
-		}
+		LoadData(stkD.TraCuuSTK());
 		
 			
 	}
 }
+
