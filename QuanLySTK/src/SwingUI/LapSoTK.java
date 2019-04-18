@@ -10,6 +10,7 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
+import DAO.LoaiTietKiem_DAO;
 import DAO.SoTietKiem_DAO;
 import model.Loaitietkiem;
 import model.Taikhoankhachhang;
@@ -132,12 +133,13 @@ public class LapSoTK extends JFrame {
 		JButton btnXacNhan = new JButton("Xac Nhan");
 		btnXacNhan.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				SoTietKiem_DAO stk = new SoTietKiem_DAO();
+//				LoaiTietKiem_DAO ltkD = new LoaiTietKiem_DAO();
+//				System.out.println(ltkD.getLoaiTietKiem().get(0).getMaLoaiTietKiem());
+								SoTietKiem_DAO stk = new SoTietKiem_DAO();
 				Loaitietkiem loaiTK = stk.getLoaiTietKiem("L01");
 				Taikhoankhachhang tkkh = stk.getTaiKhoanKhachHang("TK0001");
 				int result = stk.MoSoTk("STK0009","TK0001",loaiTK,new Date(),"11",tkkh);
 				System.out.println(result);
-//				System.out.println(loaiTK.getLaiSuat());
 			}
 		});
 		btnXacNhan.setBounds(347, 179, 131, 29);
