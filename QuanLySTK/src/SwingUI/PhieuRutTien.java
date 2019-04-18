@@ -1,11 +1,16 @@
 package SwingUI;
 
 import java.awt.BorderLayout;
+import java.util.*;
+import java.text.*;
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+
+import model.Sotietkiem;
+
 import javax.swing.JLabel;
 import java.awt.Font;
 import java.awt.event.KeyAdapter;
@@ -13,6 +18,8 @@ import java.awt.event.KeyEvent;
 import java.awt.Color;
 import javax.swing.JTextField;
 import javax.swing.JButton;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class PhieuRutTien extends JFrame {
 
@@ -100,6 +107,37 @@ public class PhieuRutTien extends JFrame {
 		contentPane.add(txtSoTienRut);
 		
 		JButton btnXacNhan = new JButton("X\u00E1c Nh\u1EADn");
+		btnXacNhan.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				DateFormat simpleDateFormat = new SimpleDateFormat("dd-MM-yyyy");
+
+				Date currentDate = new Date();
+				Date date1 = null;
+				Date date2 = null;
+				
+				Sotietkiem stk = null;
+
+				try {
+				   String startDate = stk.getNgayMoSo().toString();
+				   String endDate = txtNgayRut.getText();
+
+				   date1 = simpleDateFormat.parse(startDate);
+				   date2 = simpleDateFormat.parse(endDate);
+
+				   long getDiff = date2.getTime() - date1.getTime();
+
+				   long getDaysDiff = getDiff / (24 * 60 * 60 * 1000);
+				   if (getDaysDiff >= 15){
+						
+				   }
+				   else {
+					   
+				   }
+				}catch (Exception e) {
+					   e.printStackTrace();
+				}
+			}
+		});
 		btnXacNhan.setFont(new Font("Tahoma", Font.BOLD, 12));
 		btnXacNhan.setBounds(317, 137, 92, 29);
 		contentPane.add(btnXacNhan);

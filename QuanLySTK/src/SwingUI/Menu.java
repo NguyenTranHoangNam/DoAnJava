@@ -53,7 +53,7 @@ public class Menu extends JFrame {
 		lblMenu.setBounds(6, 0, 384, 22);
 		contentPane.add(lblMenu);
 		
-		JButton btnTaiKhoan = new JButton("Tài khoản Khách hàng");
+		JButton btnTaiKhoan = new JButton("Lập Sổ tiết kiệm");
 		btnTaiKhoan.setBounds(31, 77, 162, 29);
 		contentPane.add(btnTaiKhoan);
 		btnTaiKhoan.addActionListener(new ActionListener() {
@@ -63,10 +63,10 @@ public class Menu extends JFrame {
 			}
 		});
 		
-		JButton btnSoTietKiem = new JButton("Sổ tiết kiệm");
+		/*JButton btnSoTietKiem = new JButton("Sổ tiết kiệm");
 		btnSoTietKiem.setBounds(31, 34, 162, 29);
 		contentPane.add(btnSoTietKiem);
-		/*btnSoTietKiem.addActionListener(new ActionListener() {
+		btnSoTietKiem.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 					
 			}
@@ -80,12 +80,12 @@ public class Menu extends JFrame {
 		btnThayDoiQD.setBounds(204, 77, 162, 29);
 		contentPane.add(btnThayDoiQD);
 		
-		JButton btnNewButton = new JButton("Tra cứu");
+		JButton btnNewButton = new JButton("Tra cứu Sổ");
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 			}
 		});
-		btnNewButton.setBounds(31, 118, 162, 29);
+		btnNewButton.setBounds(31, 34, 162, 29);
 		contentPane.add(btnNewButton);
 	}
 }

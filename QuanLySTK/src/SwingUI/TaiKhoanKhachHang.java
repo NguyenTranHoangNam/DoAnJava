@@ -14,9 +14,15 @@ import javax.swing.JComboBox;
 import javax.swing.JButton;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
+
+import model.Sotietkiem;
+import model.Taikhoankhachhang;
+
 import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+import java.util.ArrayList;
+import java.util.Vector;
 import java.awt.event.ActionEvent;
 
 public class TaiKhoanKhachHang extends JFrame {
@@ -24,13 +30,8 @@ public class TaiKhoanKhachHang extends JFrame {
 	private JPanel contentPane;
 	private JTextField txtMaTK;
 	private JTextField txtHoTen;
-	private JTextField txtNgaySinh;
-	private JTextField txtCMND;
-	private JTextField txtDienThoai;
-	private JTextField txtDiaChi;
-	private JTextField txtEmail;
-	private JTextField txtLoaiTK;
 	private JTable table;
+	private DefaultTableModel tbl_TaiKhoan; 
 
 	/**
 	 * Launch the application.
@@ -47,105 +48,64 @@ public class TaiKhoanKhachHang extends JFrame {
 			}
 		});
 	}
+	
+	public void LoadDSTaiKhoan(ArrayList<Taikhoankhachhang> tkkh) {
+		if(tkkh.size() > 0) {
+			tbl_TaiKhoan = (DefaultTableModel) table.getModel();
+			tbl_TaiKhoan.setRowCount(0);
+			for (int i = 0; i < tkkh.size(); i++) {
+				Vector<String> row = new Vector<>();
+				int stt = i + 1;
+				Taikhoankhachhang tk = tkkh.get(stt);
+				row.add(stt + "");
+				row.add(tk.getHoTen());
+				row.add(tk.getNgaySinh().toString());
+				row.add(tk.getGioiTinh());
+				row.add(tk.getCmnd());
+				row.add(tk.getMaTaiKhoan());
+				row.add(tk.getLoaitaikhoan().getTenLoaiTaiKhoan());
+				row.add(tk.getDienThoai());
+				row.add(tk.getDiaChi());
+				row.add(tk.getEmail());
+				tbl_TaiKhoan.addRow(row);
+			}
+		}
+	}
 
 	/**
 	 * Create the frame.
 	 */
 	public TaiKhoanKhachHang() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 606, 585);
+		setBounds(100, 100, 539, 383);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
-		JLabel lblKhachHang = new JLabel("TH\u00D4NG TIN T\u00C0I KHO\u1EA2N KH\u00C1CH H\u00C0NG");
+		JLabel lblKhachHang = new JLabel("TÀI KHOẢN KHÁCH HÀNG");
 		lblKhachHang.setForeground(Color.BLUE);
 		lblKhachHang.setFont(new Font("Tahoma", Font.BOLD, 16));
-		lblKhachHang.setBounds(143, 26, 316, 20);
+		lblKhachHang.setBounds(161, 26, 227, 20);
 		contentPane.add(lblKhachHang);
 		
 		JLabel lblMaTK = new JLabel("M\u00E3 T\u00E0i kho\u1EA3n:");
-		lblMaTK.setBounds(50, 166, 78, 14);
+		lblMaTK.setBounds(50, 78, 78, 14);
 		contentPane.add(lblMaTK);
 		
 		txtMaTK = new JTextField();
 		txtMaTK.setColumns(10);
-		txtMaTK.setBounds(144, 163, 132, 20);
+		txtMaTK.setBounds(144, 75, 326, 20);
 		contentPane.add(txtMaTK);
 		
 		JLabel lblHoTen = new JLabel("H\u1ECD v\u00E0 T\u00EAn:");
-		lblHoTen.setBounds(50, 72, 78, 14);
+		lblHoTen.setBounds(50, 111, 78, 14);
 		contentPane.add(lblHoTen);
 		
 		txtHoTen = new JTextField();
 		txtHoTen.setColumns(10);
-		txtHoTen.setBounds(144, 69, 392, 20);
+		txtHoTen.setBounds(144, 108, 326, 20);
 		contentPane.add(txtHoTen);
-		
-		JLabel lblNgaySinh = new JLabel("Ng\u00E0y sinh:");
-		lblNgaySinh.setBounds(50, 103, 77, 14);
-		contentPane.add(lblNgaySinh);
-		
-		txtNgaySinh = new JTextField();
-		txtNgaySinh.setColumns(10);
-		txtNgaySinh.setBounds(144, 100, 392, 20);
-		contentPane.add(txtNgaySinh);
-		
-		JLabel lblGioiTinh = new JLabel("Gi\u1EDBi t\u00EDnh:");
-		lblGioiTinh.setBounds(50, 135, 78, 14);
-		contentPane.add(lblGioiTinh);
-		
-		JComboBox cbbGioiTinh = new JComboBox();
-		cbbGioiTinh.setBounds(144, 132, 132, 20);
-		contentPane.add(cbbGioiTinh);
-		cbbGioiTinh.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Nam","Nữ" }));
-		
-		JLabel lblCMND = new JLabel("S\u1ED1 CMND:");
-		lblCMND.setBounds(298, 135, 66, 14);
-		contentPane.add(lblCMND);
-		
-		JLabel lblDienThoai = new JLabel("S\u1ED1 \u0111i\u1EC7n tho\u1EA1i:");
-		lblDienThoai.setBounds(50, 197, 83, 14);
-		contentPane.add(lblDienThoai);
-		
-		txtCMND = new JTextField();
-		txtCMND.setColumns(10);
-		txtCMND.setBounds(390, 131, 146, 20);
-		contentPane.add(txtCMND);
-		
-		txtDienThoai = new JTextField();
-		txtDienThoai.setColumns(10);
-		txtDienThoai.setBounds(144, 194, 392, 20);
-		contentPane.add(txtDienThoai);
-		
-		JLabel lblDiaChi = new JLabel("\u0110\u1ECBa ch\u1EC9:");
-		lblDiaChi.setBounds(50, 231, 46, 14);
-		contentPane.add(lblDiaChi);
-		
-		txtDiaChi = new JTextField();
-		txtDiaChi.setText("");
-		txtDiaChi.setColumns(10);
-		txtDiaChi.setBounds(144, 228, 392, 20);
-		contentPane.add(txtDiaChi);
-		
-		JLabel lblEmail = new JLabel("Email:");
-		lblEmail.setBounds(50, 266, 46, 14);
-		contentPane.add(lblEmail);
-		
-		txtEmail = new JTextField();
-		txtEmail.setColumns(10);
-		txtEmail.setBounds(144, 263, 392, 20);
-		contentPane.add(txtEmail);
-		
-		JButton btnUpdate = new JButton("C\u1EADp nh\u1EADt ");
-		btnUpdate.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-			}
-		});
-		btnUpdate.setFont(new Font("Tahoma", Font.BOLD, 12));
-		btnUpdate.setBounds(168, 307, 109, 29);
-		contentPane.add(btnUpdate);
 		
 		JButton btnLapSo = new JButton("Lập Sổ tiết kiệm");
 		btnLapSo.addActionListener(new ActionListener() {
@@ -155,7 +115,7 @@ public class TaiKhoanKhachHang extends JFrame {
 			}
 		});
 		btnLapSo.setFont(new Font("Tahoma", Font.BOLD, 12));
-		btnLapSo.setBounds(413, 306, 139, 30);
+		btnLapSo.setBounds(280, 156, 139, 30);
 		contentPane.add(btnLapSo);
 		
 		JButton btnSearch = new JButton("Tìm kiếm");
@@ -164,26 +124,8 @@ public class TaiKhoanKhachHang extends JFrame {
 			}
 		});
 		btnSearch.setFont(new Font("Tahoma", Font.BOLD, 12));
-		btnSearch.setBounds(287, 306, 116, 30);
+		btnSearch.setBounds(143, 156, 116, 30);
 		contentPane.add(btnSearch);
-		
-		JLabel lblLoaiTK = new JLabel("Loại Tài khoản:");
-		lblLoaiTK.setBounds(297, 166, 92, 14);
-		contentPane.add(lblLoaiTK);
-		
-		txtLoaiTK = new JTextField();
-		txtLoaiTK.setBounds(390, 163, 146, 20);
-		contentPane.add(txtLoaiTK);
-		txtLoaiTK.setColumns(10);
-		
-		JButton btnInsert = new JButton("Thêm Khách");
-		btnInsert.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-			}
-		});
-		btnInsert.setFont(new Font("Tahoma", Font.BOLD, 12));
-		btnInsert.setBounds(33, 306, 125, 30);
-		contentPane.add(btnInsert);
 		
 		table = new JTable();
 		table.setModel(new DefaultTableModel(
@@ -197,35 +139,8 @@ public class TaiKhoanKhachHang extends JFrame {
 				"STT", "Họ và Tên", "Ngày sinh", "Giới tính", "Số CMND", "Mã Tài khoản", "Loại Tài khoản", "Số điện thoại", "Địa chỉ", "Email"
 			}
 		));
-		table.setBounds(10, 367, 570, 141);
+		table.setBounds(12, 216, 501, 104);
 		contentPane.add(table);
-		
-		txtNgaySinh.addKeyListener(new KeyAdapter() {
-			public void keyTyped(KeyEvent e) {
-			      char c = e.getKeyChar();
-			      if ( ((c < '0') || (c > '9')) && (c != KeyEvent.VK_BACK_SPACE)) {
-			         e.consume();  
-			      }
-			   }
-			});
-		
-		txtCMND.addKeyListener(new KeyAdapter() {
-			public void keyTyped(KeyEvent e) {
-			      char c = e.getKeyChar();
-			      if ( ((c < '0') || (c > '9')) && (c != KeyEvent.VK_BACK_SPACE)) {
-			         e.consume();  
-			      }
-			   }
-			});
-		
-		txtDienThoai.addKeyListener(new KeyAdapter() {
-			public void keyTyped(KeyEvent e) {
-			      char c = e.getKeyChar();
-			      if ( ((c < '0') || (c > '9')) && (c != KeyEvent.VK_BACK_SPACE)) {
-			         e.consume();  
-			      }
-			   }
-			});
 		
 	}
 }
