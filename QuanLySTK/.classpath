@@ -15,5 +15,7 @@
 	<classpathentry kind="lib" path="lib/required/jboss-logging-annotations-1.2.0.Beta1.jar"/>
 	<classpathentry kind="lib" path="lib/required/jboss-transaction-api_1.2_spec-1.0.0.Final.jar"/>
 	<classpathentry kind="lib" path="lib/jpa/hibernate-entitymanager-4.3.11.Final.jar"/>
+	<classpathentry kind="lib" path="lib/jcalendar-1.4.jar"/>
+	<classpathentry kind="lib" path="lib/JTimeChooser_0.1.0.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

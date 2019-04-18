@@ -21,6 +21,7 @@ import javax.swing.JComboBox;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import com.toedter.calendar.JDateChooser;
 
 public class LapSoTK extends JFrame {
 
@@ -145,6 +146,14 @@ public class LapSoTK extends JFrame {
 		JButton btnHuy = new JButton("Huy");
 		btnHuy.setBounds(92, 179, 136, 29);
 		contentPane.add(btnHuy);
+		
+		JDateChooser dateChooser = new JDateChooser();
+		dateChooser.getCalendarButton().addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			}
+		});
+		dateChooser.setBounds(102, 220, 119, 26);
+		contentPane.add(dateChooser);
 		tfSoTienGui.addKeyListener(new KeyAdapter() {
 			   public void keyTyped(KeyEvent e) {
 				      char c = e.getKeyChar();
