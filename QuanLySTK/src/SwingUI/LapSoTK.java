@@ -135,10 +135,12 @@ public class LapSoTK extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 //				LoaiTietKiem_DAO ltkD = new LoaiTietKiem_DAO();
 //				System.out.println(ltkD.getLoaiTietKiem().get(0).getMaLoaiTietKiem());
-								SoTietKiem_DAO stk = new SoTietKiem_DAO();
+				System.out.println(tfSoTienGui.getText());
+				SoTietKiem_DAO stk = new SoTietKiem_DAO();
 				Loaitietkiem loaiTK = stk.getLoaiTietKiem("L01");
 				Taikhoankhachhang tkkh = stk.getTaiKhoanKhachHang("TK0001");
-				int result = stk.MoSoTk("STK0009","TK0001",loaiTK,new Date(),"11",tkkh);
+
+				int result = stk.MoSoTk(tfMaSo.getText(),"TK0001",loaiTK,new Date(),tfSoTienGui.getText(),tkkh);
 				System.out.println(result);
 			}
 		});

@@ -25,9 +25,9 @@ public class SoTietKiem_DAO {
 
 	          session.beginTransaction();
 	          // Thuc thi cau querry
-	          BigDecimal soDu = new BigDecimal("0.02");
+	          BigDecimal soDu = new BigDecimal(soTien);
 	          Sotietkiem soTK = new Sotietkiem( maSoTK, loaiTK, tkkhachhang, new Date(),
-	      			new Date(), soDu, 0);
+	      			new Date(), soDu, loaiTK.getLaiSuat());
 	          session.save(soTK);
 
 		         // kết thúc 1 giao dịch
