@@ -2,16 +2,22 @@ package SwingUI;
 
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.Vector;
 
+import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableModel;
 
 import DAO.SoTietKiem_DAO;
+import model.Loaitietkiem;
 import model.Sotietkiem;
+import model.Taikhoankhachhang;
 
 import javax.swing.JTable;
 import javax.swing.JScrollPane;
@@ -85,7 +91,26 @@ public class TraCuu extends JFrame {
 		SoTietKiem_DAO stkD = new SoTietKiem_DAO();
 		LoadData(stkD.TraCuuSTK());
 		
-			
+		JButton btnGuiTien = new JButton("Gui Tien");
+		btnGuiTien.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {				
+				PhieuGuiTien phieu_gui = new PhieuGuiTien();
+				phieu_gui.main(null);
+			}
+		});
+		btnGuiTien.setBounds(347, 179, 131, 29);
+		contentPane.add(btnGuiTien);
+		
+		JButton btnRutTien = new JButton("RutTien");
+		btnRutTien.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {				
+				PhieuRutTien phieu_rut = new PhieuRutTien();
+				phieu_rut.main(null);
+			}
+		});
+		btnRutTien.setBounds(92, 179, 136, 29);
+		contentPane.add(btnRutTien);
 	}
 }
+
 

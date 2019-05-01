@@ -9,6 +9,8 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 import model.Sotietkiem;
 
 import javax.swing.JLabel;
@@ -128,10 +130,15 @@ public class PhieuRutTien extends JFrame {
 
 				   long getDaysDiff = getDiff / (24 * 60 * 60 * 1000);
 				   if (getDaysDiff >= 15){
-						
+					    
 				   }
 				   else {
-					   
+					   Alert alert = new Alert(AlertType.INFORMATION);
+						alert.setTitle("Thông báo");
+						alert.setHeaderText(null);
+						alert.setContentText("Chỉ được rút tiền sau 15 ngày mở sổ!");
+
+						alert.showAndWait();
 				   }
 				}catch (Exception e) {
 					   e.printStackTrace();

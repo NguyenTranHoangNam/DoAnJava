@@ -14,6 +14,12 @@ import java.awt.event.KeyEvent;
 
 import javax.swing.JTextField;
 import javax.swing.JButton;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
+
+import javafx.scene.control.*;
+import javafx.scene.control.Alert.AlertType;
+import model.Sotietkiem;
 
 public class PhieuGuiTien extends JFrame {
 
@@ -101,6 +107,22 @@ public class PhieuGuiTien extends JFrame {
 		contentPane.add(txtSoTienGui);
 		
 		JButton btnXacNhan = new JButton("X\u00E1c Nh\u1EADn");
+		btnXacNhan.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				//if ()
+				if (Integer.parseInt(txtSoTienGui.getText()) < 100000) {
+					Alert alert = new Alert(AlertType.INFORMATION);
+					alert.setTitle("Thông báo");
+					alert.setHeaderText(null);
+					alert.setContentText("Số tiền gửi tối thiểu phải là 100.000!");
+
+					alert.showAndWait();
+				}
+				else {
+					
+				}
+			}
+		});
 		btnXacNhan.setFont(new Font("Tahoma", Font.BOLD, 12));
 		btnXacNhan.setBounds(322, 137, 92, 29);
 		contentPane.add(btnXacNhan);
