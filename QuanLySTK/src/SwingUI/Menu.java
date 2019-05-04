@@ -83,6 +83,8 @@ public class Menu extends JFrame {
 		JButton btnNewButton = new JButton("Tra cứu Sổ");
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				TraCuu tc = new TraCuu();
+				tc.main(null);
 			}
 		});
 		btnNewButton.setBounds(31, 34, 162, 29);

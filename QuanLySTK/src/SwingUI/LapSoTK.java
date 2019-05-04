@@ -4,6 +4,8 @@ import java.awt.BorderLayout;
 import java.awt.EventQueue;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import javax.swing.JFrame;
@@ -32,7 +34,6 @@ public class LapSoTK extends JFrame {
 	private JTextField tfDiaChi;
 	private JTextField tfSoTienGui;
 	private JTextField tfCMND;
-	private JTextField tfNgayMoSo;
 
 	/**
 	 * Launch the application.
@@ -60,6 +61,16 @@ public class LapSoTK extends JFrame {
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
+		
+
+		JDateChooser dateChooser = new JDateChooser();
+		dateChooser.setDateFormatString("dd/MM/yyyy");
+		dateChooser.getCalendarButton().addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			}
+		});
+		dateChooser.setBounds(348, 108, 130, 26);
+		contentPane.add(dateChooser);
 		
 		JLabel lblNewLabel = new JLabel("Mo So Tiet Kiem");
 		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
@@ -119,11 +130,6 @@ public class LapSoTK extends JFrame {
 		lblNgyMS.setBounds(244, 113, 108, 16);
 		contentPane.add(lblNgyMS);
 		
-		tfNgayMoSo = new JTextField();
-		tfNgayMoSo.setColumns(10);
-		tfNgayMoSo.setBounds(348, 108, 130, 26);
-		contentPane.add(tfNgayMoSo);
-		
 		JComboBox cbLoaiTk = new JComboBox();
 		cbLoaiTk.setBounds(348, 42, 130, 27);
 		contentPane.add(cbLoaiTk);
@@ -133,14 +139,19 @@ public class LapSoTK extends JFrame {
 		JButton btnXacNhan = new JButton("Xac Nhan");
 		btnXacNhan.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-//				LoaiTietKiem_DAO ltkD = new LoaiTietKiem_DAO();
-//				System.out.println(ltkD.getLoaiTietKiem().get(0).getMaLoaiTietKiem());
-				System.out.println(tfSoTienGui.getText());
+				String date = ((JTextField)dateChooser.getDateEditor().getUiComponent()).getText();
+				Date dateGenerate = null;
+				try {
+					dateGenerate = new SimpleDateFormat("dd/MM/yyyy").parse(date);
+				} catch (ParseException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
 				SoTietKiem_DAO stk = new SoTietKiem_DAO();
 				Loaitietkiem loaiTK = stk.getLoaiTietKiem("L01");
 				Taikhoankhachhang tkkh = stk.getTaiKhoanKhachHang("TK0001");
 
-				int result = stk.MoSoTk(tfMaSo.getText(),"TK0001",loaiTK,new Date(),tfSoTienGui.getText(),tkkh);
+				int result = stk.MoSoTk(tfMaSo.getText(),"TK0001",loaiTK,dateGenerate,tfSoTienGui.getText(),tkkh);
 				System.out.println(result);
 			}
 		});
@@ -151,13 +162,7 @@ public class LapSoTK extends JFrame {
 		btnHuy.setBounds(92, 179, 136, 29);
 		contentPane.add(btnHuy);
 		
-		JDateChooser dateChooser = new JDateChooser();
-		dateChooser.getCalendarButton().addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-			}
-		});
-		dateChooser.setBounds(102, 220, 119, 26);
-		contentPane.add(dateChooser);
+		
 		tfSoTienGui.addKeyListener(new KeyAdapter() {
 			   public void keyTyped(KeyEvent e) {
 				      char c = e.getKeyChar();

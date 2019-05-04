@@ -21,6 +21,8 @@ import model.Taikhoankhachhang;
 
 import javax.swing.JTable;
 import javax.swing.JScrollPane;
+import javax.swing.JLabel;
+import javax.swing.SwingConstants;
 
 public class TraCuu extends JFrame {
 
@@ -110,6 +112,11 @@ public class TraCuu extends JFrame {
 		});
 		btnRutTien.setBounds(92, 179, 136, 29);
 		contentPane.add(btnRutTien);
+		
+		JLabel lblNewLabel = new JLabel("TRA CUU SO TIET KIEM");
+		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
+		lblNewLabel.setBounds(34, 82, 531, 29);
+		contentPane.add(lblNewLabel);
 	}
 }
 

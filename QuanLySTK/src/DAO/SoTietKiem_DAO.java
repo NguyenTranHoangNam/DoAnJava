@@ -26,7 +26,7 @@ public class SoTietKiem_DAO {
 	          session.beginTransaction();
 	          // Thuc thi cau querry
 	          BigDecimal soDu = new BigDecimal(soTien);
-	          Sotietkiem soTK = new Sotietkiem( maSoTK, loaiTK, tkkhachhang, new Date(),
+	          Sotietkiem soTK = new Sotietkiem( maSoTK, loaiTK, tkkhachhang, ngayMoSo,
 	      			new Date(), soDu, loaiTK.getLaiSuat());
 	          session.save(soTK);
 
