@@ -19,6 +19,7 @@ import java.awt.event.ActionEvent;
 
 import javafx.scene.control.*;
 import javafx.scene.control.Alert.AlertType;
+import model.Loaitietkiem;
 import model.Sotietkiem;
 
 public class PhieuGuiTien extends JFrame {
@@ -109,17 +110,27 @@ public class PhieuGuiTien extends JFrame {
 		JButton btnXacNhan = new JButton("X\u00E1c Nh\u1EADn");
 		btnXacNhan.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				//if ()
-				if (Integer.parseInt(txtSoTienGui.getText()) < 100000) {
-					Alert alert = new Alert(AlertType.INFORMATION);
-					alert.setTitle("Thông báo");
-					alert.setHeaderText(null);
-					alert.setContentText("Số tiền gửi tối thiểu phải là 100.000!");
+				Loaitietkiem ltk = null;
+				if (ltk.getMaLoaiTietKiem() == "TK001") {
+					if (Integer.parseInt(txtSoTienGui.getText()) < 100000) {
+						Alert alert = new Alert(AlertType.INFORMATION);
+						alert.setTitle("Thong bao");
+						alert.setHeaderText(null);
+						alert.setContentText("So tien gui toi thieu phai la 100.000!");
 
-					alert.showAndWait();
+						alert.showAndWait();
+					}
+					else {
+						
+					}
 				}
 				else {
-					
+					Alert alert = new Alert(AlertType.INFORMATION);
+					alert.setTitle("Thong bao");
+					alert.setHeaderText(null);
+					alert.setContentText("Chi nhan tien gui voi loai tiet kiem 'Khong ky han'!");
+
+					alert.showAndWait();
 				}
 			}
 		});

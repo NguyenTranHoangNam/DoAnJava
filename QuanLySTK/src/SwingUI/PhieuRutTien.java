@@ -3,6 +3,7 @@ package SwingUI;
 import java.awt.BorderLayout;
 import java.util.*;
 import java.text.*;
+import java.time.LocalDate;
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
@@ -17,6 +18,7 @@ import javax.swing.JLabel;
 import java.awt.Font;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+import java.math.BigDecimal;
 import java.awt.Color;
 import javax.swing.JTextField;
 import javax.swing.JButton;
@@ -118,6 +120,8 @@ public class PhieuRutTien extends JFrame {
 				Date date2 = null;
 				
 				Sotietkiem stk = null;
+				double SoTienConLai, TienRut;
+				TienRut = Double.parseDouble(txtSoTienRut.getText());
 
 				try {
 				   String startDate = stk.getNgayMoSo().toString();
@@ -129,17 +133,31 @@ public class PhieuRutTien extends JFrame {
 				   long getDiff = date2.getTime() - date1.getTime();
 
 				   long getDaysDiff = getDiff / (24 * 60 * 60 * 1000);
+				  
 				   if (getDaysDiff >= 15){
-					    
+					    SoTienConLai = stk.getSoDu().doubleValue() - TienRut; //BigDecimal --> Double
 				   }
 				   else {
-					   Alert alert = new Alert(AlertType.INFORMATION);
-						alert.setTitle("Thông báo");
+					   	Alert alert = new Alert(AlertType.INFORMATION);
+						alert.setTitle("Thong bao");
 						alert.setHeaderText(null);
-						alert.setContentText("Chỉ được rút tiền sau 15 ngày mở sổ!");
+						alert.setContentText("Chi duoc rut tien sau 15 ngay mo so!");
 
 						alert.showAndWait();
 				   }
+				   
+				   Date ngay_dao_han = null;
+				   Date ngay_rut = new Date(System.currentTimeMillis());
+				   String dao_han = stk.getNgayDaoHan().toString();
+				   
+				   ngay_dao_han = simpleDateFormat.parse(dao_han);
+				   long beforeDiff = ngay_rut.getTime() - ngay_dao_han.getTime();
+				   long getBeforeDiff = beforeDiff / (24 * 60 * 60 * 1000);
+				   
+				   if (getBeforeDiff >= 0){
+					    SoTienConLai = 0;
+				   }
+				   
 				}catch (Exception e) {
 					   e.printStackTrace();
 				}
