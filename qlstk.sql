@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Máy chủ: 127.0.0.1
--- Thời gian đã tạo: Th5 06, 2019 lúc 03:06 PM
+-- Thời gian đã tạo: Th5 06, 2019 lúc 03:22 PM
 -- Phiên bản máy phục vụ: 10.1.36-MariaDB
 -- Phiên bản PHP: 5.6.38
 
@@ -115,7 +115,7 @@ CREATE TABLE `phieuguitien` (
   `MaPhieuGui` varchar(20) COLLATE utf8_unicode_ci NOT NULL,
   `MaSoTietKiem` varchar(20) COLLATE utf8_unicode_ci NOT NULL,
   `NgayGuiTien` date NOT NULL,
-  `SoTienGui` double NOT NULL
+  `SoTienGui` decimal(20,0) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- --------------------------------------------------------
@@ -128,7 +128,7 @@ CREATE TABLE `phieuruttien` (
   `MaPhieuRut` varchar(20) COLLATE utf8_unicode_ci NOT NULL,
   `MaSoTietKiem` varchar(20) COLLATE utf8_unicode_ci NOT NULL,
   `NgayRutTien` date NOT NULL,
-  `SoTienRut` double NOT NULL
+  `SoTienRut` decimal(20,0) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- --------------------------------------------------------
@@ -155,7 +155,7 @@ CREATE TABLE `sotietkiem` (
   `MaLoaiTietKiem` varchar(20) COLLATE utf8_unicode_ci NOT NULL,
   `NgayMoSo` date NOT NULL,
   `NgayDaoHan` date NOT NULL,
-  `SoDu` double NOT NULL,
+  `SoDu` decimal(20,0) NOT NULL,
   `LaiSuat` float NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
@@ -164,7 +164,7 @@ CREATE TABLE `sotietkiem` (
 --
 
 INSERT INTO `sotietkiem` (`MaSo`, `MaTaiKhoan`, `MaLoaiTietKiem`, `NgayMoSo`, `NgayDaoHan`, `SoDu`, `LaiSuat`) VALUES
-('STK0001', 'TK0002', 'L03', '2019-03-17', '2019-09-17', 250000000, 0.074);
+('STK0001', 'TK0002', 'L03', '2019-03-17', '2019-09-17', '250000000', 0.074);
 
 -- --------------------------------------------------------
 
