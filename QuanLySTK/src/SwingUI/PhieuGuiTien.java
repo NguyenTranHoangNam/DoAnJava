@@ -11,6 +11,7 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+import java.math.BigDecimal;
 
 import javax.swing.JTextField;
 import javax.swing.JButton;
@@ -19,6 +20,8 @@ import java.awt.event.ActionEvent;
 
 import javafx.scene.control.*;
 import javafx.scene.control.Alert.AlertType;
+import model.Loaitietkiem;
+import model.Quydinh;
 import model.Sotietkiem;
 
 public class PhieuGuiTien extends JFrame {
@@ -108,18 +111,37 @@ public class PhieuGuiTien extends JFrame {
 		
 		JButton btnXacNhan = new JButton("X\u00E1c Nh\u1EADn");
 		btnXacNhan.addActionListener(new ActionListener() {
+			@SuppressWarnings("null")
 			public void actionPerformed(ActionEvent e) {
-				//if ()
-				if (Integer.parseInt(txtSoTienGui.getText()) < 100000) {
-					Alert alert = new Alert(AlertType.INFORMATION);
-					alert.setTitle("Thông báo");
-					alert.setHeaderText(null);
-					alert.setContentText("Số tiền gửi tối thiểu phải là 100.000!");
+				Loaitietkiem ltk = null;
+				Sotietkiem stk = null;
+				Quydinh qd = null;
+				double so_du;
+				
+				if (ltk.getMaLoaiTietKiem() == "L01") {
+					if (qd.getMaQD() == "QD01") {
+						if (Double.parseDouble(txtSoTienGui.getText()) < Double.parseDouble(qd.getChiTiet())) {
+							Alert alert = new Alert(AlertType.INFORMATION);
+							alert.setTitle("Thong bao");
+							alert.setHeaderText(null);
+							alert.setContentText("So tien gui toi thieu phai la " + qd.getChiTiet());
 
-					alert.showAndWait();
+							alert.showAndWait();
+						}
+						else {
+							so_du = stk.getSoDu().doubleValue() + Double.parseDouble(txtSoTienGui.getText());//Cap nhat so du tai khoan
+							BigDecimal.valueOf(so_du);
+							//Cau lenh Update so_du so tiet kiem
+						}
+					}
 				}
 				else {
-					
+					Alert alert = new Alert(AlertType.INFORMATION);
+					alert.setTitle("Thong bao");
+					alert.setHeaderText(null);
+					alert.setContentText("Chi nhan tien gui voi loai tiet kiem 'Khong ky han'!");
+
+					alert.showAndWait();
 				}
 			}
 		});

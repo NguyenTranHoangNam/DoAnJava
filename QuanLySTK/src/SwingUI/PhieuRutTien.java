@@ -3,6 +3,7 @@ package SwingUI;
 import java.awt.BorderLayout;
 import java.util.*;
 import java.text.*;
+import java.time.LocalDate;
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
@@ -11,12 +12,14 @@ import javax.swing.border.EmptyBorder;
 
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
+import model.Quydinh;
 import model.Sotietkiem;
 
 import javax.swing.JLabel;
 import java.awt.Font;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+import java.math.BigDecimal;
 import java.awt.Color;
 import javax.swing.JTextField;
 import javax.swing.JButton;
@@ -111,6 +114,8 @@ public class PhieuRutTien extends JFrame {
 		JButton btnXacNhan = new JButton("X\u00E1c Nh\u1EADn");
 		btnXacNhan.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
+				Quydinh qd = null;
+				
 				DateFormat simpleDateFormat = new SimpleDateFormat("dd-MM-yyyy");
 
 				Date currentDate = new Date();
@@ -118,6 +123,8 @@ public class PhieuRutTien extends JFrame {
 				Date date2 = null;
 				
 				Sotietkiem stk = null;
+				double SoTienConLai, sotienconlai, TienRut;
+				TienRut = Double.parseDouble(txtSoTienRut.getText());
 
 				try {
 				   String startDate = stk.getNgayMoSo().toString();
@@ -129,17 +136,37 @@ public class PhieuRutTien extends JFrame {
 				   long getDiff = date2.getTime() - date1.getTime();
 
 				   long getDaysDiff = getDiff / (24 * 60 * 60 * 1000);
-				   if (getDaysDiff >= 15){
-					    
-				   }
-				   else {
-					   Alert alert = new Alert(AlertType.INFORMATION);
-						alert.setTitle("Thông báo");
-						alert.setHeaderText(null);
-						alert.setContentText("Chỉ được rút tiền sau 15 ngày mở sổ!");
+				   
+				   if (qd.getMaQD() == "QD02") {
+					   if (getDaysDiff >= Integer.parseInt(qd.getChiTiet())){
+						    SoTienConLai = stk.getSoDu().doubleValue() - TienRut; //BigDecimal --> Double
+						    BigDecimal.valueOf(SoTienConLai);
+						    //Cau lenh Update SoDu so tiet kiem
+					   }
+					   else {
+						   	Alert alert = new Alert(AlertType.INFORMATION);
+							alert.setTitle("Thong bao");
+							alert.setHeaderText(null);
+							alert.setContentText("Chi duoc rut tien sau " + qd.getChiTiet() + " ngay mo so!");
 
-						alert.showAndWait();
+							alert.showAndWait();
+					   }
 				   }
+				   
+				   
+				   Date ngay_dao_han = null;
+				   Date ngay_rut = new Date(System.currentTimeMillis());
+				   String dao_han = stk.getNgayDaoHan().toString();
+				   
+				   ngay_dao_han = simpleDateFormat.parse(dao_han);
+				   long beforeDiff = ngay_rut.getTime() - ngay_dao_han.getTime();
+				   long getBeforeDiff = beforeDiff / (24 * 60 * 60 * 1000);
+				   
+				   if (getBeforeDiff >= 0){
+					    sotienconlai = 0;
+					    BigDecimal.valueOf(sotienconlai);
+				   }
+				   
 				}catch (Exception e) {
 					   e.printStackTrace();
 				}
