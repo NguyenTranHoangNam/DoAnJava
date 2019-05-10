@@ -12,6 +12,8 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
 import javax.swing.table.DefaultTableModel;
 
 import DAO.SoTietKiem_DAO;
@@ -89,6 +91,15 @@ public class TraCuu extends JFrame {
 		
 		table = new JTable(defaultTable_1);
 		scrollPane.setViewportView(table);
+		
+		table.getSelectionModel().addListSelectionListener(new ListSelectionListener(){
+	        public void valueChanged(ListSelectionEvent event) {
+	            // do some actions here, for example
+	            // print first column value from selected row
+	        	System.out.println(table.getValueAt(table.getSelectedRow(), 1).toString());
+
+	        }
+	    });
 		
 		SoTietKiem_DAO stkD = new SoTietKiem_DAO();
 		LoadData(stkD.TraCuuSTK());

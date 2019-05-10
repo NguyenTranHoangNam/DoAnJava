@@ -8,6 +8,8 @@ import java.util.Vector;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
 import javax.swing.table.DefaultTableModel;
 
 import DAO.LoaiTietKiem_DAO;
@@ -18,13 +20,20 @@ import model.Sotietkiem;
 import javax.swing.JButton;
 import javax.swing.JTable;
 import javax.swing.JScrollPane;
+import javax.swing.JLabel;
+import javax.swing.JTextField;
+import javax.swing.SwingConstants;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class ThayDoiQuiDinh extends JFrame {
 
 	private JPanel contentPane;
 	private JTable table;
 	private DefaultTableModel defaultTable_1; 
-
+	private JTextField tfTenLoaiTK;
+	private JTextField tfLaiSuat;
+	private String maLoaiTietKiem;
 	/**
 	 * Launch the application.
 	 */
@@ -53,16 +62,62 @@ public class ThayDoiQuiDinh extends JFrame {
 		contentPane.setLayout(null);
 		
 		JScrollPane scrollPane = new JScrollPane();
-		scrollPane.setBounds(6, 77, 642, 196);
+		scrollPane.setBounds(6, 34, 642, 196);
 		contentPane.add(scrollPane);
 		
 		defaultTable_1 = new DefaultTableModel(new Object[][] {},new String[] {
 				"STT","MA LOAI","TEN LOAI TIET KIEM","LAI SUAT"	
 			});
 		table = new JTable(defaultTable_1);
+		table.setDefaultEditor(Object.class, null);
+		table.getSelectionModel().addListSelectionListener(new ListSelectionListener(){
+	        public void valueChanged(ListSelectionEvent event) {
+	        maLoaiTietKiem = table.getValueAt(table.getSelectedRow(), 1).toString();
+	        tfTenLoaiTK.setText(table.getValueAt(table.getSelectedRow(), 2).toString());
+	        tfLaiSuat.setText(table.getValueAt(table.getSelectedRow(), 3).toString());
+	        }
+	    });
+
+		
 		LoaiTietKiem_DAO ltkD = new LoaiTietKiem_DAO();
 		LoadData(ltkD.getLoaiTietKiem());
 		scrollPane.setViewportView(table);
+		
+		JLabel lblNewLabel = new JLabel("TEN LOAI TIET KIEM");
+		lblNewLabel.setHorizontalAlignment(SwingConstants.RIGHT);
+		lblNewLabel.setBounds(6, 256, 130, 16);
+		contentPane.add(lblNewLabel);
+		
+		tfTenLoaiTK = new JTextField();
+		tfTenLoaiTK.setBounds(140, 251, 130, 26);
+		contentPane.add(tfTenLoaiTK);
+		tfTenLoaiTK.setColumns(10);
+		tfTenLoaiTK.setEditable(false);
+		
+		tfLaiSuat = new JTextField();
+		tfLaiSuat.setColumns(10);
+		tfLaiSuat.setBounds(140, 287, 130, 26);
+		contentPane.add(tfLaiSuat);
+		
+		JLabel lblLaiSuat = new JLabel("LAI SUAT");
+		lblLaiSuat.setHorizontalAlignment(SwingConstants.RIGHT);
+		lblLaiSuat.setBounds(6, 292, 130, 16);
+		contentPane.add(lblLaiSuat);
+		
+		JButton btnNewButton = new JButton("XAC NHAN");
+		btnNewButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				LoaiTietKiem_DAO ltk = new LoaiTietKiem_DAO();
+				int result = ltk.updateLoaiTietKiem(maLoaiTietKiem, Float.parseFloat(tfLaiSuat.getText()));
+				System.out.print(result == 1);
+				if(result == 1) {
+					LoaiTietKiem_DAO ltkD = new LoaiTietKiem_DAO();
+					LoadData(ltkD.getLoaiTietKiem());		
+				}	
+			}
+		});
+		btnNewButton.setBounds(140, 325, 130, 29);
+		contentPane.add(btnNewButton);
 	}
 	
 	public void LoadData(ArrayList<Loaitietkiem> ltks) {

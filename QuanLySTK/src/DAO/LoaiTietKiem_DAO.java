@@ -42,6 +42,29 @@ public class LoaiTietKiem_DAO {
 			return null;
 		}
 	 
-	 
+	 public int updateLoaiTietKiem(String maLoaiTK, float laiSuat) {
+		 Session session = config.sessionFactory.openSession();
+		 try {
+	            session.beginTransaction();
+	            String hqlUpdate = "update Loaitietkiem ltk set ltk.laiSuat = :laisuat where ltk.maLoaiTietKiem = :maLoaiTK";
+	            Query query=session.createQuery(hqlUpdate);
+	            query.setString("maLoaiTK", maLoaiTK);
+	            query.setFloat("laisuat", laiSuat);
+	            query.executeUpdate();
+	           	session.getTransaction().commit();
+	            return 1;
+			 
+		 }catch (Exception e) {
+			// TODO: handle exception
+		}finally {
+
+	         session.flush();
+
+	         session.close();
+
+	     }
+		 
+		 return 0;
+	 }
 
 }
