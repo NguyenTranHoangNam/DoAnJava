@@ -58,8 +58,10 @@ public class Menu extends JFrame {
 		contentPane.add(btnTaiKhoan);
 		btnTaiKhoan.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				TaiKhoanKhachHang tk = new TaiKhoanKhachHang();
-				tk.main(null);
+//				TaiKhoanKhachHang tk = new TaiKhoanKhachHang();
+//				tk.main(null);
+				LapSoTK lapSTK = new LapSoTK();
+				lapSTK.main(null);
 			}
 		});
 		

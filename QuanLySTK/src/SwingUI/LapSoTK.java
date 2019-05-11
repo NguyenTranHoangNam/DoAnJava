@@ -159,6 +159,11 @@ public class LapSoTK extends JFrame {
 		contentPane.add(btnXacNhan);
 		
 		JButton btnHuy = new JButton("Huy");
+		btnHuy.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				dispose();
+			}
+		});
 		btnHuy.setBounds(92, 179, 136, 29);
 		contentPane.add(btnHuy);
 		

@@ -128,6 +128,15 @@ public class TraCuu extends JFrame {
 		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
 		lblNewLabel.setBounds(34, 82, 531, 29);
 		contentPane.add(lblNewLabel);
+		
+		JButton btnThoat = new JButton("Thoat");
+		btnThoat.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				dispose();
+			}
+		});
+		btnThoat.setBounds(27, 329, 124, 29);
+		contentPane.add(btnThoat);
 	}
 }
 

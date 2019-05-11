@@ -17,13 +17,14 @@ import javax.swing.JTextField;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import javax.swing.JPasswordField;
 
 public class DangNhap extends JFrame {
 
 	private JPanel contentPane;
 	private JTextField tfUsername;
-	private JTextField tfPassword;
 	private JButton btnLogin;
+	private JPasswordField tfPassword;
 	/**
 	 * Launch the application.
 	 */
@@ -66,11 +67,6 @@ public class DangNhap extends JFrame {
 		contentPane.add(tfUsername);
 		tfUsername.setColumns(10);
 		
-		tfPassword = new JTextField();
-		tfPassword.setColumns(10);
-		tfPassword.setBounds(146, 99, 239, 20);
-		contentPane.add(tfPassword);
-		
 		JLabel lblPassword = new JLabel("Mật khẩu:");
 		lblPassword.setBounds(38, 101, 95, 14);
 		contentPane.add(lblPassword);
@@ -84,6 +80,7 @@ public class DangNhap extends JFrame {
 					if(dn != null) {
 						Menu mn = new Menu();
 						mn.main();
+						dispose();
 					}
 				}
 				
@@ -92,5 +89,9 @@ public class DangNhap extends JFrame {
 		});
 		btnLogin.setBounds(146, 149, 117, 29);
 		contentPane.add(btnLogin);
+		
+		tfPassword = new JPasswordField();
+		tfPassword.setBounds(146, 95, 239, 20);
+		contentPane.add(tfPassword);
 	}
 }
