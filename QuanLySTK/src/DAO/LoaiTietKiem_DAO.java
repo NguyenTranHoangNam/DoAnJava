@@ -66,5 +66,27 @@ public class LoaiTietKiem_DAO {
 		 
 		 return 0;
 	 }
+	 
+	 public int themLoaiTietKiem(String maLoaiTietKiem, String thoiHan, float laiSuat) {
+		 Session session = config.sessionFactory.openSession();
+		 try {
+	            session.beginTransaction();
+	            Loaitietkiem ltk = new Loaitietkiem( maLoaiTietKiem,  thoiHan,  laiSuat);
+	            session.save(ltk);
+	           	session.getTransaction().commit();
+	            return 1;
+			 
+		 }catch (Exception e) {
+			// TODO: handle exception
+		}finally {
+
+	         session.flush();
+
+	         session.close();
+
+	     }
+		 
+		 return 0;
+	 }
 
 }

@@ -34,6 +34,7 @@ public class ThayDoiQuiDinh extends JFrame {
 	private JTextField tfTenLoaiTK;
 	private JTextField tfLaiSuat;
 	private String maLoaiTietKiem;
+	private JButton btnThemLoaiTiet;
 	/**
 	 * Launch the application.
 	 */
@@ -118,6 +119,16 @@ public class ThayDoiQuiDinh extends JFrame {
 		});
 		btnNewButton.setBounds(140, 325, 130, 29);
 		contentPane.add(btnNewButton);
+		
+		btnThemLoaiTiet = new JButton("Them Loai Tiet Kiem");
+		btnThemLoaiTiet.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				ThemLoaiTK themLTK = new ThemLoaiTK();
+				themLTK.main(null);
+			}
+		});
+		btnThemLoaiTiet.setBounds(299, 325, 172, 29);
+		contentPane.add(btnThemLoaiTiet);
 	}
 	
 	public void LoadData(ArrayList<Loaitietkiem> ltks) {
