@@ -158,7 +158,7 @@ public class SoTietKiem_DAO {
 		 try {
 	            session.beginTransaction();
 	            String hqlUpdate = "update Sotietkiem stk set stk.soDu = :sodu where stk.maSoTietKiem = :maSoTK";
-	            Query query=session.createQuery(hqlUpdate);
+	            Query query = session.createQuery(hqlUpdate);
 	            query.setString("maSoTK", maSoTK);
 	            query.setBigDecimal("sodu", soDu);
 	            query.executeUpdate();
@@ -167,7 +167,7 @@ public class SoTietKiem_DAO {
 			 
 		 }catch (Exception e) {
 			// TODO: handle exception
-		}finally {
+		 }finally {
 
 	         session.flush();
 

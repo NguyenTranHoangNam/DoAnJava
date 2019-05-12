@@ -22,7 +22,9 @@ import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.math.BigDecimal;
 import java.text.DateFormat;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Date;
 
 import javax.swing.JTextField;
 import javax.swing.JButton;
@@ -34,6 +36,7 @@ import javafx.scene.control.Alert.AlertType;
 import model.Loaitietkiem;
 import model.Quydinh;
 import model.Sotietkiem;
+import model.Taikhoankhachhang;
 
 public class PhieuGuiTien extends JFrame {
 
@@ -47,11 +50,11 @@ public class PhieuGuiTien extends JFrame {
 	/**
 	 * Launch the application.
 	 */
-	public static void main(String[] args) {
+	public static void main(String maSotietkiem) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					PhieuGuiTien frame = new PhieuGuiTien();
+					PhieuGuiTien frame = new PhieuGuiTien(maSotietkiem);
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -63,7 +66,7 @@ public class PhieuGuiTien extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public PhieuGuiTien() {
+	public PhieuGuiTien(String maSotietkiem) {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 545, 263);
 		contentPane = new JPanel();
@@ -144,23 +147,35 @@ public class PhieuGuiTien extends JFrame {
 							if(txtMaPhieuGui.getText() != "" && txtMaSo.getText() != "" && txtNgayGui.getText() != "" && txtSoTienGui.getText() != "") {
 								PhieuGuiTien_DAO pgtD = new PhieuGuiTien_DAO();
 								SoTietKiem_DAO stkD = new SoTietKiem_DAO();
-								so_tien_gui = Double.parseDouble(txtSoTienGui.getText());
-								//int result = pgtD.themPhieuGuiTien(txtMaPhieuGui.getText(), txtMaSo.getText(), simpleDateFormat.parse(dateNgayGui.getDateFormatString()), BigDecimal.valueOf(so_tien_gui));
+								Sotietkiem ma_soTK = pgtD.getSoTietKiem(maSotietkiem);
 								
+								String date = ((JTextField)dateNgayGui.getDateEditor().getUiComponent()).getText();
+								Date dateGenerate = null;
+								try {
+									dateGenerate = new SimpleDateFormat("dd/MM/yyyy").parse(date);
+								} catch (ParseException e1) {
+									// TODO Auto-generated catch block
+									e1.printStackTrace();
+								}
+								so_tien_gui = Double.parseDouble(txtSoTienGui.getText());
+								
+								int result = pgtD.phieuGuiTien(txtMaPhieuGui.getText(), ma_soTK, dateGenerate, txtSoTienGui.getText());
+								System.out.println(result);
+								
+								//Cap nhat lai So du trong So tiet kiem
 								so_du = stk.getSoDu().doubleValue() + Double.parseDouble(txtSoTienGui.getText());//Cap nhat so du tai khoan
 								int update = stkD.updateSoTietKiem(txtMaSo.getText(), BigDecimal.valueOf(so_du));//Update so du trong STK
 								
-								/*if(result == 1) {
-									JOptionPane.showMessageDialog(null, "Them Phieu gui tien thanh cong");
+								if(result == 1) {
+									JOptionPane.showMessageDialog(null, "Quy khach da gui thanh cong " + txtSoTienGui.getText() + " vao So tiet kiem!");
 									txtMaPhieuGui.setText("");
 									txtMaSo.setText("");
 									txtNgayGui.setText("");
 									txtSoTienGui.setText("");
-								}*/
-							
-							}
-							else {
-								JOptionPane.showMessageDialog(null, "Khong the them Phieu gui tien!");
+								}
+								else {
+									JOptionPane.showMessageDialog(null, "Khong the gui tien!");
+								}
 							}
 							
 						}

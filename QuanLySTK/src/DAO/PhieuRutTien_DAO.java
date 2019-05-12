@@ -9,12 +9,13 @@ import org.hibernate.Session;
 
 import model.Loaitietkiem;
 import model.Phieuguitien;
+import model.Phieuruttien;
 import model.Sotietkiem;
 import model.Taikhoankhachhang;
 
-public class PhieuGuiTien_DAO {
-	 public int phieuGuiTien(String maPhieuGui, Sotietkiem maSoTietKiem, Date dateGenerate, String TienGui) {
-			 Phieuguitien phieuGui = new Phieuguitien();
+public class PhieuRutTien_DAO {
+	 public int phieuRutTien(String maPhieuRut, Sotietkiem maSoTietKiem, Date dateGenerate, String TienRut) {
+			 Phieuruttien phieuRut = new Phieuruttien();
 			 Session session = config.sessionFactory.openSession();
 			 
 		     try {
@@ -23,10 +24,10 @@ public class PhieuGuiTien_DAO {
 
 		         session.beginTransaction();
 		         
-		         BigDecimal soTienGui = new BigDecimal(TienGui);
+		         BigDecimal soTienRut = new BigDecimal(TienRut);
 		         
-		         Phieuguitien phieugui = new Phieuguitien(maPhieuGui, maSoTietKiem, dateGenerate, soTienGui);
-		         session.save(phieugui);
+		         Phieuguitien phieurut = new Phieuguitien(maPhieuRut, maSoTietKiem, dateGenerate, soTienRut);
+		         session.save(phieurut);
 		         
 		         session.getTransaction().commit();
 		         return 1;

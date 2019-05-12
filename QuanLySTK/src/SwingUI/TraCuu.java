@@ -115,7 +115,7 @@ public class TraCuu extends JFrame {
 		JButton btnGuiTien = new JButton("Gui Tien");
 		btnGuiTien.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {				
-				PhieuGuiTien phieu_gui = new PhieuGuiTien();
+				PhieuGuiTien phieu_gui = new PhieuGuiTien(null);
 				phieu_gui.main(null);
 			}
 		});
@@ -125,7 +125,7 @@ public class TraCuu extends JFrame {
 		JButton btnRutTien = new JButton("RutTien");
 		btnRutTien.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {				
-				PhieuRutTien phieu_rut = new PhieuRutTien();
+				PhieuRutTien phieu_rut = new PhieuRutTien(null);
 				phieu_rut.main(null);
 			}
 		});
