@@ -10,12 +10,18 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
+import com.toedter.calendar.JDateChooser;
+
+import DAO.SoTietKiem_DAO;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
+import model.Loaitietkiem;
 import model.Quydinh;
 import model.Sotietkiem;
 
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+
 import java.awt.Font;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
@@ -96,10 +102,14 @@ public class PhieuRutTien extends JFrame {
 		txtMaSo.setBounds(77, 56, 150, 20);
 		contentPane.add(txtMaSo);
 		
-		txtNgayRut = new JTextField();
-		txtNgayRut.setColumns(10);
-		txtNgayRut.setBounds(76, 96, 150, 20);
-		contentPane.add(txtNgayRut);
+		JDateChooser dateNgayRut = new JDateChooser();
+		dateNgayRut.setDateFormatString("dd/MM/yyyy");
+		dateNgayRut.getCalendarButton().addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			}
+		});
+		dateNgayRut.setBounds(76, 96, 150, 20);
+		contentPane.add(dateNgayRut);
 		
 		txtKhachHang = new JTextField();
 		txtKhachHang.setColumns(10);
@@ -115,6 +125,7 @@ public class PhieuRutTien extends JFrame {
 		btnXacNhan.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				Quydinh qd = null;
+				Loaitietkiem lTK = null;
 				
 				DateFormat simpleDateFormat = new SimpleDateFormat("dd-MM-yyyy");
 
@@ -127,49 +138,57 @@ public class PhieuRutTien extends JFrame {
 				TienRut = Double.parseDouble(txtSoTienRut.getText());
 
 				try {
-				   String startDate = stk.getNgayMoSo().toString();
-				   String endDate = txtNgayRut.getText();
+					SoTietKiem_DAO stkD = new SoTietKiem_DAO();
+					
+					String startDate = stk.getNgayMoSo().toString();
+					String endDate = dateNgayRut.getDateFormatString();
 
-				   date1 = simpleDateFormat.parse(startDate);
-				   date2 = simpleDateFormat.parse(endDate);
+					date1 = simpleDateFormat.parse(startDate);
+					date2 = simpleDateFormat.parse(endDate);
 
-				   long getDiff = date2.getTime() - date1.getTime();
+					long getDiff = date2.getTime() - date1.getTime();
 
-				   long getDaysDiff = getDiff / (24 * 60 * 60 * 1000);
+					long getDaysDiff = getDiff / (24 * 60 * 60 * 1000);
 				   
-				   if (qd.getMaQD() == "QD02") {
-					   if (getDaysDiff >= Integer.parseInt(qd.getChiTiet())){
-						    SoTienConLai = stk.getSoDu().doubleValue() - TienRut; //BigDecimal --> Double
-						    BigDecimal.valueOf(SoTienConLai);
-						    //Cau lenh Update SoDu so tiet kiem
-					   }
-					   else {
-						   	Alert alert = new Alert(AlertType.INFORMATION);
-							alert.setTitle("Thong bao");
-							alert.setHeaderText(null);
-							alert.setContentText("Chi duoc rut tien sau " + qd.getChiTiet() + " ngay mo so!");
-
-							alert.showAndWait();
-					   }
-				   }
+					//Rut tien sau X ngay mo so
+					if (qd.getMaQD() == "QD02") {
+						if (getDaysDiff >= Integer.parseInt(qd.getChiTiet())){
+							SoTienConLai = stk.getSoDu().doubleValue() - TienRut; //BigDecimal --> Double
+							int update = stkD.updateSoTietKiem(txtMaSo.getText(), BigDecimal.valueOf(SoTienConLai));
+						}
+						else {
+							JOptionPane.showMessageDialog(null, "Chi duoc rut tien sau " + qd.getChiTiet() + " ngay mo so");
+						}
+					}
 				   
+					//Rut tien voi loai tiet kiem co ky han
+					if (stk.getNgayDaoHan() != null) {//Voi Loai tiet kiem = Khong ky han => NgayDaoHan = null
+						Date ngay_dao_han = null;
+						Date ngay_rut = new Date(System.currentTimeMillis());
+						String dao_han = stk.getNgayDaoHan().toString();
 				   
-				   Date ngay_dao_han = null;
-				   Date ngay_rut = new Date(System.currentTimeMillis());
-				   String dao_han = stk.getNgayDaoHan().toString();
+						ngay_dao_han = simpleDateFormat.parse(dao_han);
+						long beforeDiff = ngay_rut.getTime() - ngay_dao_han.getTime();
+						long getBeforeDiff = beforeDiff / (24 * 60 * 60 * 1000);
 				   
-				   ngay_dao_han = simpleDateFormat.parse(dao_han);
-				   long beforeDiff = ngay_rut.getTime() - ngay_dao_han.getTime();
-				   long getBeforeDiff = beforeDiff / (24 * 60 * 60 * 1000);
-				   
-				   if (getBeforeDiff >= 0){
-					    sotienconlai = 0;
-					    BigDecimal.valueOf(sotienconlai);
-				   }
+						if (getBeforeDiff >= 0){
+							double tienlai;
+							String laisuat = String.valueOf(lTK.getLaiSuat());
+							sotienconlai = 0;
+							
+							int ud = stkD.updateSoTietKiem(txtMaSo.getText(), BigDecimal.valueOf(sotienconlai));
+							tienlai = Double.parseDouble(laisuat) * Double.parseDouble(lTK.getThoiHan().substring(0));
+							
+							JOptionPane.showMessageDialog(null, "Quy khach da rut het tien trong So tiet kiem! Lai suat quy khach nhan duoc la " + tienlai);
+						}
+					}
+					
+					//Rut tien voi loai tiet kiem khong ky han
 				   
 				}catch (Exception e) {
-					   e.printStackTrace();
+						e.printStackTrace();
 				}
+				
 			}
 		});
 		btnXacNhan.setFont(new Font("Tahoma", Font.BOLD, 12));
@@ -177,20 +196,16 @@ public class PhieuRutTien extends JFrame {
 		contentPane.add(btnXacNhan);
 		
 		JButton btnCancel = new JButton("Cancel");
+		btnCancel.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				dispose();
+			}
+		});
 		btnCancel.setFont(new Font("Tahoma", Font.BOLD, 12));
 		btnCancel.setBounds(419, 137, 78, 29);
 		contentPane.add(btnCancel);
 		
 		txtSoTienRut.addKeyListener(new KeyAdapter() {
-			public void keyTyped(KeyEvent e) {
-			      char c = e.getKeyChar();
-			      if ( ((c < '0') || (c > '9')) && (c != KeyEvent.VK_BACK_SPACE)) {
-			         e.consume();  
-			      }
-			   }
-			});
-		
-		txtNgayRut.addKeyListener(new KeyAdapter() {
 			public void keyTyped(KeyEvent e) {
 			      char c = e.getKeyChar();
 			      if ( ((c < '0') || (c > '9')) && (c != KeyEvent.VK_BACK_SPACE)) {
