@@ -21,6 +21,7 @@ import javax.swing.JButton;
 import javax.swing.JTable;
 import javax.swing.JScrollPane;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 import java.awt.event.ActionListener;
@@ -35,6 +36,8 @@ public class ThayDoiQuiDinh extends JFrame {
 	private JTextField tfLaiSuat;
 	private String maLoaiTietKiem;
 	private JButton btnThemLoaiTiet;
+	private JButton btnToar;
+	private JButton btnXoaLoaiTiet;
 	/**
 	 * Launch the application.
 	 */
@@ -120,15 +123,41 @@ public class ThayDoiQuiDinh extends JFrame {
 		btnNewButton.setBounds(140, 325, 130, 29);
 		contentPane.add(btnNewButton);
 		
-		btnThemLoaiTiet = new JButton("Them Loai Tiet Kiem");
+		btnThemLoaiTiet = new JButton("THEM LOAI TIET KIEM");
 		btnThemLoaiTiet.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				ThemLoaiTK themLTK = new ThemLoaiTK();
 				themLTK.main(null);
 			}
 		});
-		btnThemLoaiTiet.setBounds(299, 325, 172, 29);
+		btnThemLoaiTiet.setBounds(290, 251, 172, 29);
 		contentPane.add(btnThemLoaiTiet);
+		
+		btnToar = new JButton("THOAT");
+		btnToar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				dispose();
+			}
+		});
+		btnToar.setBounds(6, 325, 117, 29);
+		contentPane.add(btnToar);
+		
+		btnXoaLoaiTiet = new JButton("XOA LOAI TIET KIEM");
+		btnXoaLoaiTiet.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				LoaiTietKiem_DAO ltkD = new LoaiTietKiem_DAO();
+				int result = ltkD.xoaLoaiTietKiem(maLoaiTietKiem);
+				if(result == 1) {
+					table.repaint();
+					JOptionPane.showMessageDialog(null, "Xoa loai tiet kiem thanh cong");
+				}
+				else {
+					JOptionPane.showMessageDialog(null, "Xoa loai tiet kiem that bai");
+				}
+			}
+		});
+		btnXoaLoaiTiet.setBounds(290, 287, 172, 29);
+		contentPane.add(btnXoaLoaiTiet);
 	}
 	
 	public void LoadData(ArrayList<Loaitietkiem> ltks) {

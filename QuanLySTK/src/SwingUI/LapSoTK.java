@@ -38,11 +38,11 @@ public class LapSoTK extends JFrame {
 	/**
 	 * Launch the application.
 	 */
-	public static void main(String[] args) {
+	public static void main(String hoten,String cmnd, String diaChi, String maTK) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					LapSoTK frame = new LapSoTK();
+					LapSoTK frame = new LapSoTK(hoten,cmnd,diaChi,maTK);
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -54,7 +54,8 @@ public class LapSoTK extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public LapSoTK() {
+	public LapSoTK(String hoten,String cmnd, String diaChi,String maTK) {
+		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 541, 369);
 		contentPane = new JPanel();
@@ -135,7 +136,9 @@ public class LapSoTK extends JFrame {
 		contentPane.add(cbLoaiTk);
 		
 		cbLoaiTk.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Khong ky han ","6 Thang","3 Thang" }));
-		
+		tfKhachHang.setText(hoten);
+		tfCMND.setText(cmnd);
+		tfDiaChi.setText(diaChi);
 		JButton btnXacNhan = new JButton("Xac Nhan");
 		btnXacNhan.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -149,7 +152,7 @@ public class LapSoTK extends JFrame {
 				}
 				SoTietKiem_DAO stk = new SoTietKiem_DAO();
 				Loaitietkiem loaiTK = stk.getLoaiTietKiem("L01");
-				Taikhoankhachhang tkkh = stk.getTaiKhoanKhachHang("TK0001");
+				Taikhoankhachhang tkkh = stk.getTaiKhoanKhachHang(maTK);
 
 				int result = stk.MoSoTk(tfMaSo.getText(),"TK0001",loaiTK,dateGenerate,tfSoTienGui.getText(),tkkh);
 				System.out.println(result);

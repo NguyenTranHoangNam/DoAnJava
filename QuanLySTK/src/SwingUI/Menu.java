@@ -58,10 +58,10 @@ public class Menu extends JFrame {
 		contentPane.add(btnTaiKhoan);
 		btnTaiKhoan.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-//				TaiKhoanKhachHang tk = new TaiKhoanKhachHang();
-//				tk.main(null);
-				LapSoTK lapSTK = new LapSoTK();
-				lapSTK.main(null);
+				TaiKhoanKhachHanng tk = new TaiKhoanKhachHanng();
+				tk.main(null);
+//				LapSoTK lapSTK = new LapSoTK();
+//				lapSTK.main(null);
 			}
 		});
 		
@@ -84,6 +84,12 @@ public class Menu extends JFrame {
 		contentPane.add(btnBaoCao);
 		
 		JButton btnThayDoiQD = new JButton("Thay đổi quy định");
+		btnThayDoiQD.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				ThayDoiQuiDinh tdqd = new ThayDoiQuiDinh();
+				tdqd.main(null);
+			}
+		});
 		btnThayDoiQD.setBounds(204, 77, 162, 29);
 		contentPane.add(btnThayDoiQD);
 		

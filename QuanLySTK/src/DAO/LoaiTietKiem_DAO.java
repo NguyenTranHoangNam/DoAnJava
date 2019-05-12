@@ -75,18 +75,33 @@ public class LoaiTietKiem_DAO {
 	            session.save(ltk);
 	           	session.getTransaction().commit();
 	            return 1;
-			 
 		 }catch (Exception e) {
 			// TODO: handle exception
 		}finally {
-
 	         session.flush();
-
 	         session.close();
-
 	     }
 		 
 		 return 0;
 	 }
 
+	 public int xoaLoaiTietKiem(String maLoaiTietKiem) {
+		 Session session = config.sessionFactory.openSession();
+		 try {
+	            session.beginTransaction();
+	            String sql = "delete from Loaitietkiem where maLoaiTietKiem = :maLoaiTK";
+	            Query query=session.createQuery(sql);
+	            query.setString("maLoaiTK", maLoaiTietKiem);
+	            query.executeUpdate();	           
+	            session.getTransaction().commit();
+	            return 1;
+		 }catch (Exception e) {
+			// TODO: handle exception
+		}finally {
+	         session.flush();
+	         session.close();
+	     }
+		 
+		 return 0;
+	 }
 }

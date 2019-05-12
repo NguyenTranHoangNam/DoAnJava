@@ -12,9 +12,13 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+import javax.swing.event.DocumentEvent;
+import javax.swing.event.DocumentListener;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableModel;
+import javax.swing.table.TableRowSorter;
 
 import DAO.SoTietKiem_DAO;
 import model.Loaitietkiem;
@@ -25,12 +29,15 @@ import javax.swing.JTable;
 import javax.swing.JScrollPane;
 import javax.swing.JLabel;
 import javax.swing.SwingConstants;
+import javax.swing.JTextField;
+import javax.swing.RowFilter;
 
 public class TraCuu extends JFrame {
 
 	private JPanel contentPane;
 	private JTable table;
 	private DefaultTableModel defaultTable_1; 
+	private JTextField tfMaSoTietKiem;
 
 	/**
 	 * Launch the application.
@@ -81,7 +88,7 @@ public class TraCuu extends JFrame {
 		contentPane.setLayout(null);
 		
 		JScrollPane scrollPane = new JScrollPane();
-		scrollPane.setBounds(34, 110, 531, 207);
+		scrollPane.setBounds(34, 77, 531, 240);
 		contentPane.add(scrollPane);
 		
 		defaultTable_1 = new DefaultTableModel(new Object[][] {},new String[] {
@@ -91,7 +98,8 @@ public class TraCuu extends JFrame {
 		
 		table = new JTable(defaultTable_1);
 		scrollPane.setViewportView(table);
-		
+		TableRowSorter<TableModel> sorter = new TableRowSorter<TableModel>(table.getModel());
+        table.setRowSorter(sorter);
 		table.getSelectionModel().addListSelectionListener(new ListSelectionListener(){
 	        public void valueChanged(ListSelectionEvent event) {
 	            // do some actions here, for example
@@ -126,7 +134,7 @@ public class TraCuu extends JFrame {
 		
 		JLabel lblNewLabel = new JLabel("TRA CUU SO TIET KIEM");
 		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
-		lblNewLabel.setBounds(34, 82, 531, 29);
+		lblNewLabel.setBounds(34, 3, 531, 29);
 		contentPane.add(lblNewLabel);
 		
 		JButton btnThoat = new JButton("Thoat");
@@ -137,6 +145,32 @@ public class TraCuu extends JFrame {
 		});
 		btnThoat.setBounds(27, 329, 124, 29);
 		contentPane.add(btnThoat);
+		
+		tfMaSoTietKiem = new JTextField();
+		tfMaSoTietKiem.setBounds(152, 44, 130, 26);
+		contentPane.add(tfMaSoTietKiem);
+		tfMaSoTietKiem.setColumns(10);
+		
+		JLabel lblMaSoTiet = new JLabel("MA SO TIET KIEM");
+		lblMaSoTiet.setBounds(34, 49, 106, 16);
+		contentPane.add(lblMaSoTiet);
+		
+		tfMaSoTietKiem.getDocument().addDocumentListener(new DocumentListener() {
+			  public void changedUpdate(DocumentEvent e) {
+//				  updateText();
+			  }
+			  public void removeUpdate(DocumentEvent e) {
+				  updateText();
+			  }
+			  public void insertUpdate(DocumentEvent e) {
+				  updateText();
+			  }
+			  public void updateText() {
+			    	 sorter.setRowFilter(RowFilter.regexFilter("(?i)" + tfMaSoTietKiem.getText()));
+			    	
+			  }
+			});
+
 	}
 }
 
