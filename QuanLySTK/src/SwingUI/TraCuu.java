@@ -40,6 +40,7 @@ public class TraCuu extends JFrame {
 	private JTextField tfMaSoTietKiem;
 	private String maSotietkiem;
 	private String hoTen;
+	private String loaiTK;
 
 	/**
 	 * Launch the application.
@@ -108,31 +109,12 @@ public class TraCuu extends JFrame {
 	            // print first column value from selected row
 	        	maSotietkiem = table.getValueAt(table.getSelectedRow(), 1).toString();
 	        	hoTen = table.getValueAt(table.getSelectedRow(), 3).toString();
+	        	loaiTK = table.getValueAt(table.getSelectedRow(), 2).toString();
 	        }
 	    });
 		
 		SoTietKiem_DAO stkD = new SoTietKiem_DAO();
 		LoadData(stkD.TraCuuSTK());
-		
-		JButton btnGuiTien = new JButton("Gui Tien");
-		btnGuiTien.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {				
-				PhieuGuiTien phieu_gui = new PhieuGuiTien(maSotietkiem, hoTen);
-				phieu_gui.main(maSotietkiem, hoTen);
-			}
-		});
-		btnGuiTien.setBounds(347, 179, 131, 29);
-		contentPane.add(btnGuiTien);
-		
-		JButton btnRutTien = new JButton("RutTien");
-		btnRutTien.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {				
-				PhieuRutTien phieu_rut = new PhieuRutTien(maSotietkiem, hoTen);
-				phieu_rut.main(maSotietkiem, hoTen);
-			}
-		});
-		btnRutTien.setBounds(92, 179, 136, 29);
-		contentPane.add(btnRutTien);
 		
 		JLabel lblNewLabel = new JLabel("TRA CUU SO TIET KIEM");
 		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
@@ -160,7 +142,8 @@ public class TraCuu extends JFrame {
 		JButton btnPhieuGuiTien = new JButton("LAP PHIEU GUI");
 		btnPhieuGuiTien.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				//ACTION PHIEU GUI TIEN 
+				PhieuGuiTien phieu_gui = new PhieuGuiTien(maSotietkiem, hoTen);
+				phieu_gui.main(maSotietkiem, hoTen);
 			}
 		});
 		btnPhieuGuiTien.setBounds(294, 44, 117, 29);
@@ -169,7 +152,8 @@ public class TraCuu extends JFrame {
 		JButton btnPhieuRutTien = new JButton("LAP PHIEU RUT");
 		btnPhieuRutTien.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				//ACTION PHIEU RUT TIEN 
+				PhieuRutTien phieu_rut = new PhieuRutTien(maSotietkiem, hoTen);
+				phieu_rut.main(maSotietkiem, hoTen); 
 			}
 		});
 		btnPhieuRutTien.setBounds(448, 44, 117, 29);

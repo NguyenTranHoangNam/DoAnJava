@@ -37,6 +37,7 @@ import model.Loaitietkiem;
 import model.Quydinh;
 import model.Sotietkiem;
 import model.Taikhoankhachhang;
+import SwingUI.TraCuu;
 
 public class PhieuGuiTien extends JFrame {
 
@@ -136,6 +137,7 @@ public class PhieuGuiTien extends JFrame {
 			@SuppressWarnings("null")
 			public void actionPerformed(ActionEvent e) {
 				Loaitietkiem ltk = null;
+				String loaiTK;
 				Sotietkiem stk = null;
 				Quydinh qd = null;
 				double so_du, so_tien_gui;
