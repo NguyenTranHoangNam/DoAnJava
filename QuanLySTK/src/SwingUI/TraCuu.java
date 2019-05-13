@@ -38,6 +38,8 @@ public class TraCuu extends JFrame {
 	private JTable table;
 	private DefaultTableModel defaultTable_1; 
 	private JTextField tfMaSoTietKiem;
+	private String maSotietkiem;
+	private String hoTen;
 
 	/**
 	 * Launch the application.
@@ -104,8 +106,8 @@ public class TraCuu extends JFrame {
 	        public void valueChanged(ListSelectionEvent event) {
 	            // do some actions here, for example
 	            // print first column value from selected row
-	        	System.out.println(table.getValueAt(table.getSelectedRow(), 1).toString());
-
+	        	maSotietkiem = table.getValueAt(table.getSelectedRow(), 1).toString();
+	        	hoTen = table.getValueAt(table.getSelectedRow(), 3).toString();
 	        }
 	    });
 		
@@ -115,8 +117,8 @@ public class TraCuu extends JFrame {
 		JButton btnGuiTien = new JButton("Gui Tien");
 		btnGuiTien.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {				
-				PhieuGuiTien phieu_gui = new PhieuGuiTien(null);
-				phieu_gui.main(null);
+				PhieuGuiTien phieu_gui = new PhieuGuiTien(maSotietkiem, hoTen);
+				phieu_gui.main(maSotietkiem, hoTen);
 			}
 		});
 		btnGuiTien.setBounds(347, 179, 131, 29);
@@ -125,8 +127,8 @@ public class TraCuu extends JFrame {
 		JButton btnRutTien = new JButton("RutTien");
 		btnRutTien.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {				
-				PhieuRutTien phieu_rut = new PhieuRutTien(null);
-				phieu_rut.main(null);
+				PhieuRutTien phieu_rut = new PhieuRutTien(maSotietkiem, hoTen);
+				phieu_rut.main(maSotietkiem, hoTen);
 			}
 		});
 		btnRutTien.setBounds(92, 179, 136, 29);

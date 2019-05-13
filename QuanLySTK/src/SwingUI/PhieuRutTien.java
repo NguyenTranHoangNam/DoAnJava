@@ -46,11 +46,11 @@ public class PhieuRutTien extends JFrame {
 	/**
 	 * Launch the application.
 	 */
-	public static void main(String maSotietkiem) {
+	public static void main(String maSotietkiem, String hoTen) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					PhieuRutTien frame = new PhieuRutTien(maSotietkiem);
+					PhieuRutTien frame = new PhieuRutTien(maSotietkiem, hoTen);
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -62,7 +62,7 @@ public class PhieuRutTien extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public PhieuRutTien(String maSotietkiem) {
+	public PhieuRutTien(String maSotietkiem, String hoTen) {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 543, 266);
 		contentPane = new JPanel();
@@ -123,6 +123,9 @@ public class PhieuRutTien extends JFrame {
 		txtSoTienRut.setColumns(10);
 		txtSoTienRut.setBounds(335, 136, 163, 20);
 		contentPane.add(txtSoTienRut);
+		
+		txtMaSo.setText(maSotietkiem);
+		txtKhachHang.setText(hoTen);
 		
 		JButton btnXacNhan = new JButton("X\u00E1c Nh\u1EADn");
 		btnXacNhan.addActionListener(new ActionListener() {
@@ -284,4 +287,5 @@ public class PhieuRutTien extends JFrame {
 			   }
 		});
 	}
+
 }
