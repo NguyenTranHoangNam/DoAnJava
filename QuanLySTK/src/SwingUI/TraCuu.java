@@ -157,6 +157,24 @@ public class TraCuu extends JFrame {
 		lblMaSoTiet.setBounds(34, 49, 106, 16);
 		contentPane.add(lblMaSoTiet);
 		
+		JButton btnPhieuGuiTien = new JButton("LAP PHIEU GUI");
+		btnPhieuGuiTien.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				//ACTION PHIEU GUI TIEN 
+			}
+		});
+		btnPhieuGuiTien.setBounds(294, 44, 117, 29);
+		contentPane.add(btnPhieuGuiTien);
+		
+		JButton btnPhieuRutTien = new JButton("LAP PHIEU RUT");
+		btnPhieuRutTien.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				//ACTION PHIEU RUT TIEN 
+			}
+		});
+		btnPhieuRutTien.setBounds(448, 44, 117, 29);
+		contentPane.add(btnPhieuRutTien);
+		
 		tfMaSoTietKiem.getDocument().addDocumentListener(new DocumentListener() {
 			  public void changedUpdate(DocumentEvent e) {
 //				  updateText();
