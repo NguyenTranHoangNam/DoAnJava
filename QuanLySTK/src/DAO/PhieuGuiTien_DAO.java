@@ -111,4 +111,7 @@ public class PhieuGuiTien_DAO {
 		 return null;
 	 }
 
+	 public int getPhieuGuiTienTheoNgay() {
+		 return 0;
+	 }
 }

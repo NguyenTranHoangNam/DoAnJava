@@ -13,6 +13,7 @@ import DAO.DangNhap_DAO;
 import model.Dangnhap;
 
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
@@ -82,9 +83,10 @@ public class DangNhap extends JFrame {
 						mn.main();
 						dispose();
 					}
+					else {
+							JOptionPane.showMessageDialog(null, "Dang nhap that bai");
+						}
 				}
-				
-				
 			}
 		});
 		btnLogin.setBounds(146, 149, 117, 29);

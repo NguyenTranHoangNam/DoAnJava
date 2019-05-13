@@ -26,6 +26,7 @@ import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.SwingConstants;
 
 public class TaiKhoanKhachHanng extends JFrame {
@@ -41,6 +42,7 @@ public class TaiKhoanKhachHanng extends JFrame {
 	private String maTK;
 	private JLabel lblCmnd;
 	private JLabel lblNewLabel;
+	private JButton btnHuy;
 
 	/**
 	 * Launch the application.
@@ -128,21 +130,38 @@ public class TaiKhoanKhachHanng extends JFrame {
 		btnLapSoTiet = new JButton("LAP SO TIET KIEM");
 		btnLapSoTiet.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				LapSoTK ltk = new LapSoTK(hoTen, cmnd, diaChi, maTK);
-				ltk.main(hoTen, cmnd, diaChi, maTK);
+				if(maTK != null) {
+					System.out.println(maTK);
+					LapSoTK ltk = new LapSoTK(hoTen, cmnd, diaChi, maTK);
+					ltk.main(hoTen, cmnd, diaChi, maTK);
+				}
+				else {
+					JOptionPane.showMessageDialog(null, "Chon khach hang can lap so");
+				}
+				
 			}
 		});
 		btnLapSoTiet.setBounds(400, 74, 153, 29);
 		contentPane.add(btnLapSoTiet);
 		
-		lblCmnd = new JLabel("CMND");
-		lblCmnd.setBounds(35, 79, 61, 16);
+		lblCmnd = new JLabel("THONG TIN");
+		lblCmnd.setHorizontalAlignment(SwingConstants.CENTER);
+		lblCmnd.setBounds(6, 79, 90, 16);
 		contentPane.add(lblCmnd);
 		
 		lblNewLabel = new JLabel("THONG TIN KHACH HANG");
 		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
 		lblNewLabel.setBounds(6, 18, 799, 16);
 		contentPane.add(lblNewLabel);
+		
+		btnHuy = new JButton("HUY");
+		btnHuy.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				dispose();
+			}
+		});
+		btnHuy.setBounds(688, 74, 117, 29);
+		contentPane.add(btnHuy);
 		
 		tfCMND.getDocument().addDocumentListener(new DocumentListener() {
 			  public void changedUpdate(DocumentEvent e) {

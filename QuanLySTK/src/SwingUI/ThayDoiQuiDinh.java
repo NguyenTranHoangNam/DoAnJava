@@ -112,12 +112,17 @@ public class ThayDoiQuiDinh extends JFrame {
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				LoaiTietKiem_DAO ltk = new LoaiTietKiem_DAO();
-				int result = ltk.updateLoaiTietKiem(maLoaiTietKiem, Float.parseFloat(tfLaiSuat.getText()));
-				System.out.print(result == 1);
-				if(result == 1) {
-					LoaiTietKiem_DAO ltkD = new LoaiTietKiem_DAO();
-					LoadData(ltkD.getLoaiTietKiem());		
-				}	
+				if(maLoaiTietKiem != null) {
+					int result = ltk.updateLoaiTietKiem(maLoaiTietKiem, Float.parseFloat(tfLaiSuat.getText()));
+					if(result == 1) {
+						LoaiTietKiem_DAO ltkD = new LoaiTietKiem_DAO();
+						LoadData(ltkD.getLoaiTietKiem());		
+					}	
+				}
+				else {
+					JOptionPane.showMessageDialog(null, "Vui long chon loai tiet kiem");
+				}
+				
 			}
 		});
 		btnNewButton.setBounds(140, 325, 130, 29);
@@ -145,14 +150,18 @@ public class ThayDoiQuiDinh extends JFrame {
 		btnXoaLoaiTiet = new JButton("XOA LOAI TIET KIEM");
 		btnXoaLoaiTiet.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				LoaiTietKiem_DAO ltkD = new LoaiTietKiem_DAO();
-				int result = ltkD.xoaLoaiTietKiem(maLoaiTietKiem);
-				if(result == 1) {
-					table.repaint();
-					JOptionPane.showMessageDialog(null, "Xoa loai tiet kiem thanh cong");
+				if(maLoaiTietKiem != null) {
+					LoaiTietKiem_DAO ltkD = new LoaiTietKiem_DAO();
+					int result = ltkD.xoaLoaiTietKiem(maLoaiTietKiem);
+					if(result == 1) {
+						JOptionPane.showMessageDialog(null, "Xoa loai tiet kiem thanh cong");
+					}
+					else {
+						JOptionPane.showMessageDialog(null, "Xoa loai tiet kiem that bai");
+					}
 				}
 				else {
-					JOptionPane.showMessageDialog(null, "Xoa loai tiet kiem that bai");
+					JOptionPane.showMessageDialog(null, "Vui long chon loai tiet kiem");
 				}
 			}
 		});
