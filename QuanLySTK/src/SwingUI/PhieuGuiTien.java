@@ -136,14 +136,16 @@ public class PhieuGuiTien extends JFrame {
 		btnXacNhan.addActionListener(new ActionListener() {
 			@SuppressWarnings("null")
 			public void actionPerformed(ActionEvent e) {
-				Loaitietkiem ltk = null;
-				String loaiTK;
+				String loaiTK = null;
+				SoTietKiem_DAO stkD = new SoTietKiem_DAO();
+				Loaitietkiem ltk = stkD.getLoaiTietKiem(loaiTK);
 				Sotietkiem stk = null;
+				
 				Quydinh qd = null;
 				double so_du, so_tien_gui;
 				DateFormat simpleDateFormat = new SimpleDateFormat("dd-MM-yyyy");
 				
-				if (ltk.getMaLoaiTietKiem() == "L01") {
+				/*if (ltk.toString() == "L01") {
 					if (qd.getMaQD() == "QD01") {
 						if (Double.parseDouble(txtSoTienGui.getText()) < Double.parseDouble(qd.getChiTiet())) {
 							JOptionPane.showMessageDialog(null, "So tien gui toi thieu la " + qd.getChiTiet());
@@ -151,7 +153,7 @@ public class PhieuGuiTien extends JFrame {
 						else {
 							if(txtMaPhieuGui.getText() != "" && txtMaSo.getText() != "" && txtNgayGui.getText() != "" && txtSoTienGui.getText() != "") {
 								PhieuGuiTien_DAO pgtD = new PhieuGuiTien_DAO();
-								SoTietKiem_DAO stkD = new SoTietKiem_DAO();
+								
 								Sotietkiem ma_soTK = pgtD.getSoTietKiem(maSotietkiem);
 								
 								String date = ((JTextField)dateNgayGui.getDateEditor().getUiComponent()).getText();
@@ -188,7 +190,26 @@ public class PhieuGuiTien extends JFrame {
 				}
 				else {
 					JOptionPane.showMessageDialog(null, "Chi nhan gui tien voi loai tiet kiem 'Khong ky han'");
+				}*/
+				PhieuGuiTien_DAO pgtD = new PhieuGuiTien_DAO();
+				
+				Sotietkiem ma_soTK = pgtD.getSoTietKiem(maSotietkiem);
+				
+				String date = ((JTextField)dateNgayGui.getDateEditor().getUiComponent()).getText();
+				Date dateGenerate = null;
+				try {
+					dateGenerate = new SimpleDateFormat("dd/MM/yyyy").parse(date);
+				} catch (ParseException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
 				}
+				so_tien_gui = Double.parseDouble(txtSoTienGui.getText());
+				
+				int result = pgtD.phieuGuiTien(txtMaPhieuGui.getText(), ma_soTK, dateGenerate, txtSoTienGui.getText());
+				System.out.println(result);
+				
+				so_du = stk.getSoDu().doubleValue() + Double.parseDouble(txtSoTienGui.getText());//Cap nhat so du tai khoan
+				int update = stkD.updateSoTietKiem(txtMaSo.getText(), BigDecimal.valueOf(so_du));//Update so du trong STK
 			}
 		});
 		btnXacNhan.setFont(new Font("Tahoma", Font.BOLD, 12));
