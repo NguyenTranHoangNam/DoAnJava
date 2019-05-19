@@ -2,6 +2,11 @@ package SwingUI;
 
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.beans.PropertyChangeEvent;
+import java.beans.PropertyChangeListener;
+import java.util.Date;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -10,7 +15,11 @@ import javax.swing.table.DefaultTableModel;
 import javax.swing.JLabel;
 import javax.swing.SwingConstants;
 import com.toedter.calendar.JDateChooser;
+
+import DAO.BaoCao_DAO;
+
 import javax.swing.JTable;
+import javax.swing.JTextField;
 import javax.swing.JScrollPane;
 
 public class BaoCaoNgay extends JFrame {
@@ -55,6 +64,16 @@ public class BaoCaoNgay extends JFrame {
 		dateChooser.setDateFormatString("dd/MM/yyyy");
 		dateChooser.setBounds(304, 34, 143, 26);
 		contentPane.add(dateChooser);
+		dateChooser.getDateEditor().addPropertyChangeListener(new PropertyChangeListener() {
+			
+			@Override
+			public void propertyChange(PropertyChangeEvent e) {
+				 if ("date".equals(e.getPropertyName())) {
+		                System.out.println(e.getPropertyName()
+		                    + ": " + (Date) e.getNewValue());
+		           }
+			}
+		});
 		
 		JLabel lblNewLabel = new JLabel("NGAY");
 		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);

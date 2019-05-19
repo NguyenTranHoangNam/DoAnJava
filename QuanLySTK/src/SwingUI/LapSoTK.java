@@ -17,6 +17,7 @@ import javax.swing.border.EmptyBorder;
 import DAO.LoaiTietKiem_DAO;
 import DAO.SoTietKiem_DAO;
 import model.Loaitietkiem;
+import model.Sotietkiem;
 import model.Taikhoankhachhang;
 
 import javax.swing.JLabel;
@@ -58,12 +59,23 @@ public class LapSoTK extends JFrame {
 	}
 	public void loadDataComboBox() {
 		LoaiTietKiem_DAO ltkD = new LoaiTietKiem_DAO();
-		ArrayList<Loaitietkiem> ltks = ltkD.getLoaiTietKiem() ;
+		ArrayList<Loaitietkiem> ltks = ltkD.getLoaiTietKiem();
+		
 		if(ltks.size() > 0) {
+			ltkChoose = ltks.get(0);
 			cbLoaiTk.setModel(new DefaultComboBoxModel<Loaitietkiem>(
 					ltks.toArray(new Loaitietkiem[0])
 					));
 		}
+	}
+	
+	public void getMaSoTietKiem() {
+		SoTietKiem_DAO stkD = new SoTietKiem_DAO();
+		Sotietkiem stk = stkD.TraCuuSTK().get(stkD.TraCuuSTK().size() - 1);
+		String temp = stk.getMaSo();
+		String[] parts = temp.split("STK");
+		int stt = Integer.parseInt(parts[1]) + 1;
+		tfMaSo.setText("STK" + stt);
 	}
 	
 	/**
@@ -154,6 +166,8 @@ public class LapSoTK extends JFrame {
 		tfCMND.setText(cmnd);
 		tfDiaChi.setText(diaChi);
 		JButton btnXacNhan = new JButton("Xac Nhan");
+		
+		getMaSoTietKiem();
 		btnXacNhan.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				String date = ((JTextField)dateChooser.getDateEditor().getUiComponent()).getText();
@@ -165,7 +179,7 @@ public class LapSoTK extends JFrame {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				}
-				if(maTK != null) {
+								if(maTK != null) {
 					
 					SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
 					Calendar c = Calendar.getInstance();
@@ -180,8 +194,8 @@ public class LapSoTK extends JFrame {
 						Loaitietkiem loaiTK = stk.getLoaiTietKiem(ltkChoose.getMaLoaiTietKiem());
 						Taikhoankhachhang tkkh = stk.getTaiKhoanKhachHang(maTK);
 						
-						int result = stk.MoSoTk(tfMaSo.getText(),"TK0001",loaiTK,dateGenerate,ngayDongSo,tfSoTienGui.getText(),tkkh);
-						System.out.println(result);
+						int result = stk.MoSoTk(tfMaSo.getText(),maTK,loaiTK,dateGenerate,ngayDongSo,tfSoTienGui.getText(),tkkh);
+						System.out.println(maTK);
 
 					} catch (ParseException e1) {
 						// TODO Auto-generated catch block
@@ -240,8 +254,5 @@ public class LapSoTK extends JFrame {
 				      }
 				   }
 				});
-		
-		
-
 	}
 }
