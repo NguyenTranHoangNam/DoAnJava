@@ -7,6 +7,7 @@ import java.awt.event.KeyEvent;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 
 import javax.swing.JFrame;
@@ -38,7 +39,8 @@ public class LapSoTK extends JFrame {
 	private JTextField tfSoTienGui;
 	private JTextField tfCMND;
 	private JComboBox cbLoaiTk;
-	private String maLTK;
+//	private String maLTK;
+	private Loaitietkiem ltkChoose;
 	/**
 	 * Launch the application.
 	 */
@@ -156,6 +158,7 @@ public class LapSoTK extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				String date = ((JTextField)dateChooser.getDateEditor().getUiComponent()).getText();
 				Date dateGenerate = null;
+				Date ngayDongSo = null;
 				try {
 					dateGenerate = new SimpleDateFormat("dd/MM/yyyy").parse(date);
 				} catch (ParseException e1) {
@@ -163,13 +166,30 @@ public class LapSoTK extends JFrame {
 					e1.printStackTrace();
 				}
 				if(maTK != null) {
-					SoTietKiem_DAO stk = new SoTietKiem_DAO();
-					Loaitietkiem loaiTK = stk.getLoaiTietKiem(maLTK);
-					Taikhoankhachhang tkkh = stk.getTaiKhoanKhachHang(maTK);
+					
+					SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+					Calendar c = Calendar.getInstance();
+					String strDate =  sdf.format(dateGenerate);
+					   //Setting the date to the given date
+					  try {
+						c.setTime(sdf.parse(strDate));
+						c.add(Calendar.MONTH, Integer.parseInt(ltkChoose.getThoiHan()));
+						ngayDongSo = c.getTime();
+						System.out.println(ngayDongSo);
+						SoTietKiem_DAO stk = new SoTietKiem_DAO();
+						Loaitietkiem loaiTK = stk.getLoaiTietKiem(ltkChoose.getMaLoaiTietKiem());
+						Taikhoankhachhang tkkh = stk.getTaiKhoanKhachHang(maTK);
+						
+						int result = stk.MoSoTk(tfMaSo.getText(),"TK0001",loaiTK,dateGenerate,ngayDongSo,tfSoTienGui.getText(),tkkh);
+						System.out.println(result);
 
-					int result = stk.MoSoTk(tfMaSo.getText(),"TK0001",loaiTK,dateGenerate,tfSoTienGui.getText(),tkkh);
-					System.out.println(result);
-				}
+					} catch (ParseException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					}
+					
+					
+									}
 				else {
 					JOptionPane.showMessageDialog(null, "Chon loai tiet kiem");
 				}
@@ -182,7 +202,11 @@ public class LapSoTK extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stub
 				Loaitietkiem ltk = (Loaitietkiem)cbLoaiTk.getSelectedItem();
-				maLTK = ltk.getMaLoaiTietKiem();
+				System.out.println(ltk.getMaLoaiTietKiem());
+				
+				ltkChoose = ltk;
+				   
+//				maLTK = ltk.getMaLoaiTietKiem();
 			}
 		});
 		

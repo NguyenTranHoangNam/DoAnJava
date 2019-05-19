@@ -16,7 +16,7 @@ import model.Taikhoankhachhang;
 
 public class SoTietKiem_DAO {
 //	 SessionFactory sessionFactory = new Configuration().configure().buildSessionFactory();
-	 public int MoSoTk(String maSoTK,String cusName,Loaitietkiem loaiTK , Date ngayMoSo, String soTien,Taikhoankhachhang tkkhachhang) {
+	 public int MoSoTk(String maSoTK,String cusName,Loaitietkiem loaiTK , Date ngayMoSo, Date ngayDongSo, String soTien,Taikhoankhachhang tkkhachhang) {
 	 	Sotietkiem sotk = new Sotietkiem();
 	 	 Session session = config.sessionFactory.openSession();
 	 	      try {
@@ -27,7 +27,7 @@ public class SoTietKiem_DAO {
 	          // Thuc thi cau querry
 	          BigDecimal soDu = new BigDecimal(soTien);
 	          Sotietkiem soTK = new Sotietkiem( maSoTK, loaiTK, tkkhachhang, ngayMoSo,
-	      			new Date(), soDu, loaiTK.getLaiSuat());
+	        		  ngayDongSo, soDu, loaiTK.getLaiSuat());
 	          session.save(soTK);
 
 		         // kết thúc 1 giao dịch
