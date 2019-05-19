@@ -25,6 +25,10 @@ public class Loaitietkiem implements java.io.Serializable {
 	public Loaitietkiem() {
 	}
 
+	public String toString() {
+		return this.thoiHan;
+	}
+	
 	public Loaitietkiem(String maLoaiTietKiem, String thoiHan, float laiSuat) {
 		this.maLoaiTietKiem = maLoaiTietKiem;
 		this.thoiHan = thoiHan;

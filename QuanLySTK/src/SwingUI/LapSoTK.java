@@ -6,6 +6,7 @@ import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 
 import javax.swing.JFrame;
@@ -18,9 +19,11 @@ import model.Loaitietkiem;
 import model.Taikhoankhachhang;
 
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.SwingConstants;
 import javax.swing.JTextField;
 import javax.swing.JComboBox;
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
@@ -34,7 +37,8 @@ public class LapSoTK extends JFrame {
 	private JTextField tfDiaChi;
 	private JTextField tfSoTienGui;
 	private JTextField tfCMND;
-
+	private JComboBox cbLoaiTk;
+	private String maLTK;
 	/**
 	 * Launch the application.
 	 */
@@ -50,7 +54,16 @@ public class LapSoTK extends JFrame {
 			}
 		});
 	}
-
+	public void loadDataComboBox() {
+		LoaiTietKiem_DAO ltkD = new LoaiTietKiem_DAO();
+		ArrayList<Loaitietkiem> ltks = ltkD.getLoaiTietKiem() ;
+		if(ltks.size() > 0) {
+			cbLoaiTk.setModel(new DefaultComboBoxModel<Loaitietkiem>(
+					ltks.toArray(new Loaitietkiem[0])
+					));
+		}
+	}
+	
 	/**
 	 * Create the frame.
 	 */
@@ -131,11 +144,10 @@ public class LapSoTK extends JFrame {
 		lblNgyMS.setBounds(244, 113, 108, 16);
 		contentPane.add(lblNgyMS);
 		
-		JComboBox cbLoaiTk = new JComboBox();
+		cbLoaiTk = new JComboBox();
 		cbLoaiTk.setBounds(348, 42, 130, 27);
 		contentPane.add(cbLoaiTk);
-		
-		cbLoaiTk.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Khong ky han ","6 Thang","3 Thang" }));
+		loadDataComboBox();
 		tfKhachHang.setText(hoten);
 		tfCMND.setText(cmnd);
 		tfDiaChi.setText(diaChi);
@@ -150,14 +162,30 @@ public class LapSoTK extends JFrame {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				}
-				SoTietKiem_DAO stk = new SoTietKiem_DAO();
-				Loaitietkiem loaiTK = stk.getLoaiTietKiem("L01");
-				Taikhoankhachhang tkkh = stk.getTaiKhoanKhachHang(maTK);
+				if(maTK != null) {
+					SoTietKiem_DAO stk = new SoTietKiem_DAO();
+					Loaitietkiem loaiTK = stk.getLoaiTietKiem(maLTK);
+					Taikhoankhachhang tkkh = stk.getTaiKhoanKhachHang(maTK);
 
-				int result = stk.MoSoTk(tfMaSo.getText(),"TK0001",loaiTK,dateGenerate,tfSoTienGui.getText(),tkkh);
-				System.out.println(result);
+					int result = stk.MoSoTk(tfMaSo.getText(),"TK0001",loaiTK,dateGenerate,tfSoTienGui.getText(),tkkh);
+					System.out.println(result);
+				}
+				else {
+					JOptionPane.showMessageDialog(null, "Chon loai tiet kiem");
+				}
 			}
 		});
+		
+		cbLoaiTk.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub
+				Loaitietkiem ltk = (Loaitietkiem)cbLoaiTk.getSelectedItem();
+				maLTK = ltk.getMaLoaiTietKiem();
+			}
+		});
+		
 		btnXacNhan.setBounds(347, 179, 131, 29);
 		contentPane.add(btnXacNhan);
 		
