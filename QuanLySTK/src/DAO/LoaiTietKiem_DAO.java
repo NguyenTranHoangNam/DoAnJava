@@ -104,4 +104,38 @@ public class LoaiTietKiem_DAO {
 		 
 		 return 0;
 	 }
+	 
+	 //////////
+	 public void countLoaiTietKiem() {
+			
+		 Session session = config.sessionFactory.openSession();
+		// ArrayList<Loaitietkiem> ltks = new ArrayList();
+	     try {
+
+	         // Bat dau 1 transaction (Giao dich)
+
+	         session.beginTransaction();
+
+	         // Thuc thi cau querry
+
+	         String sql = "select SUM(distinct ltk.laiSuat) "
+	         		+ " from Loaitietkiem ltk";
+	         Query query = session.createQuery(sql);
+	         //int rs = query.;
+	       	System.out.println(query.list());
+	       	
+	     } catch (RuntimeException e) {
+
+	         session.getTransaction().rollback();
+
+	         e.printStackTrace();
+
+	     } finally {
+
+	         session.flush();
+
+	         session.close();
+
+	     }
+	}
 }

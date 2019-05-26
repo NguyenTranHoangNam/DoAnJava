@@ -6,17 +6,30 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
+import java.sql.ResultSet;
 import java.util.Date;
+import java.util.List;
+import java.util.Vector;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableModel;
+
+import org.hibernate.Query;
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+import org.hibernate.cfg.Configuration;
+
 import javax.swing.JLabel;
 import javax.swing.SwingConstants;
+
+import com.mysql.jdbc.ResultSetMetaData;
 import com.toedter.calendar.JDateChooser;
 
 import DAO.BaoCao_DAO;
+import DAO.LoaiTietKiem_DAO;
+import DAO.config;
 
 import javax.swing.JTable;
 import javax.swing.JTextField;
@@ -43,11 +56,31 @@ public class BaoCaoNgay extends JFrame {
 			}
 		});
 	}
+	public void loadData(){
+		LoaiTietKiem_DAO ltkD = new LoaiTietKiem_DAO();
+//		ltkD.countLoaiTietKiem();
+		int i = 0;
+		BaoCao_DAO bcD = new BaoCao_DAO();
+		List<Object[]> rows = bcD.getGiaoDich();
+		 for(Object[] row : rows){
+     		//System.out.println(row[0].toString());
+     		Vector<String> rowTable = new Vector<>();
+     		i = i + 1;
+     		rowTable.add(i + "");
+     		rowTable.add(row[0].toString());
+     		rowTable.add(row[1].toString());
+     		rowTable.add(row[2].toString());
+     		rowTable.add(row[3].toString());
+			defaultTable_1.addRow(rowTable);
+
+     	}	
+		 }
 
 	/**
 	 * Create the frame.
 	 */
 	public BaoCaoNgay() {
+		//loadData();
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 643, 326);
 		contentPane = new JPanel();
@@ -88,6 +121,7 @@ public class BaoCaoNgay extends JFrame {
 		defaultTable_1 = new DefaultTableModel(new Object[][] {},new String[] {
 			"STT","LOAI TIET KIEM","TONG THU","TONG CHI","CHENH LECH"	
 		});
+		loadData();
 		table = new JTable(defaultTable_1);
 		scrollPane.setViewportView(table);
 	}

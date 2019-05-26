@@ -23,7 +23,7 @@ import javax.persistence.TemporalType;
 @Table(name = "sotietkiem", catalog = "QLSTK")
 public class Sotietkiem implements java.io.Serializable {
 
-	private String maSo;
+	public String maSo;
 	private Loaitietkiem loaitietkiem;
 	private Taikhoankhachhang taikhoankhachhang;
 	private Date ngayMoSo;

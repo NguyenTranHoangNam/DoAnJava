@@ -3,7 +3,8 @@ package model;
 public class BaoCao {
 	private String loaiTietKiem;
 	private Float tongThu;
-	private String tongChi;
+	private Float tongChi;
+	private Float chenhLech;
 	public String getLoaiTietKiem() {
 		return loaiTietKiem;
 	}
@@ -16,11 +17,17 @@ public class BaoCao {
 	public void setTongThu(Float tongThu) {
 		this.tongThu = tongThu;
 	}
-	public String getTongChi() {
+	public Float getTongChi() {
 		return tongChi;
 	}
-	public void setTongChi(String tongChi) {
+	public void setTongChi(Float tongChi) {
 		this.tongChi = tongChi;
+	}
+	public Float getChenhLech() {
+		return chenhLech;
+	}
+	public void setChenhLech(Float chenhLech) {
+		this.chenhLech = chenhLech;
 	}
 
 }
