@@ -136,8 +136,9 @@ public class PhieuGuiTien extends JFrame {
 		btnXacNhan.addActionListener(new ActionListener() {
 			@SuppressWarnings("null")
 			public void actionPerformed(ActionEvent e) {
-				String loaiTK = null;
+				String loaiTK = null;//--------- đây nè 
 				SoTietKiem_DAO stkD = new SoTietKiem_DAO();
+				//----------- truyền mã loại tiết kiệm vào để lấy loaiTK truyền null vào thì nó get cái gì ?
 				Loaitietkiem ltk = stkD.getLoaiTietKiem(loaiTK);
 				Sotietkiem stk = null;
 				
@@ -145,6 +146,7 @@ public class PhieuGuiTien extends JFrame {
 				double so_du, so_tien_gui;
 				DateFormat simpleDateFormat = new SimpleDateFormat("dd-MM-yyyy");
 				
+//---------------- ltk bị null mà đòi compare 
 				/*if (ltk.toString() == "L01") {
 					if (qd.getMaQD() == "QD01") {
 						if (Double.parseDouble(txtSoTienGui.getText()) < Double.parseDouble(qd.getChiTiet())) {
@@ -208,8 +210,9 @@ public class PhieuGuiTien extends JFrame {
 				
 				JOptionPane.showMessageDialog(null, "Quy khach da gui " + so_tien_gui + " vao So tiet kiem!");
 				
-				//so_du = stk.getSoDu().doubleValue() + so_tien_gui;//Cap nhat so du tai khoan
-				//int update = stkD.updateSoTietKiem(txtMaSo.toString(), BigDecimal.valueOf(so_du));//Update so du trong STK
+//-------------------- Sổ tiết kiệm bị null mà đòi get số dư 
+//				so_du = stk.getSoDu().doubleValue() + so_tien_gui;//Cap nhat so du tai khoan
+//				int update = stkD.updateSoTietKiem(txtMaSo.toString(), BigDecimal.valueOf(so_du));//Update so du trong STK
 			}
 		});
 		btnXacNhan.setFont(new Font("Tahoma", Font.BOLD, 12));

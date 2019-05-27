@@ -179,31 +179,34 @@ public class LapSoTK extends JFrame {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				}
-								if(maTK != null) {
-					
-					SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
-					Calendar c = Calendar.getInstance();
-					String strDate =  sdf.format(dateGenerate);
-					   //Setting the date to the given date
-					  try {
-						c.setTime(sdf.parse(strDate));
-						c.add(Calendar.MONTH, Integer.parseInt(ltkChoose.getThoiHan()));
-						ngayDongSo = c.getTime();
-						System.out.println(ngayDongSo);
-						SoTietKiem_DAO stk = new SoTietKiem_DAO();
-						Loaitietkiem loaiTK = stk.getLoaiTietKiem(ltkChoose.getMaLoaiTietKiem());
-						Taikhoankhachhang tkkh = stk.getTaiKhoanKhachHang(maTK);
-						
-						int result = stk.MoSoTk(tfMaSo.getText(),maTK,loaiTK,dateGenerate,ngayDongSo,tfSoTienGui.getText(),tkkh);
-						System.out.println(maTK);
+				if(maTK != null) {
+					if(Float.parseFloat(tfSoTienGui.getText()) > 100000) {
+						SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+						Calendar c = Calendar.getInstance();
+						String strDate =  sdf.format(dateGenerate);
+						   //Setting the date to the given date
+						  try {
+							c.setTime(sdf.parse(strDate));
+							c.add(Calendar.MONTH, Integer.parseInt(ltkChoose.getThoiHan()));
+							ngayDongSo = c.getTime();
+							System.out.println(ngayDongSo);
+							SoTietKiem_DAO stk = new SoTietKiem_DAO();
+							Loaitietkiem loaiTK = stk.getLoaiTietKiem(ltkChoose.getMaLoaiTietKiem());
+							Taikhoankhachhang tkkh = stk.getTaiKhoanKhachHang(maTK);
+							
+							int result = stk.MoSoTk(tfMaSo.getText(),maTK,loaiTK,dateGenerate,ngayDongSo,tfSoTienGui.getText(),tkkh);
+							System.out.println(maTK);
 
-					} catch (ParseException e1) {
-						// TODO Auto-generated catch block
-						e1.printStackTrace();
+						} catch (ParseException e1) {
+							// TODO Auto-generated catch block
+							e1.printStackTrace();
+						}
+					}
+					else {
+						JOptionPane.showMessageDialog(null, "So tien gui it nhat la 100000");
 					}
 					
-					
-									}
+				}
 				else {
 					JOptionPane.showMessageDialog(null, "Chon loai tiet kiem");
 				}
