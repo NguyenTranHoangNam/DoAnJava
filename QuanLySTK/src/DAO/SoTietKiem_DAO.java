@@ -157,7 +157,7 @@ public class SoTietKiem_DAO {
 		 Session session = config.sessionFactory.openSession();
 		 try {
 	            session.beginTransaction();
-	            String hqlUpdate = "update Sotietkiem stk set stk.soDu = :sodu where stk.maSoTietKiem = :maSoTK";
+	            String hqlUpdate = "update Sotietkiem stk set stk.soDu = :sodu where stk.maSo = :maSoTK";
 	            Query query = session.createQuery(hqlUpdate);
 	            query.setString("maSoTK", maSoTK);
 	            query.setBigDecimal("sodu", soDu);
@@ -177,4 +177,5 @@ public class SoTietKiem_DAO {
 		 
 		 return 0;
 	 }
+	 
 }

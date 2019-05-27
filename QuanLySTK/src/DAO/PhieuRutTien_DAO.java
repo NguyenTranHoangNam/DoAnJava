@@ -26,7 +26,7 @@ public class PhieuRutTien_DAO {
 		         
 		         BigDecimal soTienRut = new BigDecimal(TienRut);
 		         
-		         Phieuguitien phieurut = new Phieuguitien(maPhieuRut, maSoTietKiem, dateGenerate, soTienRut);
+		         Phieuruttien phieurut = new Phieuruttien(maPhieuRut, maSoTietKiem, dateGenerate, soTienRut);
 		         session.save(phieurut);
 		         
 		         session.getTransaction().commit();

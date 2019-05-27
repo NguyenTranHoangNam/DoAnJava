@@ -130,16 +130,16 @@ public class PhieuRutTien extends JFrame {
 		JButton btnXacNhan = new JButton("X\u00E1c Nh\u1EADn");
 		btnXacNhan.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				Quydinh qd = null;
+				/*Quydinh qd = null;
 				Loaitietkiem lTK = null;
 				
 				DateFormat simpleDateFormat = new SimpleDateFormat("dd-MM-yyyy");
 
 				Date currentDate = new Date();
 				Date date1 = null;
-				Date date2 = null;
+				Date date2 = null;*/
 				
-				Sotietkiem stk = null;
+				Sotietkiem stk = new Sotietkiem();
 				double SoTienConLai, sotienconlai, TienRut;
 				TienRut = Double.parseDouble(txtSoTienRut.getText());
 
@@ -148,7 +148,7 @@ public class PhieuRutTien extends JFrame {
 					SoTietKiem_DAO stkD = new SoTietKiem_DAO();
 					Sotietkiem ma_soTK = prtD.getSoTietKiem(maSotietkiem);
 					
-					String startDate = stk.getNgayMoSo().toString();
+					/*String startDate = stk.getNgayMoSo().toString();
 					String endDate = dateNgayRut.getDateFormatString();
 
 					date1 = simpleDateFormat.parse(startDate);
@@ -156,11 +156,11 @@ public class PhieuRutTien extends JFrame {
 
 					long getDiff = date2.getTime() - date1.getTime();
 
-					long getDaysDiff = getDiff / (24 * 60 * 60 * 1000);
+					long getDaysDiff = getDiff / (24 * 60 * 60 * 1000);*/
 				   
 					//Rut tien sau X ngay mo so
-					if (qd.getMaQD() == "QD02" && TienRut <= stk.getSoDu().doubleValue()) {
-						if (getDaysDiff >= Integer.parseInt(qd.getChiTiet())){
+					/*if (qd.getMaQD() == "QD02" ) {
+						if (getDaysDiff >= 15 && TienRut <= stk.getSoDu().doubleValue()){*/	//Integer.parseInt(qd.getChiTiet())
 							String date = ((JTextField)dateNgayRut.getDateEditor().getUiComponent()).getText();
 							Date dateGenerate = null;
 							try {
@@ -174,18 +174,18 @@ public class PhieuRutTien extends JFrame {
 							System.out.println(result);
 							
 							//Cap nhat so tien con lai trong SO tiet kiem
-							SoTienConLai = stk.getSoDu().doubleValue() - TienRut; //BigDecimal --> Double
-							int update = stkD.updateSoTietKiem(txtMaSo.getText(), BigDecimal.valueOf(SoTienConLai));
+							//SoTienConLai = stk.getSoDu().doubleValue() - TienRut; //BigDecimal --> Double
+							//int update = stkD.updateSoTietKiem(txtMaSo.toString(), BigDecimal.valueOf(SoTienConLai));
 							
 							JOptionPane.showMessageDialog(null, "Quy khach da rut " + TienRut + " trong So tiet kiem!");
-						}
+						/*}
 						else {
 							JOptionPane.showMessageDialog(null, "Chi duoc rut tien sau " + qd.getChiTiet() + " ngay mo so");
-						}
-					}
+						}*/
+					//}
 				   
 					//Rut tien voi loai tiet kiem co ky han
-					if (stk.getNgayDaoHan() != null) {//Voi Loai tiet kiem = Khong ky han => NgayDaoHan = null
+					/*if (stk.getNgayDaoHan() != null) {//Voi Loai tiet kiem = Khong ky han => NgayDaoHan = null
 						Date ngay_dao_han = null;
 						Date ngay_rut = new Date(System.currentTimeMillis());
 						String dao_han = stk.getNgayDaoHan().toString();
@@ -216,16 +216,16 @@ public class PhieuRutTien extends JFrame {
 							
 							JOptionPane.showMessageDialog(null, "Quy khach da rut het tien trong So tiet kiem! Lai suat quy khach nhan duoc la " + tienlai);
 						}
-					}
+					}*/
 					
 					//Rut tien voi loai tiet kiem khong ky han
-					if (stk.getNgayDaoHan() == null) {
-						double so_tien_rut, soDu, soTienCon;
+					//if (stk.getNgayDaoHan() == null) {
+						/*double so_tien_rut, soDu, soTienCon;
 						so_tien_rut = Double.parseDouble(txtSoTienRut.getText());
-						soDu = stk.getSoDu().doubleValue();
+						soDu = stk.getSoDu().doubleValue();*/
 						 
-						if (so_tien_rut <= soDu) {
-							String date = ((JTextField)dateNgayRut.getDateEditor().getUiComponent()).getText();
+						//if (so_tien_rut <= soDu) {
+							/*String date = ((JTextField)dateNgayRut.getDateEditor().getUiComponent()).getText();
 							Date dateGenerate = null;
 							try {
 								dateGenerate = new SimpleDateFormat("dd/MM/yyyy").parse(date);
@@ -235,17 +235,17 @@ public class PhieuRutTien extends JFrame {
 							}
 							
 							int result = prtD.phieuRutTien(txtMaPhieuRut.getText(), ma_soTK, dateGenerate, txtSoTienRut.getText());
-							System.out.println(result);
+							System.out.println(result);*/
 							
-							soTienCon = soDu - so_tien_rut;
-							int ud = stkD.updateSoTietKiem(txtMaSo.getText(), BigDecimal.valueOf(soTienCon));
+							//soTienCon = soDu - so_tien_rut;
+							//int ud = stkD.updateSoTietKiem(txtMaSo.getText(), BigDecimal.valueOf(soTienCon));
 							
-							JOptionPane.showMessageDialog(null, "Quy khach da rut " + so_tien_rut + " trong So tiet kiem!");
-						}
+							//JOptionPane.showMessageDialog(null, "Quy khach da rut " + so_tien_rut + " trong So tiet kiem!");
+						/*}
 						else {
 							JOptionPane.showMessageDialog(null, "So tien rut lon hon So du trong So tiet kiem!");
 						}
-					}
+					}*/
 				   
 				}catch (Exception e) {
 						e.printStackTrace();

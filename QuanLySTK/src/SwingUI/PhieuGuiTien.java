@@ -184,8 +184,6 @@ public class PhieuGuiTien extends JFrame {
 									JOptionPane.showMessageDialog(null, "Khong the gui tien!");
 								}
 							}
-							
-						}
 					}
 				}
 				else {
@@ -208,8 +206,10 @@ public class PhieuGuiTien extends JFrame {
 				int result = pgtD.phieuGuiTien(txtMaPhieuGui.getText(), ma_soTK, dateGenerate, txtSoTienGui.getText());
 				System.out.println(result);
 				
-				so_du = stk.getSoDu().doubleValue() + Double.parseDouble(txtSoTienGui.getText());//Cap nhat so du tai khoan
-				int update = stkD.updateSoTietKiem(txtMaSo.getText(), BigDecimal.valueOf(so_du));//Update so du trong STK
+				JOptionPane.showMessageDialog(null, "Quy khach da gui " + so_tien_gui + " vao So tiet kiem!");
+				
+				//so_du = stk.getSoDu().doubleValue() + so_tien_gui;//Cap nhat so du tai khoan
+				//int update = stkD.updateSoTietKiem(txtMaSo.toString(), BigDecimal.valueOf(so_du));//Update so du trong STK
 			}
 		});
 		btnXacNhan.setFont(new Font("Tahoma", Font.BOLD, 12));
