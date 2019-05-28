@@ -46,11 +46,11 @@ public class PhieuRutTien extends JFrame {
 	/**
 	 * Launch the application.
 	 */
-	public static void main(String maSotietkiem, String hoTen) {
+	public static void main(String maSotietkiem, String hoTen, String loaiTK) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					PhieuRutTien frame = new PhieuRutTien(maSotietkiem, hoTen);
+					PhieuRutTien frame = new PhieuRutTien(maSotietkiem, hoTen, loaiTK);
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -62,7 +62,7 @@ public class PhieuRutTien extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public PhieuRutTien(String maSotietkiem, String hoTen) {
+	public PhieuRutTien(String maSotietkiem, String hoTen,String loaiTK) {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 543, 266);
 		contentPane = new JPanel();

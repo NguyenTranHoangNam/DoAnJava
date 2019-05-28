@@ -51,11 +51,11 @@ public class PhieuGuiTien extends JFrame {
 	/**
 	 * Launch the application.
 	 */
-	public static void main(String maSotietkiem, String hoTen) {
+	public static void main(String maSotietkiem, String hoTen, String loaiTK) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					PhieuGuiTien frame = new PhieuGuiTien(maSotietkiem, hoTen);
+					PhieuGuiTien frame = new PhieuGuiTien(maSotietkiem, hoTen,loaiTK);
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -67,7 +67,7 @@ public class PhieuGuiTien extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public PhieuGuiTien(String maSotietkiem, String hoTen) {
+	public PhieuGuiTien(String maSotietkiem, String hoTen, String loaiTK) {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 545, 263);
 		contentPane = new JPanel();
@@ -136,17 +136,14 @@ public class PhieuGuiTien extends JFrame {
 		btnXacNhan.addActionListener(new ActionListener() {
 			@SuppressWarnings("null")
 			public void actionPerformed(ActionEvent e) {
-				String loaiTK = null;//--------- đây nè 
 				SoTietKiem_DAO stkD = new SoTietKiem_DAO();
-				//----------- truyền mã loại tiết kiệm vào để lấy loaiTK truyền null vào thì nó get cái gì ?
 				Loaitietkiem ltk = stkD.getLoaiTietKiem(loaiTK);
-				Sotietkiem stk = null;
+				
+				Sotietkiem stk = stkD.getSoTietKiem(maSotietkiem);
 				
 				Quydinh qd = null;
 				double so_du, so_tien_gui;
 				DateFormat simpleDateFormat = new SimpleDateFormat("dd-MM-yyyy");
-				
-//---------------- ltk bị null mà đòi compare 
 				/*if (ltk.toString() == "L01") {
 					if (qd.getMaQD() == "QD01") {
 						if (Double.parseDouble(txtSoTienGui.getText()) < Double.parseDouble(qd.getChiTiet())) {
@@ -211,8 +208,10 @@ public class PhieuGuiTien extends JFrame {
 				JOptionPane.showMessageDialog(null, "Quy khach da gui " + so_tien_gui + " vao So tiet kiem!");
 				
 //-------------------- Sổ tiết kiệm bị null mà đòi get số dư 
-//				so_du = stk.getSoDu().doubleValue() + so_tien_gui;//Cap nhat so du tai khoan
-//				int update = stkD.updateSoTietKiem(txtMaSo.toString(), BigDecimal.valueOf(so_du));//Update so du trong STK
+				so_du = stk.getSoDu().doubleValue() + so_tien_gui;//Cap nhat so du tai khoan
+				int update = stkD.updateSoTietKiem(maSotietkiem, BigDecimal.valueOf(so_du));//Update so du trong STK
+//				System.out.println(update + "update");
+
 			}
 		});
 		btnXacNhan.setFont(new Font("Tahoma", Font.BOLD, 12));

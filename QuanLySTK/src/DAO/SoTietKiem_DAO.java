@@ -118,6 +118,38 @@ public class SoTietKiem_DAO {
 		 return null;
 	 }
 	 
+	 public Sotietkiem getSoTietKiem(String maSTK) {
+		 Sotietkiem kh = new Sotietkiem();
+		 Session session = config.sessionFactory.openSession();
+	      try {
+         session.beginTransaction();
+         // Thuc thi cau querry
+         
+         String sql = "from Sotietkiem stk where stk.maSo =:maTK";
+         Query query = session.createQuery(sql);
+         query.setString("maTK", maSTK);
+         ArrayList<Sotietkiem> result = (ArrayList<Sotietkiem>) query.list();
+         if(result.size() > 0) {
+        	 System.out.println(result.get(0).getMaSo());
+        	 return result.get(0);
+         }
+           return null;       
+     } catch (RuntimeException e) {
+
+         session.getTransaction().rollback();
+
+         e.printStackTrace();
+
+     } finally {
+
+         session.flush();
+
+         session.close();
+
+     }
+
+		 return null;
+	 }
 	 
 	 
 	 public ArrayList<Sotietkiem> TraCuuSTK() {

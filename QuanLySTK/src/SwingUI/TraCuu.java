@@ -142,8 +142,8 @@ public class TraCuu extends JFrame {
 		JButton btnPhieuGuiTien = new JButton("LAP PHIEU GUI");
 		btnPhieuGuiTien.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				PhieuGuiTien phieu_gui = new PhieuGuiTien(maSotietkiem, hoTen);
-				phieu_gui.main(maSotietkiem, hoTen);
+				PhieuGuiTien phieu_gui = new PhieuGuiTien(maSotietkiem, hoTen,loaiTK);
+				phieu_gui.main(maSotietkiem, hoTen,loaiTK);
 			}
 		});
 		btnPhieuGuiTien.setBounds(294, 44, 117, 29);
@@ -152,8 +152,8 @@ public class TraCuu extends JFrame {
 		JButton btnPhieuRutTien = new JButton("LAP PHIEU RUT");
 		btnPhieuRutTien.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				PhieuRutTien phieu_rut = new PhieuRutTien(maSotietkiem, hoTen);
-				phieu_rut.main(maSotietkiem, hoTen); 
+				PhieuRutTien phieu_rut = new PhieuRutTien(maSotietkiem, hoTen,loaiTK);
+				phieu_rut.main(maSotietkiem, hoTen,loaiTK); 
 			}
 		});
 		btnPhieuRutTien.setBounds(448, 44, 117, 29);
