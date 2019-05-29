@@ -4,6 +4,7 @@ import java.awt.BorderLayout;
 import java.util.*;
 import java.text.*;
 import java.time.LocalDate;
+import java.time.Period;
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
@@ -130,80 +131,67 @@ public class PhieuRutTien extends JFrame {
 		JButton btnXacNhan = new JButton("X\u00E1c Nh\u1EADn");
 		btnXacNhan.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				/*Quydinh qd = null;
-				Loaitietkiem lTK = null;
+				SoTietKiem_DAO stkD = new SoTietKiem_DAO();
+				Sotietkiem stk = stkD.getSoTietKiem(maSotietkiem);
+				Loaitietkiem ltk = stkD.getLoaiTietKiem(loaiTK);
 				
-				DateFormat simpleDateFormat = new SimpleDateFormat("dd-MM-yyyy");
-
-				Date currentDate = new Date();
-				Date date1 = null;
-				Date date2 = null;*/
-				
-				Sotietkiem stk = new Sotietkiem();
 				double SoTienConLai, sotienconlai, TienRut;
 				TienRut = Double.parseDouble(txtSoTienRut.getText());
 
 				try {
 					PhieuRutTien_DAO prtD = new PhieuRutTien_DAO();
-					SoTietKiem_DAO stkD = new SoTietKiem_DAO();
 					Sotietkiem ma_soTK = prtD.getSoTietKiem(maSotietkiem);
 					
-					/*String startDate = stk.getNgayMoSo().toString();
-					String endDate = dateNgayRut.getDateFormatString();
+					String date1 = stk.getNgayMoSo().toString();
+					
+					//Rut tien sau 15 ngay mo so
+					
+					//if (getDaysDiff >= 15 && TienRut <= stk.getSoDu().doubleValue()){	//Integer.parseInt(qd.getChiTiet())
+						String date2 = ((JTextField)dateNgayRut.getDateEditor().getUiComponent()).getText();
+						//Date startDate = null;
+						Date endDate = null;
+						try {
+							//startDate = new SimpleDateFormat("dd/MM/yyyy").parse(date1);
+							endDate = new SimpleDateFormat("dd/MM/yyyy").parse(date2);
+						
+							//long getDiff = endDate.getTime() - startDate.getTime();
 
-					date1 = simpleDateFormat.parse(startDate);
-					date2 = simpleDateFormat.parse(endDate);
-
-					long getDiff = date2.getTime() - date1.getTime();
-
-					long getDaysDiff = getDiff / (24 * 60 * 60 * 1000);*/
-				   
-					//Rut tien sau X ngay mo so
-					/*if (qd.getMaQD() == "QD02" ) {
-						if (getDaysDiff >= 15 && TienRut <= stk.getSoDu().doubleValue()){*/	//Integer.parseInt(qd.getChiTiet())
-							String date = ((JTextField)dateNgayRut.getDateEditor().getUiComponent()).getText();
-							Date dateGenerate = null;
-							try {
-								dateGenerate = new SimpleDateFormat("dd/MM/yyyy").parse(date);
-							} catch (ParseException e1) {
-								// TODO Auto-generated catch block
-								e1.printStackTrace();
-							}
+							//long getDaysDiff = getDiff / (24 * 60 * 60 * 1000);
+						
+						} catch (ParseException e1) {
 							
-							int result = prtD.phieuRutTien(txtMaPhieuRut.getText(), ma_soTK, dateGenerate, txtSoTienRut.getText());
-							System.out.println(result);
+							e1.printStackTrace();
+						}
 							
-							//Cap nhat so tien con lai trong SO tiet kiem
-							//SoTienConLai = stk.getSoDu().doubleValue() - TienRut; //BigDecimal --> Double
-							//int update = stkD.updateSoTietKiem(txtMaSo.toString(), BigDecimal.valueOf(SoTienConLai));
+						int result = prtD.phieuRutTien(txtMaPhieuRut.getText(), ma_soTK, endDate, txtSoTienRut.getText());
+						JOptionPane.showMessageDialog(null, "Quy khach da rut " + TienRut + " trong So tiet kiem!");
 							
-							JOptionPane.showMessageDialog(null, "Quy khach da rut " + TienRut + " trong So tiet kiem!");
-						/*}
-						else {
-							JOptionPane.showMessageDialog(null, "Chi duoc rut tien sau " + qd.getChiTiet() + " ngay mo so");
-						}*/
-					//}
+						//Cap nhat so tien con lai trong So tiet kiem
+						SoTienConLai = stk.getSoDu().doubleValue() - TienRut; //BigDecimal --> Double
+						int update = stkD.updateSoTietKiem(maSotietkiem, BigDecimal.valueOf(SoTienConLai));
 				   
 					//Rut tien voi loai tiet kiem co ky han
 					/*if (stk.getNgayDaoHan() != null) {//Voi Loai tiet kiem = Khong ky han => NgayDaoHan = null
-						Date ngay_dao_han = null;
-						Date ngay_rut = new Date(System.currentTimeMillis());
+						String ngayrut = ((JTextField)dateNgayRut.getDateEditor().getUiComponent()).getText();
 						String dao_han = stk.getNgayDaoHan().toString();
 				   
+						Date ngay_dao_han = null;
 						ngay_dao_han = simpleDateFormat.parse(dao_han);
+						Date ngay_rut = new SimpleDateFormat("dd/MM/yyyy").parse(ngayrut);//new Date(System.currentTimeMillis());
+						
 						long beforeDiff = ngay_rut.getTime() - ngay_dao_han.getTime();
 						long getBeforeDiff = beforeDiff / (24 * 60 * 60 * 1000);
 				   
 						if (getBeforeDiff >= 0){
 							double tienlai;
-							String laisuat = String.valueOf(lTK.getLaiSuat());
+							String laisuat = String.valueOf(ltk.getLaiSuat());
 							String date = ((JTextField)dateNgayRut.getDateEditor().getUiComponent()).getText();
 							Date dateGenerate = null;
 							try {
 								dateGenerate = new SimpleDateFormat("dd/MM/yyyy").parse(date);
-							} catch (ParseException e1) {
+							} catch (ParseException e2) {
 								// TODO Auto-generated catch block
-								e1.printStackTrace();
+								e2.printStackTrace();
 							}
 							
 							int result = prtD.phieuRutTien(txtMaPhieuRut.getText(), ma_soTK, dateGenerate, txtSoTienRut.getText());
@@ -211,15 +199,15 @@ public class PhieuRutTien extends JFrame {
 							
 							sotienconlai = 0;
 							
-							int ud = stkD.updateSoTietKiem(txtMaSo.getText(), BigDecimal.valueOf(sotienconlai));
-							tienlai = Double.parseDouble(laisuat) * Double.parseDouble(lTK.getThoiHan().substring(0));
+							int ud = stkD.updateSoTietKiem(maSotietkiem, BigDecimal.valueOf(sotienconlai));
+							tienlai = Double.parseDouble(laisuat) * Double.parseDouble(ltk.getThoiHan().substring(0));
 							
 							JOptionPane.showMessageDialog(null, "Quy khach da rut het tien trong So tiet kiem! Lai suat quy khach nhan duoc la " + tienlai);
 						}
 					}*/
 					
 					//Rut tien voi loai tiet kiem khong ky han
-					//if (stk.getNgayDaoHan() == null) {
+					//if (ltk.getMaLoaiTietKiem().equals("L01")) {
 						/*double so_tien_rut, soDu, soTienCon;
 						so_tien_rut = Double.parseDouble(txtSoTienRut.getText());
 						soDu = stk.getSoDu().doubleValue();*/
@@ -229,9 +217,9 @@ public class PhieuRutTien extends JFrame {
 							Date dateGenerate = null;
 							try {
 								dateGenerate = new SimpleDateFormat("dd/MM/yyyy").parse(date);
-							} catch (ParseException e1) {
+							} catch (ParseException e3) {
 								// TODO Auto-generated catch block
-								e1.printStackTrace();
+								e3.printStackTrace();
 							}
 							
 							int result = prtD.phieuRutTien(txtMaPhieuRut.getText(), ma_soTK, dateGenerate, txtSoTienRut.getText());

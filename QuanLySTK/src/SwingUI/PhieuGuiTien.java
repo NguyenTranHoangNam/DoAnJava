@@ -12,6 +12,7 @@ import com.toedter.calendar.JDateChooser;
 import DAO.LoaiTietKiem_DAO;
 import DAO.PhieuGuiTien_DAO;
 import DAO.SoTietKiem_DAO;
+import DAO.QuyDinh_DAO;
 
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -34,6 +35,7 @@ import java.awt.event.ActionEvent;
 import javafx.scene.control.*;
 import javafx.scene.control.Alert.AlertType;
 import model.Loaitietkiem;
+import model.Phieuguitien;
 import model.Quydinh;
 import model.Sotietkiem;
 import model.Taikhoankhachhang;
@@ -63,6 +65,7 @@ public class PhieuGuiTien extends JFrame {
 			}
 		});
 	}
+	
 
 	/**
 	 * Create the frame.
@@ -133,6 +136,7 @@ public class PhieuGuiTien extends JFrame {
 		txtKhachHang.setText(hoTen);
 		
 		JButton btnXacNhan = new JButton("X\u00E1c Nh\u1EADn");
+		
 		btnXacNhan.addActionListener(new ActionListener() {
 			@SuppressWarnings("null")
 			public void actionPerformed(ActionEvent e) {
@@ -141,77 +145,48 @@ public class PhieuGuiTien extends JFrame {
 				
 				Sotietkiem stk = stkD.getSoTietKiem(maSotietkiem);
 				
-				Quydinh qd = null;
+				//QuyDinh_DAO qdD = new QuyDinh_DAO();
+				//Quydinh qd = qdD.getQuyDinh("QD01");
+				
 				double so_du, so_tien_gui;
-				DateFormat simpleDateFormat = new SimpleDateFormat("dd-MM-yyyy");
-				/*if (ltk.toString() == "L01") {
-					if (qd.getMaQD() == "QD01") {
-						if (Double.parseDouble(txtSoTienGui.getText()) < Double.parseDouble(qd.getChiTiet())) {
-							JOptionPane.showMessageDialog(null, "So tien gui toi thieu la " + qd.getChiTiet());
-						}
-						else {
-							if(txtMaPhieuGui.getText() != "" && txtMaSo.getText() != "" && txtNgayGui.getText() != "" && txtSoTienGui.getText() != "") {
-								PhieuGuiTien_DAO pgtD = new PhieuGuiTien_DAO();
-								
-								Sotietkiem ma_soTK = pgtD.getSoTietKiem(maSotietkiem);
-								
-								String date = ((JTextField)dateNgayGui.getDateEditor().getUiComponent()).getText();
-								Date dateGenerate = null;
-								try {
-									dateGenerate = new SimpleDateFormat("dd/MM/yyyy").parse(date);
-								} catch (ParseException e1) {
-									// TODO Auto-generated catch block
-									e1.printStackTrace();
-								}
-								so_tien_gui = Double.parseDouble(txtSoTienGui.getText());
-								
-								int result = pgtD.phieuGuiTien(txtMaPhieuGui.getText(), ma_soTK, dateGenerate, txtSoTienGui.getText());
-								System.out.println(result);
-								
-								//Cap nhat lai So du trong So tiet kiem
-								so_du = stk.getSoDu().doubleValue() + Double.parseDouble(txtSoTienGui.getText());//Cap nhat so du tai khoan
-								int update = stkD.updateSoTietKiem(txtMaSo.getText(), BigDecimal.valueOf(so_du));//Update so du trong STK
-								
-								if(result == 1) {
-									JOptionPane.showMessageDialog(null, "Quy khach da gui thanh cong " + txtSoTienGui.getText() + " vao So tiet kiem!");
-									txtMaPhieuGui.setText("");
-									txtMaSo.setText("");
-									txtNgayGui.setText("");
-									txtSoTienGui.setText("");
-								}
-								else {
-									JOptionPane.showMessageDialog(null, "Khong the gui tien!");
-								}
-							}
+				
+				if (ltk.getMaLoaiTietKiem().equals("L01")) {
+					//if (Double.parseDouble(txtSoTienGui.getText()) < Double.parseDouble(qd.getChiTiet())){}
+					
+					if (Double.parseDouble(txtSoTienGui.getText()) < 100000) {
+						JOptionPane.showMessageDialog(null, "So tien gui toi thieu phai la 100.000" );
 					}
+					else {
+						PhieuGuiTien_DAO pgtD = new PhieuGuiTien_DAO();
+				
+						Sotietkiem ma_soTK = pgtD.getSoTietKiem(maSotietkiem);
+				
+						String date = ((JTextField)dateNgayGui.getDateEditor().getUiComponent()).getText();
+						Date dateGenerate = null;
+						try {
+							dateGenerate = new SimpleDateFormat("dd/MM/yyyy").parse(date);
+						} catch (ParseException e1) {
+									
+							e1.printStackTrace();
+						}
+						so_tien_gui = Double.parseDouble(txtSoTienGui.getText());
+				
+						int result = pgtD.phieuGuiTien(txtMaPhieuGui.getText(), ma_soTK, dateGenerate, txtSoTienGui.getText());
+						System.out.println(result);
+				
+						JOptionPane.showMessageDialog(null, "Quy khach da gui " + so_tien_gui + " vao So tiet kiem!");
+				
+						so_du = stk.getSoDu().doubleValue() + so_tien_gui;//Cap nhat so du tai khoan
+						int update = stkD.updateSoTietKiem(maSotietkiem, BigDecimal.valueOf(so_du));//Update so du trong STK
+						
+					}
+				
 				}
-				else {
+				else{
 					JOptionPane.showMessageDialog(null, "Chi nhan gui tien voi loai tiet kiem 'Khong ky han'");
-				}*/
-				PhieuGuiTien_DAO pgtD = new PhieuGuiTien_DAO();
 				
-				Sotietkiem ma_soTK = pgtD.getSoTietKiem(maSotietkiem);
-				
-				String date = ((JTextField)dateNgayGui.getDateEditor().getUiComponent()).getText();
-				Date dateGenerate = null;
-				try {
-					dateGenerate = new SimpleDateFormat("dd/MM/yyyy").parse(date);
-				} catch (ParseException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
 				}
-				so_tien_gui = Double.parseDouble(txtSoTienGui.getText());
 				
-				int result = pgtD.phieuGuiTien(txtMaPhieuGui.getText(), ma_soTK, dateGenerate, txtSoTienGui.getText());
-				System.out.println(result);
-				
-				JOptionPane.showMessageDialog(null, "Quy khach da gui " + so_tien_gui + " vao So tiet kiem!");
-				
-//-------------------- Sổ tiết kiệm bị null mà đòi get số dư 
-				so_du = stk.getSoDu().doubleValue() + so_tien_gui;//Cap nhat so du tai khoan
-				int update = stkD.updateSoTietKiem(maSotietkiem, BigDecimal.valueOf(so_du));//Update so du trong STK
-//				System.out.println(update + "update");
-
 			}
 		});
 		btnXacNhan.setFont(new Font("Tahoma", Font.BOLD, 12));
@@ -249,3 +224,4 @@ public class PhieuGuiTien extends JFrame {
 		});
 	}
 }
+
