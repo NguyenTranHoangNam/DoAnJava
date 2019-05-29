@@ -213,6 +213,7 @@ public class PhieuGuiTien extends JFrame {
 		txtMaPhieuGui.setColumns(10);
 		txtMaPhieuGui.setBounds(107, 46, 395, 20);
 		contentPane.add(txtMaPhieuGui);
+		txtMaPhieuGui.setText("PG00");
 		
 		txtSoTienGui.addKeyListener(new KeyAdapter() {
 			public void keyTyped(KeyEvent e) {
