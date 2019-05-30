@@ -154,7 +154,9 @@ public class ThayDoiQuiDinh extends JFrame {
 					LoaiTietKiem_DAO ltkD = new LoaiTietKiem_DAO();
 					int result = ltkD.xoaLoaiTietKiem(maLoaiTietKiem);
 					if(result == 1) {
-						JOptionPane.showMessageDialog(null, "Xoa loai tiet kiem thanh cong");
+//						JOptionPane.showMessageDialog(null, "Xoa loai tiet kiem thanh cong");
+					
+						LoadData(ltkD.getLoaiTietKiem());
 					}
 					else {
 						JOptionPane.showMessageDialog(null, "Xoa loai tiet kiem that bai");
@@ -170,9 +172,10 @@ public class ThayDoiQuiDinh extends JFrame {
 	}
 	
 	public void LoadData(ArrayList<Loaitietkiem> ltks) {
-		if(ltks.size() > 0) {
-			defaultTable_1 = (DefaultTableModel) table.getModel();
-			defaultTable_1.setRowCount(0);
+		defaultTable_1.setRowCount(0);
+			if(ltks.size() > 0) {
+//			defaultTable_1 = (DefaultTableModel) table.getModel();
+				LoaiTietKiem_DAO ltkD = new LoaiTietKiem_DAO();
 			for (int i = 0; i < ltks.size(); i++) {
 				Vector<String> row = new Vector<>();
 				Loaitietkiem ltk = ltks.get(i);

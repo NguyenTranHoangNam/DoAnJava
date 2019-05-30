@@ -12,16 +12,28 @@ import java.awt.Font;
 import javax.swing.JTextField;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
+import java.beans.PropertyChangeEvent;
+import java.beans.PropertyChangeListener;
+import java.time.Month;
+import java.util.ArrayList;
+import java.util.Date;
 import java.awt.event.ActionEvent;
+import com.toedter.calendar.JMonthChooser;
+
+import DAO.LoaiTietKiem_DAO;
+import model.Loaitietkiem;
+
+import javax.swing.JComboBox;
 
 public class BaoCaoThang extends JFrame {
 
 	private JPanel contentPane;
-	private JTextField txtLoaiTietKiem;
-	private JTextField txtThang;
 	private JTable table;
+	private JComboBox comboBox = new JComboBox();
+	Loaitietkiem ltkChoose = null;
 
 	/**
 	 * Launch the application.
@@ -38,6 +50,19 @@ public class BaoCaoThang extends JFrame {
 			}
 		});
 	}
+	
+	public void loadDataComboBox() {
+		LoaiTietKiem_DAO ltkD = new LoaiTietKiem_DAO();
+		ArrayList<Loaitietkiem> ltks = ltkD.getLoaiTietKiem();
+		
+		if(ltks.size() > 0) {
+//			ltkChoose = ltks.get(0);
+			comboBox.setModel(new DefaultComboBoxModel<Loaitietkiem>(
+					ltks.toArray(new Loaitietkiem[0])
+					));
+		}
+	}
+
 
 	/**
 	 * Create the frame.
@@ -57,22 +82,12 @@ public class BaoCaoThang extends JFrame {
 		contentPane.add(lblBaoCao);
 		
 		JLabel lblLoaiTietkiem = new JLabel("Lo\u1EA1i ti\u1EBFt ki\u1EC7m:");
-		lblLoaiTietkiem.setBounds(35, 54, 73, 14);
+		lblLoaiTietkiem.setBounds(10, 54, 98, 14);
 		contentPane.add(lblLoaiTietkiem);
 		
 		JLabel lblThang = new JLabel("Th\u00E1ng:");
 		lblThang.setBounds(250, 54, 73, 14);
 		contentPane.add(lblThang);
-		
-		txtLoaiTietKiem = new JTextField();
-		txtLoaiTietKiem.setBounds(110, 51, 118, 20);
-		contentPane.add(txtLoaiTietKiem);
-		txtLoaiTietKiem.setColumns(10);
-		
-		txtThang = new JTextField();
-		txtThang.setColumns(10);
-		txtThang.setBounds(303, 51, 118, 20);
-		contentPane.add(txtThang);
 		
 		table = new JTable();
 		table.setModel(new DefaultTableModel(
@@ -91,7 +106,7 @@ public class BaoCaoThang extends JFrame {
 		table.getColumnModel().getColumn(4).setPreferredWidth(94);
 		table.setBounds(10, 97, 442, 132);
 		contentPane.add(table);
-		
+		loadDataComboBox();
 		JButton btnOK = new JButton("OK");
 		btnOK.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
@@ -101,5 +116,31 @@ public class BaoCaoThang extends JFrame {
 		btnOK.setFont(new Font("Tahoma", Font.BOLD, 11));
 		btnOK.setBounds(363, 250, 89, 23);
 		contentPane.add(btnOK);
+		
+		JMonthChooser monthChooser = new JMonthChooser();
+		monthChooser.setBounds(304, 45, 137, 26);
+		monthChooser.addPropertyChangeListener(new PropertyChangeListener() {
+			
+			@Override
+			public void propertyChange(PropertyChangeEvent e) {
+				 if ("month".equals(e.getPropertyName())) {
+			                 System.out.println(  e.getNewValue());
+				 }
+			}
+		});
+		contentPane.add(monthChooser);
+		
+		comboBox.setBounds(109, 46, 116, 27);
+		contentPane.add(comboBox);
+		
+		comboBox.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub
+				Loaitietkiem ltk = (Loaitietkiem)comboBox.getSelectedItem();
+				ltkChoose = ltk;
+			}
+		});
+
 	}
 }

@@ -56,15 +56,15 @@ public class BaoCaoNgay extends JFrame {
 			}
 		});
 	}
-	public void loadData(){
+	public void loadData(Date ngayGD){
+		defaultTable_1.setRowCount(0);
 		LoaiTietKiem_DAO ltkD = new LoaiTietKiem_DAO();
-//		ltkD.countLoaiTietKiem();
 		int i = 0;
+		
 		BaoCao_DAO bcD = new BaoCao_DAO();
-		List<Object[]> rows = bcD.getGiaoDich();
+		List<Object[]> rows = bcD.getGiaoDich(ngayGD);
 		 for(Object[] row : rows){
-     		//System.out.println(row[0].toString());
-     		Vector<String> rowTable = new Vector<>();
+         	Vector<String> rowTable = new Vector<>();
      		i = i + 1;
      		rowTable.add(i + "");
      		rowTable.add(row[0].toString());
@@ -102,8 +102,7 @@ public class BaoCaoNgay extends JFrame {
 			@Override
 			public void propertyChange(PropertyChangeEvent e) {
 				 if ("date".equals(e.getPropertyName())) {
-		                System.out.println(e.getPropertyName()
-		                    + ": " + (Date) e.getNewValue());
+					 loadData((Date) e.getNewValue());
 		           }
 			}
 		});
@@ -121,7 +120,6 @@ public class BaoCaoNgay extends JFrame {
 		defaultTable_1 = new DefaultTableModel(new Object[][] {},new String[] {
 			"STT","LOAI TIET KIEM","TONG THU","TONG CHI","CHENH LECH"	
 		});
-		loadData();
 		table = new JTable(defaultTable_1);
 		scrollPane.setViewportView(table);
 	}

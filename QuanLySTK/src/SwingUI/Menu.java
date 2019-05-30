@@ -103,7 +103,13 @@ public class Menu extends JFrame {
 		btnNewButton.setBounds(31, 34, 162, 29);
 		contentPane.add(btnNewButton);
 		
-		JButton btnNewButton_1 = new JButton("LAP BAO CAO NGAY");
+		JButton btnNewButton_1 = new JButton("Lập báo cáo ngày");
+		btnNewButton_1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				BaoCaoNgay bcNgay = new BaoCaoNgay();
+				bcNgay.main(null);
+			}
+		});
 		btnNewButton_1.setBounds(31, 112, 162, 29);
 		contentPane.add(btnNewButton_1);
 	}
