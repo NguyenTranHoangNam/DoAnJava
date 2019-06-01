@@ -41,6 +41,7 @@ public class TraCuu extends JFrame {
 	private String maSotietkiem;
 	private String hoTen;
 	private String loaiTK;
+	private String soDu;
 
 	/**
 	 * Launch the application.
@@ -110,6 +111,7 @@ public class TraCuu extends JFrame {
 	        	maSotietkiem = table.getValueAt(table.getSelectedRow(), 1).toString();
 	        	hoTen = table.getValueAt(table.getSelectedRow(), 3).toString();
 	        	loaiTK = table.getValueAt(table.getSelectedRow(), 2).toString();
+	        	soDu = table.getValueAt(table.getSelectedRow(), 4).toString();
 	        }
 	    });
 		
@@ -142,8 +144,8 @@ public class TraCuu extends JFrame {
 		JButton btnPhieuGuiTien = new JButton("LAP PHIEU GUI");
 		btnPhieuGuiTien.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				PhieuGuiTien phieu_gui = new PhieuGuiTien(maSotietkiem, hoTen,loaiTK);
-				phieu_gui.main(maSotietkiem, hoTen,loaiTK);
+				PhieuGuiTien phieu_gui = new PhieuGuiTien(maSotietkiem, hoTen, loaiTK);
+				phieu_gui.main(maSotietkiem, hoTen, loaiTK);
 			}
 		});
 		btnPhieuGuiTien.setBounds(294, 44, 117, 29);
@@ -152,8 +154,8 @@ public class TraCuu extends JFrame {
 		JButton btnPhieuRutTien = new JButton("LAP PHIEU RUT");
 		btnPhieuRutTien.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				PhieuRutTien phieu_rut = new PhieuRutTien(maSotietkiem, hoTen,loaiTK);
-				phieu_rut.main(maSotietkiem, hoTen,loaiTK); 
+				PhieuRutTien phieu_rut = new PhieuRutTien(maSotietkiem, hoTen, loaiTK, soDu);
+				phieu_rut.main(maSotietkiem, hoTen, loaiTK, soDu); 
 			}
 		});
 		btnPhieuRutTien.setBounds(448, 44, 117, 29);
