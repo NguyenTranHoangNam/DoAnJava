@@ -16,14 +16,17 @@ import javax.swing.JButton;
 import javax.swing.SwingConstants;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
-
+interface AddingLoaiTietKiem {
+	 // this can be any type of method
+	 void resetTableAfterAdd();
+	}
 public class ThemLoaiTK extends JFrame {
 
 	private JPanel contentPane;
 	private JTextField tfMaLoai;
 	private JTextField tfThoiHan;
 	private JTextField tfLaiSuat;
-
+	private AddingLoaiTietKiem addInterface;
 	/**
 	 * Launch the application.
 	 */
@@ -31,7 +34,7 @@ public class ThemLoaiTK extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					ThemLoaiTK frame = new ThemLoaiTK();
+					ThemLoaiTK frame = new ThemLoaiTK(null);
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -39,11 +42,23 @@ public class ThemLoaiTK extends JFrame {
 			}
 		});
 	}
+	 public void registerOnGeekEventListener(AddingLoaiTietKiem mListener)
+
+	 {
+
+	 this.addInterface = mListener;
+
+	 }
+	 public void doGeekStuff(){
+	 if (this.addInterface != null) {
+		 addInterface.resetTableAfterAdd();
+	 }
+	 }
 
 	/**
 	 * Create the frame.
 	 */
-	public ThemLoaiTK() {
+	public ThemLoaiTK(ThayDoiQuiDinh farm) {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 379, 238);
 		contentPane = new JPanel();
@@ -78,6 +93,13 @@ public class ThemLoaiTK extends JFrame {
 		lblLaiSuat.setBounds(32, 140, 61, 16);
 		contentPane.add(lblLaiSuat);
 		
+//		ThemLoaiTK obj = new ThemLoaiTK();
+		AddingLoaiTietKiem mListener = new ThayDoiQuiDinh();
+
+		 registerOnGeekEventListener(mListener);
+
+		
+		
 		JButton btnHuy = new JButton("Huy");
 		btnHuy.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -98,6 +120,10 @@ public class ThemLoaiTK extends JFrame {
 						tfLaiSuat.setText("");
 						tfMaLoai.setText("");
 						tfThoiHan.setText("");
+//						 doGeekStuff();
+							LoaiTietKiem_DAO ltD = new LoaiTietKiem_DAO();
+						 farm.LoadData(ltkD.getLoaiTietKiem());
+						
 					}
 					else {
 						JOptionPane.showMessageDialog(null, "Them loai tiet kiem that bai");

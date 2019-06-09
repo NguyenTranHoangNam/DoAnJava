@@ -28,6 +28,7 @@ import model.Loaitietkiem;
 
 import javax.swing.JComboBox;
 
+
 public class BaoCaoThang extends JFrame {
 
 	private JPanel contentPane;

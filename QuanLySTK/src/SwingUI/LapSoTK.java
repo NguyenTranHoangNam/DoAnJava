@@ -166,7 +166,7 @@ public class LapSoTK extends JFrame {
 		tfCMND.setText(cmnd);
 		tfDiaChi.setText(diaChi);
 		JButton btnXacNhan = new JButton("Xac Nhan");
-		
+		dateChooser.setDate(new Date());
 		getMaSoTietKiem();
 		btnXacNhan.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {

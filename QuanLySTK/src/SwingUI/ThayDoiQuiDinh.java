@@ -27,7 +27,7 @@ import javax.swing.SwingConstants;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
-public class ThayDoiQuiDinh extends JFrame {
+public class ThayDoiQuiDinh extends JFrame implements AddingLoaiTietKiem {
 
 	private JPanel contentPane;
 	private JTable table;
@@ -38,6 +38,7 @@ public class ThayDoiQuiDinh extends JFrame {
 	private JButton btnThemLoaiTiet;
 	private JButton btnToar;
 	private JButton btnXoaLoaiTiet;
+	public ThayDoiQuiDinh frameTDQD;
 	/**
 	 * Launch the application.
 	 */
@@ -57,13 +58,51 @@ public class ThayDoiQuiDinh extends JFrame {
 	/**
 	 * Create the frame.
 	 */
+//	public void LoadData(ArrayList<Loaitietkiem> ltks) {
+//		defaultTable_1.setRowCount(0);
+//			if(ltks.size() > 0) {
+//			for (int i = 0; i < ltks.size(); i++) {
+//				Object[] row = new Object[4];
+//				Loaitietkiem ltk = ltks.get(i);
+//				int stt = i + 1;
+//				row[0] = stt + "";
+//				row[1] = (ltk.getMaLoaiTietKiem());
+//				row[2] = (ltk.getThoiHan());
+//				row[3] =(ltk.getLaiSuat() + "");
+//				defaultTable_1.addRow(row);
+//			}
+//			table.setModel(defaultTable_1);
+//		}
+//	}
+
+	public void LoadData(ArrayList<Loaitietkiem> ltks) {
+			
+			defaultTable_1.setRowCount(0);
+			if(ltks.size() > 0) {
+//			defaultTable_1 = (DefaultTableModel) table.getModel();
+				LoaiTietKiem_DAO ltkD = new LoaiTietKiem_DAO();
+			for (int i = 0; i < ltks.size(); i++) {
+				Vector<String> row = new Vector<>();
+				Loaitietkiem ltk = ltks.get(i);
+				int stt = i + 1;
+				row.add(stt + "");
+				row.add(ltk.getMaLoaiTietKiem());
+				row.add(ltk.getThoiHan());
+				row.add(ltk.getLaiSuat() + "");
+				defaultTable_1.addRow(row);
+			}
+		}
+	}
 	public ThayDoiQuiDinh() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frameTDQD = this;
 		setBounds(100, 100, 654, 419);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
+		
+		
 		
 		JScrollPane scrollPane = new JScrollPane();
 		scrollPane.setBounds(6, 34, 642, 196);
@@ -74,14 +113,20 @@ public class ThayDoiQuiDinh extends JFrame {
 			});
 		table = new JTable(defaultTable_1);
 		table.setDefaultEditor(Object.class, null);
-		table.getSelectionModel().addListSelectionListener(new ListSelectionListener(){
-	        public void valueChanged(ListSelectionEvent event) {
-	        maLoaiTietKiem = table.getValueAt(table.getSelectedRow(), 1).toString();
-	        tfTenLoaiTK.setText(table.getValueAt(table.getSelectedRow(), 2).toString());
-	        tfLaiSuat.setText(table.getValueAt(table.getSelectedRow(), 3).toString());
-	        }
-	    });
+//		table.getSelectionModel().addListSelectionListener(new ListSelectionListener(){
+//	        public void valueChanged(ListSelectionEvent event) {
+//	        	if(table.getRowCount() > 0) {
+//	        		
+//	        	}
+//	        maLoaiTietKiem = table.getValueAt(table.getSelectedRow(), 1).toString();
+//	        tfTenLoaiTK.setText(table.getValueAt(table.getSelectedRow(), 2).toString());
+//	        tfLaiSuat.setText(table.getValueAt(table.getSelectedRow(), 3).toString());
+//	        System.out.println(maLoaiTietKiem);
+//	        table.clearSelection();
+//	    	        }
+//	    });
 
+		
 		
 		LoaiTietKiem_DAO ltkD = new LoaiTietKiem_DAO();
 		LoadData(ltkD.getLoaiTietKiem());
@@ -131,10 +176,13 @@ public class ThayDoiQuiDinh extends JFrame {
 		btnThemLoaiTiet = new JButton("THEM LOAI TIET KIEM");
 		btnThemLoaiTiet.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				ThemLoaiTK themLTK = new ThemLoaiTK();
-				themLTK.main(null);
+				ThemLoaiTK themLTK = new ThemLoaiTK(frameTDQD);
+//				themLTK.main();
+				themLTK.setVisible(true);
+			
 			}
 		});
+		
 		btnThemLoaiTiet.setBounds(290, 251, 172, 29);
 		contentPane.add(btnThemLoaiTiet);
 		
@@ -150,13 +198,17 @@ public class ThayDoiQuiDinh extends JFrame {
 		btnXoaLoaiTiet = new JButton("XOA LOAI TIET KIEM");
 		btnXoaLoaiTiet.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				int row = table.getSelectedRow();
+				maLoaiTietKiem = table.getModel().getValueAt(row, 1).toString();
+
 				if(maLoaiTietKiem != null) {
 					LoaiTietKiem_DAO ltkD = new LoaiTietKiem_DAO();
 					int result = ltkD.xoaLoaiTietKiem(maLoaiTietKiem);
 					if(result == 1) {
-//						JOptionPane.showMessageDialog(null, "Xoa loai tiet kiem thanh cong");
-					
-						LoadData(ltkD.getLoaiTietKiem());
+						JOptionPane.showMessageDialog(null, "Xoa loai tiet kiem thanh cong");
+						ArrayList<Loaitietkiem> ltks = ltkD.getLoaiTietKiem();
+						
+						LoadData(ltks);
 					}
 					else {
 						JOptionPane.showMessageDialog(null, "Xoa loai tiet kiem that bai");
@@ -171,21 +223,15 @@ public class ThayDoiQuiDinh extends JFrame {
 		contentPane.add(btnXoaLoaiTiet);
 	}
 	
-	public void LoadData(ArrayList<Loaitietkiem> ltks) {
-		defaultTable_1.setRowCount(0);
-			if(ltks.size() > 0) {
-//			defaultTable_1 = (DefaultTableModel) table.getModel();
-				LoaiTietKiem_DAO ltkD = new LoaiTietKiem_DAO();
-			for (int i = 0; i < ltks.size(); i++) {
-				Vector<String> row = new Vector<>();
-				Loaitietkiem ltk = ltks.get(i);
-				int stt = i + 1;
-				row.add(stt + "");
-				row.add(ltk.getMaLoaiTietKiem());
-				row.add(ltk.getThoiHan());
-				row.add(ltk.getLaiSuat() + "");
-				defaultTable_1.addRow(row);
-			}
-		}
+	
+	@Override
+	public void resetTableAfterAdd() {
+	System.out.println("resetTableAfterAdd");
+		// TODO Auto-generated method stub
+	LoaiTietKiem_DAO ltkD = new LoaiTietKiem_DAO();
+	
+	LoadData(ltkD.getLoaiTietKiem());
+
+
 	}
 }
