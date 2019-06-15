@@ -205,7 +205,7 @@ public class PhieuRutTien extends JFrame {
 								int ud = stkD.updateSoTietKiem(maSotietkiem, BigDecimal.valueOf(soTienCon));
 								
 								if (diffDays_1 >= 31) {
-									laiSuat = 0.015 * soDu;
+									laiSuat = 0.0015 * soDu;
 									JOptionPane.showMessageDialog(null, "Quy khach da rut " + so_tien_rut + " trong So tiet kiem! Lai suat nhan duoc la " + laiSuat);
 								}
 								else {
@@ -221,31 +221,32 @@ public class PhieuRutTien extends JFrame {
 					}
 					else {
 						JOptionPane.showMessageDialog(null, "Rut tien sau 15 ngay chi ap dung cho loai tiet kiem 'Khong ky han'!");
+					}
 					
-						//Rut tien voi loai tiet kiem co ky han
-						if (daoHan != null) {//Voi Loai tiet kiem = Khong ky han => NgayDaoHan = null
-							
-							//Ngay rut tien >= Ngay dao han
-							long diff_2 = endDate.getTime() - daoHan.getTime();
-							long diffDays_2 = diff_2 / (24 * 60 * 60 * 1000);
+					//Rut tien voi loai tiet kiem co ky han
+					if (!ltk.getMaLoaiTietKiem().equals("L01")) {
+						
+						//Ngay rut tien >= Ngay dao han
+						long diff_2 = endDate.getTime() - daoHan.getTime();
+						long diffDays_2 = diff_2 / (24 * 60 * 60 * 1000);
 					   
-							if (diffDays_2 >= 0){
-								double tienlai;
-								String laisuat = String.valueOf(ltk.getLaiSuat());
+						if (diffDays_2 >= 0){
+							double tienlai;
+							String laisuat = String.valueOf(stk.getLaiSuat());
 								
-								int result = prtD.phieuRutTien(txtMaPhieuRut.getText(), ma_soTK, endDate, txtSoTienRut.getText());
-								System.out.println(result);
+							int result = prtD.phieuRutTien(txtMaPhieuRut.getText(), ma_soTK, endDate, txtSoTienRut.getText());
+							System.out.println(result);
 								
-								sotienconlai = 0;
+							sotienconlai = 0;
 								
-								int ud = stkD.updateSoTietKiem(maSotietkiem, BigDecimal.valueOf(sotienconlai));
-								tienlai = Double.parseDouble(laisuat) * Double.parseDouble(ltk.getThoiHan().substring(0));
+							int ud = stkD.updateSoTietKiem(maSotietkiem, BigDecimal.valueOf(sotienconlai));
+							tienlai = Double.parseDouble(laisuat) * stk.getSoDu().doubleValue(); 
 								
-								JOptionPane.showMessageDialog(null, "Quy khach da rut het tien trong So tiet kiem! Lai suat quy khach nhan duoc la " + tienlai);
-							}
+							JOptionPane.showMessageDialog(null, "Quy khach da rut het tien trong So tiet kiem! Lai suat quy khach nhan duoc la " + tienlai);
 						}
 					}
-				   
+					
+					
 				}catch (Exception e) {
 						e.printStackTrace();
 				}
