@@ -32,7 +32,6 @@ public class ThayDoiQuiDinh extends JFrame implements AddingLoaiTietKiem {
 	private JPanel contentPane;
 	private JTable table;
 	private DefaultTableModel defaultTable_1; 
-	private JTextField tfTenLoaiTK;
 	private JTextField tfLaiSuat;
 	private String maLoaiTietKiem;
 	private JButton btnThemLoaiTiet;
@@ -132,31 +131,23 @@ public class ThayDoiQuiDinh extends JFrame implements AddingLoaiTietKiem {
 		LoadData(ltkD.getLoaiTietKiem());
 		scrollPane.setViewportView(table);
 		
-		JLabel lblNewLabel = new JLabel("TEN LOAI TIET KIEM");
-		lblNewLabel.setHorizontalAlignment(SwingConstants.RIGHT);
-		lblNewLabel.setBounds(6, 256, 130, 16);
-		contentPane.add(lblNewLabel);
-		
-		tfTenLoaiTK = new JTextField();
-		tfTenLoaiTK.setBounds(140, 251, 130, 26);
-		contentPane.add(tfTenLoaiTK);
-		tfTenLoaiTK.setColumns(10);
-		tfTenLoaiTK.setEditable(false);
-		
 		tfLaiSuat = new JTextField();
 		tfLaiSuat.setColumns(10);
-		tfLaiSuat.setBounds(140, 287, 130, 26);
+		tfLaiSuat.setBounds(148, 251, 130, 26);
 		contentPane.add(tfLaiSuat);
 		
 		JLabel lblLaiSuat = new JLabel("LAI SUAT");
 		lblLaiSuat.setHorizontalAlignment(SwingConstants.RIGHT);
-		lblLaiSuat.setBounds(6, 292, 130, 16);
+		lblLaiSuat.setBounds(6, 256, 130, 16);
 		contentPane.add(lblLaiSuat);
 		
 		JButton btnNewButton = new JButton("XAC NHAN");
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				LoaiTietKiem_DAO ltk = new LoaiTietKiem_DAO();
+				int row = table.getSelectedRow();
+				maLoaiTietKiem = table.getModel().getValueAt(row, 1).toString();
+
 				if(maLoaiTietKiem != null) {
 					int result = ltk.updateLoaiTietKiem(maLoaiTietKiem, Float.parseFloat(tfLaiSuat.getText()));
 					if(result == 1) {
@@ -170,7 +161,7 @@ public class ThayDoiQuiDinh extends JFrame implements AddingLoaiTietKiem {
 				
 			}
 		});
-		btnNewButton.setBounds(140, 325, 130, 29);
+		btnNewButton.setBounds(148, 287, 130, 29);
 		contentPane.add(btnNewButton);
 		
 		btnThemLoaiTiet = new JButton("THEM LOAI TIET KIEM");
@@ -192,7 +183,7 @@ public class ThayDoiQuiDinh extends JFrame implements AddingLoaiTietKiem {
 				dispose();
 			}
 		});
-		btnToar.setBounds(6, 325, 117, 29);
+		btnToar.setBounds(26, 287, 117, 29);
 		contentPane.add(btnToar);
 		
 		btnXoaLoaiTiet = new JButton("XOA LOAI TIET KIEM");

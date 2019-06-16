@@ -77,7 +77,8 @@ public class Menu extends JFrame {
 		JButton btnBaoCao = new JButton("Lập báo cáo tháng");
 		btnBaoCao.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				
+			BaoCaoThang bcThang = new BaoCaoThang();
+			bcThang.setVisible(true);
 			}
 		});
 		btnBaoCao.setBounds(204, 34, 162, 29);
