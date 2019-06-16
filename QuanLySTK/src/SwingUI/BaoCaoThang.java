@@ -27,7 +27,7 @@ import DAO.LoaiTietKiem_DAO;
 import model.Loaitietkiem;
 
 import javax.swing.JComboBox;
-
+import javax.swing.JScrollPane;
 
 public class BaoCaoThang extends JFrame {
 
@@ -35,7 +35,7 @@ public class BaoCaoThang extends JFrame {
 	private JTable table;
 	private JComboBox comboBox = new JComboBox();
 	Loaitietkiem ltkChoose = null;
-
+	private DefaultTableModel defaultTable_1; 
 	/**
 	 * Launch the application.
 	 */
@@ -91,15 +91,15 @@ public class BaoCaoThang extends JFrame {
 		contentPane.add(lblThang);
 		
 		table = new JTable();
-		table.setModel(new DefaultTableModel(
-			new Object[][] {
-				{null, null, null, null, null},
-				{null, null, null, null, null},
-			},
-			new String[] {
+		defaultTable_1 = new DefaultTableModel(new Object[][] {},new String[] {
 				"STT", "Ng\u00E0y", "S\u1ED1 M\u1EDF", "S\u1ED1 \u0110\u00F3ng", "Ch\u00EAnh L\u1EC7ch"
-			}
-		));
+			});
+			
+			JScrollPane scrollPane = new JScrollPane();
+			scrollPane.setBounds(10, 97, 442, 132);
+			contentPane.add(scrollPane);
+			table = new JTable(defaultTable_1);
+			scrollPane.setViewportView(table);
 		table.getColumnModel().getColumn(0).setPreferredWidth(57);
 		table.getColumnModel().getColumn(1).setPreferredWidth(127);
 		table.getColumnModel().getColumn(2).setPreferredWidth(97);
