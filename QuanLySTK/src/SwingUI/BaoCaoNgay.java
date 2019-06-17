@@ -34,6 +34,7 @@ import DAO.config;
 import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.JScrollPane;
+import javax.swing.JButton;
 
 public class BaoCaoNgay extends JFrame {
 
@@ -122,5 +123,14 @@ public class BaoCaoNgay extends JFrame {
 		});
 		table = new JTable(defaultTable_1);
 		scrollPane.setViewportView(table);
+		
+		JButton btnThot = new JButton("Thoát");
+		btnThot.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				dispose();
+			}
+		});
+		btnThot.setBounds(0, 45, 117, 29);
+		contentPane.add(btnThot);
 	}
 }

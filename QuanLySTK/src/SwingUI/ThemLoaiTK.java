@@ -15,6 +15,8 @@ import javax.swing.JOptionPane;
 import javax.swing.JButton;
 import javax.swing.SwingConstants;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 import java.awt.event.ActionEvent;
 interface AddingLoaiTietKiem {
 	 // this can be any type of method
@@ -138,5 +140,24 @@ public class ThemLoaiTK extends JFrame {
 		lblNewLabel_1.setHorizontalAlignment(SwingConstants.CENTER);
 		lblNewLabel_1.setBounds(6, 6, 367, 26);
 		contentPane.add(lblNewLabel_1);
+		
+		tfLaiSuat.addKeyListener(new KeyAdapter() {
+			   public void keyTyped(KeyEvent e) {
+				      char c = e.getKeyChar();
+				      if ( ((c < '0' && c != '.') || (c > '9' && c != '.' )) && (c != KeyEvent.VK_BACK_SPACE))  {
+				         e.consume();  // ignore event
+				      }
+				   }
+				});
+		
+		tfThoiHan.addKeyListener(new KeyAdapter() {
+			   public void keyTyped(KeyEvent e) {
+				      char c = e.getKeyChar();
+				      if ( ((c < '0' && c != '.') || (c > '9' && c != '.')) && (c != KeyEvent.VK_BACK_SPACE) )  {
+				         e.consume();  // ignore event
+				      }
+				   }
+				});
+
 	}
 }
