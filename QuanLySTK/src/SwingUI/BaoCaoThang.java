@@ -109,7 +109,7 @@ public class BaoCaoThang extends JFrame {
 		JButton btnOK = new JButton("OK");
 		btnOK.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				dispose();
+				
 			}
 		});
 		btnOK.setFont(new Font("Tahoma", Font.BOLD, 11));
@@ -135,7 +135,7 @@ public class BaoCaoThang extends JFrame {
 		JButton btnThot = new JButton("Thoát");
 		btnThot.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				
+				dispose();
 			}
 			
 		});
