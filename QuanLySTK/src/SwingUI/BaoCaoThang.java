@@ -90,23 +90,21 @@ public class BaoCaoThang extends JFrame {
 		lblThang.setBounds(250, 54, 73, 14);
 		contentPane.add(lblThang);
 		
-		table = new JTable();
 		defaultTable_1 = new DefaultTableModel(new Object[][] {},new String[] {
 				"STT", "Ng\u00E0y", "S\u1ED1 M\u1EDF", "S\u1ED1 \u0110\u00F3ng", "Ch\u00EAnh L\u1EC7ch"
 			});
-			
-			JScrollPane scrollPane = new JScrollPane();
-			scrollPane.setBounds(10, 97, 442, 132);
-			contentPane.add(scrollPane);
-			table = new JTable(defaultTable_1);
-			scrollPane.setViewportView(table);
-		table.getColumnModel().getColumn(0).setPreferredWidth(57);
-		table.getColumnModel().getColumn(1).setPreferredWidth(127);
-		table.getColumnModel().getColumn(2).setPreferredWidth(97);
-		table.getColumnModel().getColumn(3).setPreferredWidth(84);
-		table.getColumnModel().getColumn(4).setPreferredWidth(94);
-		table.setBounds(10, 97, 442, 132);
-		contentPane.add(table);
+		
+		JScrollPane scrollPane = new JScrollPane();
+		scrollPane.setBounds(10, 97, 442, 132);
+		contentPane.add(scrollPane);
+		table = new JTable(defaultTable_1);
+		scrollPane.setViewportView(table);
+
+				table.getColumnModel().getColumn(0).setPreferredWidth(57);
+				table.getColumnModel().getColumn(1).setPreferredWidth(127);
+				table.getColumnModel().getColumn(2).setPreferredWidth(97);
+				table.getColumnModel().getColumn(3).setPreferredWidth(84);
+				table.getColumnModel().getColumn(4).setPreferredWidth(94);
 		loadDataComboBox();
 		JButton btnOK = new JButton("OK");
 		btnOK.addActionListener(new ActionListener() {
@@ -133,6 +131,16 @@ public class BaoCaoThang extends JFrame {
 		
 		comboBox.setBounds(109, 46, 116, 27);
 		contentPane.add(comboBox);
+		
+		JButton btnThot = new JButton("Thoát");
+		btnThot.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+			}
+			
+		});
+		btnThot.setBounds(6, 246, 98, 29);
+		contentPane.add(btnThot);
 		
 		comboBox.addActionListener(new ActionListener() {
 			@Override
