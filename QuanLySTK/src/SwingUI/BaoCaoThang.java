@@ -38,6 +38,7 @@ public class BaoCaoThang extends JFrame {
 	private JTable table;
 	private JComboBox comboBox = new JComboBox();
 	Loaitietkiem ltkChoose = null;
+	int thang = -1;
 	private DefaultTableModel defaultTable_1; 
 	/**
 	 * Launch the application.
@@ -131,7 +132,10 @@ public class BaoCaoThang extends JFrame {
 		JButton btnOK = new JButton("OK");
 		btnOK.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				
+				if(thang != -1 && ltkChoose != null)
+				{
+					loadData(ltkChoose.getMaLoaiTietKiem(), thang);
+				}
 			}
 		});
 		btnOK.setFont(new Font("Tahoma", Font.BOLD, 11));
@@ -145,7 +149,7 @@ public class BaoCaoThang extends JFrame {
 			@Override
 			public void propertyChange(PropertyChangeEvent e) {
 				 if ("month".equals(e.getPropertyName())) {
-			                 System.out.println(  e.getNewValue());
+					 thang = Integer.parseInt(e.getNewValue().toString());
 				 }
 			}
 		});
