@@ -80,29 +80,18 @@ public class BaoCao_DAO {
 
 			         // Thuc thi cau querry
 
-			         /*String sql = "SELECT stk.loaitietkiem.maLoaiTietKiem,SUM( pgt.soTienGui),"
-			         		+ "SUM( prt.soTienRut),SUM( pgt.soTienGui) - SUM( prt.soTienRut) "
-			         		+ " from Phieuguitien  pgt, Phieuruttien  prt, Sotietkiem stk, Loaitietkiem ltk"
-			 				+ " where "
-			 				+ "pgt.sotietkiem.maSo = stk.maSo and "
-			 				+ "prt.sotietkiem.maSo = stk.maSo and "
-			 				+ "pgt.ngayGuiTien = prt.ngayRutTien and "
-			 				+ "pgt.ngayGuiTien = :ngay and "
-			 				+ "ltk.maLoaiTietKiem = stk.loaitietkiem.maLoaiTietKiem "
-			 				+"group by prt.sotietkiem.maSo,pgt.sotietkiem.maSo "
-			 				+ "";*/
 			         
 			         String sql = "SELECT stk.loaitietkiem.maLoaiTietKiem, SUM(stk), stk.ngayMoSo, stk.ngayDaoHan"
 				         		+ " from Sotietkiem stk, Loaitietkiem ltk"
 				 				+ " where "
-				 				+ "stk.soDu = 0 and "	//So du = 0 => Dong so tiet kiem
-				 				+ "stk.ngayMoSo = :ngay and "
-				 				+ "ltk.maLoaiTietKiem = stk.loaitietkiem.maLoaiTietKiem "
-				 				+"group by stk.ngayMoSo, stk.ngayDaoHan "
-				 				+ "";
+				 				+ "stk.maSo = phieuguitien.maSoTietKiem \n" + 
+				 				"and sotietkiem.MaLoaiTietKiem = :maLoaiTK'\n" + 
+				 				"and phieuguitien.NgayGuiTien like '%-:thang-%'";
 			         
 			         Query query = session.createQuery(sql);
 			         query.setInteger("thang", thang);
+			         query.setString("maLoaiTK", maLoaiTietKiem);
+			         
 			         List<Object[]> ltks  =  query.list();
 			       	return ltks;
 			     } catch (RuntimeException e) {
