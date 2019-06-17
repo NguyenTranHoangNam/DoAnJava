@@ -20,9 +20,12 @@ import java.beans.PropertyChangeListener;
 import java.time.Month;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
+import java.util.Vector;
 import java.awt.event.ActionEvent;
 import com.toedter.calendar.JMonthChooser;
 
+import DAO.BaoCao_DAO;
 import DAO.LoaiTietKiem_DAO;
 import model.Loaitietkiem;
 
@@ -64,7 +67,26 @@ public class BaoCaoThang extends JFrame {
 		}
 	}
 
+	public void loadData(String maLoaiTietKiem, int thang){
+		defaultTable_1.setRowCount(0);
+		
+		int i = 0;
+		
+		BaoCao_DAO bcD = new BaoCao_DAO();
+		List<Object[]> rows = bcD.getBaoCaoThang(maLoaiTietKiem, thang);
+		
+		 for(Object[] row : rows){
+         	Vector<String> rowTable = new Vector<>();
+     		i = i + 1;
+     		rowTable.add(i + "");
+     		rowTable.add(row[0].toString());
+     		rowTable.add(row[1].toString());
+     		rowTable.add(row[2].toString());
+     		rowTable.add(row[3].toString());
+			defaultTable_1.addRow(rowTable);
 
+     	}	
+		 }
 	/**
 	 * Create the frame.
 	 */
