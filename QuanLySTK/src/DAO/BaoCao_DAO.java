@@ -73,27 +73,28 @@ public class BaoCao_DAO {
 				 Session session = config.sessionFactory.openSession();
 				
 					try {
+						 // Bat dau 1 transaction (Giao dich)
 
-			         // Bat dau 1 transaction (Giao dich)
+				         session.beginTransaction();
 
-			         session.beginTransaction();
+				         // Thuc thi cau querry
+				         String thangS = "'%-" + thang + "-%'";
+				         if(thang.toString().length() == 1) {
+				        	 thangS = "'%-0" + thang + "-%'";
+				         }
+				         String sql = "SELECT phieuguitien.ngayGuiTien,phieuguitien.sotietkiem.maSo,phieuguitien.soTienGui,phieuguitien.soTienGui "
+					         		+ " from Sotietkiem stk, Loaitietkiem ltk,Phieuguitien phieuguitien"
+					 				+ " where "
+					 				+ "stk.maSo = phieuguitien.sotietkiem.maSo " + 
+					 				"and stk.loaitietkiem.maLoaiTietKiem = :maLoaiTK " + 
+					 				"and phieuguitien.ngayGuiTien like ";
 
-			         // Thuc thi cau querry
-
-			         
-			         String sql = "SELECT stk.loaitietkiem.maLoaiTietKiem, SUM(stk), stk.ngayMoSo, stk.ngayDaoHan"
-				         		+ " from Sotietkiem stk, Loaitietkiem ltk"
-				 				+ " where "
-				 				+ "stk.maSo = phieuguitien.maSoTietKiem \n" + 
-				 				"and sotietkiem.MaLoaiTietKiem = :maLoaiTK'\n" + 
-				 				"and phieuguitien.NgayGuiTien like '%-:thang-%'";
-			         
-			         Query query = session.createQuery(sql);
-			         query.setInteger("thang", thang);
-			         query.setString("maLoaiTK", maLoaiTietKiem);
-			         
-			         List<Object[]> ltks  =  query.list();
-			       	return ltks;
+				         Query query = session.createQuery(sql + thangS);
+				         query.setString("maLoaiTK", maLoaiTietKiem);
+				         System.out.println(sql + thangS);
+				         List<Object[]> ltks  =  query.list();
+				         System.out.println(ltks.size());
+				       	return ltks;
 			     } catch (RuntimeException e) {
 
 			         session.getTransaction().rollback();
