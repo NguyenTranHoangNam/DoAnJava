@@ -16,6 +16,7 @@ import com.toedter.calendar.JDateChooser;
 import DAO.PhieuGuiTien_DAO;
 import DAO.PhieuRutTien_DAO;
 import DAO.SoTietKiem_DAO;
+import DAO.QuyDinh_DAO;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import model.Loaitietkiem;
@@ -135,6 +136,9 @@ public class PhieuRutTien extends JFrame {
 				SoTietKiem_DAO stkD = new SoTietKiem_DAO();
 				Sotietkiem stk = stkD.getSoTietKiem(maSotietkiem);
 				Loaitietkiem ltk = stkD.getLoaiTietKiem(loaiTK);
+				//QuyDinh_DAO qdD = new QuyDinh_DAO();
+				
+				//Quydinh qd = qdD.ThoiGianGuiToiThieu("QD02");
 				
 				double sotienconlai;
 
@@ -191,6 +195,7 @@ public class PhieuRutTien extends JFrame {
 						double so_tien_rut, soDu, soTienCon, laiSuat;
 						so_tien_rut = Double.parseDouble(txtSoTienRut.getText());
 						soDu = stk.getSoDu().doubleValue();
+						//int ngayMin = Integer.parseInt(qd.getChiTiet());
 						
 						//Ngay rut tien - Ngay mo so = 15days
 						long diff_1 = endDate.getTime() - startDate.getTime();
